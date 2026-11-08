@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html lang="nl"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>CodeKompas | FIFA Ultimate Team Challenge</title>
+<style>
+      :root {
+        --navy: #093147;
+        --cyan: #1f9dbc;
+        --pale: #e7f5fa;
+        --orange: #fab515;
+        --ink: #173344;
+        --muted: #59717f;
+        --bg: #f1f6f8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        font:
+          16px/1.65 system-ui,
+          Segoe UI,
+          Arial,
+          sans-serif;
+        color: var(--ink);
+      }
+
+      a {
+        color: #096e91;
+      }
+
+      header {
+        background: linear-gradient(120deg, #093147, #155f77);
+        padding: 34px max(18px, calc((100vw - 1100px) / 2));
+        color: white;
+      }
+
+      header h1 {
+        font-size: clamp(32px, 5vw, 50px);
+        line-height: 1.14;
+        margin: 14px 0;
+      }
+
+      header p {
+        max-width: 740px;
+        color: #e5f4f8;
+      }
+
+      .brand {
+        font-weight: 800;
+        letter-spacing: 0.08em;
+      }
+
+      .pill {
+        display: inline-block;
+        background: #ffffff1d;
+        border: 1px solid #ffffff60;
+        border-radius: 30px;
+        padding: 5px 13px;
+        margin: 8px 5px 0 0;
+        font-size: 13px;
+      }
+
+      .layout {
+        max-width: 1140px;
+        margin: 24px auto 60px;
+        padding: 0 18px;
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+
+      .side,
+      .intro,
+      .step,
+      .finish {
+        background: white;
+        border: 1px solid #d8e7ec;
+        border-radius: 18px;
+        padding: 24px;
+        box-shadow: 0 7px 22px #1230440b;
+      }
+
+      .side {
+        position: sticky;
+        top: 18px;
+        padding: 17px;
+      }
+
+      .side h2 {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+      }
+
+      .stepnavitem {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        width: 100%;
+        text-align: left;
+        background: transparent;
+        border: 0;
+        padding: 10px 8px;
+        border-radius: 9px;
+        color: var(--ink);
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+      }
+
+      .stepnavitem:hover,
+      .stepnavitem.active {
+        background: var(--pale);
+      }
+
+      .circle {
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        height: 26px;
+        width: 26px;
+        border-radius: 50%;
+        background: #eaf0f3;
+        font-weight: 800;
+      }
+
+      .active .circle {
+        background: var(--navy);
+        color: white;
+      }
+
+      .intro {
+        margin-bottom: 17px;
+      }
+
+      .step {
+        display: none;
+      }
+
+      .step.active {
+        display: block;
+      }
+
+      .step h2 {
+        font-size: clamp(25px, 3.4vw, 35px);
+        line-height: 1.22;
+        margin: 10px 0;
+      }
+
+      .meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-weight: 800;
+        color: #14778c;
+      }
+
+      .time {
+        font-size: 13px;
+        background: #e8f4f8;
+        border-radius: 20px;
+        padding: 4px 10px;
+      }
+
+      .goal {
+        color: var(--muted);
+      }
+
+      .theory {
+        background: #eaf5f9;
+        border-radius: 14px;
+        padding: 18px 21px;
+        margin: 23px 0;
+      }
+
+      .task {
+        border-left: 4px solid var(--cyan);
+        padding-left: 18px;
+        margin: 24px 0;
+      }
+
+      .help {
+        background: #f8fafb;
+        border: 1px solid #d8e7ec;
+        border-radius: 14px;
+        padding: 18px 20px;
+        margin-top: 25px;
+      }
+
+      .sub {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        color: #0b6f83;
+        text-transform: uppercase;
+      }
+
+      .help details {
+        padding: 10px 0;
+        border-top: 1px solid #dbe5e9;
+      }
+
+      .help summary {
+        font-weight: 650;
+        cursor: pointer;
+      }
+
+      code {
+        font-family: Consolas, monospace;
+        font-size: 0.92em;
+      }
+
+      p code,
+      li code {
+        background: #dcecf1;
+        padding: 2px 4px;
+        border-radius: 4px;
+      }
+
+      pre {
+        background: var(--navy);
+        color: #f0f9ff;
+        border-radius: 9px;
+        padding: 15px;
+        overflow-x: auto;
+        line-height: 1.6;
+        font-size: 14px;
+      }
+
+      .check {
+        display: flex;
+        align-items: start;
+        gap: 9px;
+        margin: 9px 0;
+      }
+
+      .check input {
+        accent-color: var(--cyan);
+        width: 18px;
+        height: 18px;
+        margin-top: 4px;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 24px;
+        border-top: 1px solid #e0e9ed;
+        padding-top: 22px;
+      }
+
+      button.action {
+        background: var(--navy);
+        color: white;
+        border: 0;
+        border-radius: 10px;
+        padding: 10px 17px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button.action.secondary {
+        background: white;
+        border: 1px solid #aec7d1;
+        color: var(--navy);
+      }
+
+      button:disabled {
+        opacity: 0.3;
+        cursor: default;
+      }
+
+      .notice {
+        padding: 14px 17px;
+        background: #fff5d8;
+        border-left: 4px solid var(--orange);
+        border-radius: 9px;
+      }
+
+      .quiz {
+        margin: 17px 0;
+        border: 1px solid #d8e7ec;
+        padding: 16px;
+        border-radius: 12px;
+      }
+
+      .quiz button {
+        width: 100%;
+        text-align: left;
+        border: 1px solid #a9c8d2;
+        background: white;
+        border-radius: 8px;
+        padding: 10px;
+        margin: 4px 0;
+        cursor: pointer;
+      }
+
+      .quiz button.selected {
+        background: #dcf3f7;
+        border-color: var(--cyan);
+      }
+
+      .quiz .feedback {
+        font-weight: 700;
+        min-height: 22px;
+      }
+
+      .finish {
+        margin-top: 17px;
+        font-size: 14px;
+      }
+
+      .tiny {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      @media (max-width: 810px) {
+        .layout {
+          display: block;
+          padding: 0 12px;
+        }
+
+        .side {
+          position: static;
+          margin-bottom: 18px;
+        }
+
+        .navlist {
+          display: flex;
+          overflow-x: auto;
+        }
+
+        .stepnavitem {
+          min-width: 190px;
+        }
+
+        .intro,
+        .step {
+          padding: 20px;
+        }
+
+        header {
+          padding: 27px 20px;
+        }
+      }
+      .challenge { border-left: 4px solid #fab515; background:#fff9e9; border-radius:9px; padding:15px 18px; margin: 18px 0; }
+      .stepnavitem.done .circle { background:#d5f2e7; color:#12694d; }
+      .stepnavitem.done .circle::after { content:'✓'; }
+      .stepnavitem.done .circle span { display:none; }
+      .tools { display:flex;flex-wrap:wrap;gap:10px;margin-top:14px; }
+      .tools a { display:inline-block;padding:9px 12px;text-decoration:none;border-radius:9px;background:#eaf5f9;font-weight:700; }
+      .finish { margin-top:18px; }
+      .finish strong {color:#093147}
+</style></head>
+<body><header><div class="brand">Informaticawetenschappen: variabelen - input</div>
+<h1>Ultimate Team Challenge</h1>
+<p>Bouw in Google Colab stap voor stap een Pythonprogramma waarmee je een voetbalploeg samenstelt. Oefen <code>print()</code>, variabelen, <code>input()</code>, <code>int(input())</code> en berekeningen.</p>
+</header>
+<div class="layout"><aside class="side"><h2>Het leerpad</h2><div class="navlist" id="navlist"></div><p class="tiny" id="counter">Stap 1 van 10</p></aside>
+<main><section class="intro"><h2>Hoe ga je tewerk?</h2>
+<p>Lees telkens de korte uitleg en voer de opdracht uit in <a href="https://colab.research.google.com/" rel="noopener" target="_blank">Google Colab</a>. <strong>Breid steeds dezelfde codecel uit</strong>, zodat je uiteindelijk één programma hebt. Test na iedere stap met ▶.</p>
+<div class="notice"><strong>Hulp nodig?</strong> Probeer eerst zelf, open daarna Hint 1 of Hint 2. Je kunt ook je leerkracht om hulp vragen. <strong>Indienen:</strong> je levert je Colab-notebook in via Google Classroom, niet deze website.</div>
+
+</section>
+<section class="step" data-step="0" id="stap-1">
+<div class="meta"><span class="eyebrow">Stap 01 van 10</span></div>
+<h2>Welkom bij de transfermarkt</h2><p class="goal">Je opent Google Colab en maakt één programma dat je tijdens het leerpad uitbreidt.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Je bent de manager van een nieuwe voetbalclub. Je hebt <strong>150 miljoen euro</strong> om een aanvaller, een middenvelder en een verdediger te kopen. Je programma onthoudt de transfers, berekent de kosten en geeft je ploeg een gemiddelde rating. We gebruiken alleen <code>print()</code>, variabelen, <code>input()</code>, <code>int(input())</code> en berekeningen.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Maak in <strong>Google Colab</strong> een notebook met één codecel. Voer de code uit na elke stap. Alle nieuwe regels komen in <strong>dezelfde codecel</strong>.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Open Colab en druk op <em>+ Code</em> om een codecel te maken.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="0-0" type="checkbox"/><span>Ik heb één codecel in Google Colab.</span></label><label class="check"><input data-check="0-1" type="checkbox"/><span>Ik weet hoe ik de codecel uitvoer.</span></label></div>
+<div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div>
+</section><section class="step" data-step="1" id="stap-2">
+<div class="meta"><span class="eyebrow">Stap 02 van 10</span></div>
+<h2>Geef je club een identiteit</h2><p class="goal">Leer tekst opslaan in variabelen.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Een variabele bewaart een waarde. Voor tekst zet je de waarde tussen aanhalingstekens, bijvoorbeeld <code>clubnaam = "FC Bliksem"</code>. Kies een eigen naam voor je club én manager.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Maak bovenaan twee tekstvariabelen met de namen <code>clubnaam</code> en <code>manager</code>. Geef ze zelfgekozen tekstwaarden.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Voor een clubnaam kun je schrijven: <code>clubnaam = "FC Python"</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Bij tekst staan de aanhalingstekens rond de waarde, niet rond de variabelenaam.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="1-0" type="checkbox"/><span>Ik heb twee tekstvariabelen gemaakt.</span></label><label class="check"><input data-check="1-1" type="checkbox"/><span>Mijn code werkt zonder foutmelding.</span></label></div>
+<div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div>
+</section><section class="step" data-step="2" id="stap-3">
+<div class="meta"><span class="eyebrow">Stap 03 van 10</span></div>
+<h2>Stel je club voor</h2><p class="goal">Gebruik <code>print()</code> met tekst en variabelen.</p>
+<div class="theory"><span class="sub">Uitleg</span><p><code>print()</code> toont informatie. Met een komma kun je tekst en een variabele tegelijk tonen: <code>print("Club:", clubnaam)</code>. De naam uit de variabele verschijnt dan in de uitvoer.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Voeg onder de variabelen drie printregels toe: een titel <em>ULTIMATE TEAM CHALLENGE</em>, de naam van je club en de naam van de manager.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Voor de manager: <code>print("Manager:", manager)</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="2-0" type="checkbox"/><span>De titel verschijnt op het scherm.</span></label><label class="check"><input data-check="2-1" type="checkbox"/><span>Ik zie de gekozen clubnaam en manager.</span></label></div>
+<div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div>
+</section><section class="step" data-step="3" id="stap-4">
+<div class="meta"><span class="eyebrow">Stap 04 van 10</span></div>
+<h2>Een transferbudget van 150 miljoen</h2><p class="goal">Werk met gehele getallen.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Voor hele getallen gebruik je <code>int</code>. Een bedrag van 150 miljoen bewaren we als het getal <code>150</code>. We werken overal met <strong>miljoenen euro</strong>, dus je hoeft geen kommawaarden in te voeren.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Voeg <strong>boven je printregels</strong> <code>budget = 150</code> toe. Toon het beschikbare budget onder de clubnaam met een duidelijke zin.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Bijvoorbeeld: <code>print("Transferbudget:", budget, "miljoen euro")</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="3-0" type="checkbox"/><span>Mijn budget is een geheel getal.</span></label><label class="check"><input data-check="3-1" type="checkbox"/><span>De uitvoer toont 150 miljoen euro.</span></label></div>
+<div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div>
+</section><section class="step" data-step="4" id="stap-5">
+<div class="meta"><span class="eyebrow">Stap 05 van 10</span></div>
+<h2>De eerste transfer: een aanvaller</h2><p class="goal">Ontdek <code>input()</code> en <code>int(input())</code>.</p>
+<div class="theory"><span class="sub">Uitleg</span><p><code>input()</code> laat de gebruiker tekst ingeven. Met <code>int(input())</code> vraag je een geheel getal. Zo kan jouw programma bij elke uitvoering met een andere voetballer werken.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Maak <strong>onder de huidige uitvoer</strong> een deel <em>TRANSFER 1: AANVALLER</em>. Vraag met <code>input()</code> naar de naam van de aanvaller. Vraag met <code>int(input())</code> naar zijn transferprijs in miljoenen en zijn rating (een geheel getal van 1 tot en met 99). Bewaar deze gegevens in <code>aanvaller</code>, <code>prijs1</code> en <code>rating1</code>. Toon ze daarna.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p><code>aanvaller = input("Naam aanvaller: ")</code></p></details><details><summary>Hint 2 — extra hulp</summary><p><code>prijs1 = int(input("Prijs in miljoenen: "))</code>. De rating vraag je op dezelfde manier.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="4-0" type="checkbox"/><span>Ik vraag een spelersnaam als tekst.</span></label><label class="check"><input data-check="4-1" type="checkbox"/><span>Ik vraag prijs en rating als gehele getallen.</span></label></div>
+<div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div>
+</section><section class="step" data-step="5" id="stap-6">
+<div class="meta"><span class="eyebrow">Stap 06 van 10</span></div>
+<h2>Hoeveel geld blijft er over?</h2><p class="goal">Bereken met variabelen en overschrijf een waarde.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Een variabele kan een nieuwe waarde krijgen. Met <code>budget = budget - prijs1</code> trek je de kostprijs af van het bestaande budget. Het nieuwe budget vervangt de vorige waarde.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Voeg na de eerste transfer een berekening toe die <code>budget</code> aanpast. Toon hoeveel miljoen euro je nog over hebt. Test bijvoorbeeld met een aanvaller van 65 miljoen: je moet <strong>85 miljoen</strong> overhouden.</p></div>
+<div class="quiz"><strong>Controlevraag: wat toont dit stukje code?</strong><pre>budget = 150
+budget = budget - 65
+print(budget)</pre><div class="quizoptions"><button data-correct="false" type="button">150</button><button data-correct="true" type="button">85</button><button data-correct="false" type="button">65</button></div><div aria-live="polite" class="feedback"></div></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>De berekening is <code>budget = budget - prijs1</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Laat de printregel <strong>na</strong> de berekening staan.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="5-0" type="checkbox"/><span>Ik trek de transferprijs van het budget af.</span></label><label class="check"><input data-check="5-1" type="checkbox"/><span>Met 65 miljoen transferkosten blijft 85 miljoen over.</span></label></div>
+<div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div>
+</section><section class="step" data-step="6" id="stap-7">
+<div class="meta"><span class="eyebrow">Stap 07 van 10</span></div>
+<h2>Koop een middenvelder</h2><p class="goal">Herhaal dezelfde invoer voor een tweede speler.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Je gebruikt nieuwe variabelen voor een <strong>andere speler</strong>. De oorspronkelijke variabele <code>budget</code> blijft dezelfde en wordt opnieuw aangepast.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Maak <em>TRANSFER 2: MIDDENVELDER</em>. Vraag de naam, prijs en rating. Bewaar ze in <code>middenvelder</code>, <code>prijs2</code> en <code>rating2</code>. Trek de prijs van het resterende budget af en toon het nieuwe budget.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Begin met <code>middenvelder = input("Naam middenvelder: ")</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Gebruik daarna <code>budget = budget - prijs2</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="6-0" type="checkbox"/><span>Ik kan de tweede speler volledig invoeren.</span></label><label class="check"><input data-check="6-1" type="checkbox"/><span>Mijn budget wordt een tweede keer aangepast.</span></label></div>
+<div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div>
+</section><section class="step" data-step="7" id="stap-8">
+<div class="meta"><span class="eyebrow">Stap 08 van 10</span></div>
+<h2>Maak je verdediging compleet</h2><p class="goal">Je ploeg krijgt een derde transfer.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Voor je derde speler gebruik je opnieuw tekstinvoer en twee getalinvoeren. Na deze transfer heb je drie spelers, hun prijzen en hun ratings.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Maak <em>TRANSFER 3: VERDEDIGER</em>. Vraag de naam, prijs en rating en bewaar ze in <code>verdediger</code>, <code>prijs3</code> en <code>rating3</code>. Trek ook deze prijs van <code>budget</code> af en toon wat er overblijft.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Gebruik de naam <code>verdediger</code> en de variabelen <code>prijs3</code> en <code>rating3</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>De aftrekking werkt op dezelfde manier als bij de twee vorige transfers.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="7-0" type="checkbox"/><span>Ik heb drie spelers en hun ratings opgeslagen.</span></label><label class="check"><input data-check="7-1" type="checkbox"/><span>Het budget is na elke transfer opnieuw berekend.</span></label></div>
+<div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div>
+</section><section class="step" data-step="8" id="stap-9">
+<div class="meta"><span class="eyebrow">Stap 09 van 10</span></div>
+<h2>Bereken je teamscore</h2><p class="goal">Maak een berekening met de drie ratings.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>De gemiddelde rating bereken je door de drie ratings op te tellen en door 3 te delen. In Python betekent <code>/</code> delen. Je mag het resultaat met <code>round(gemiddelde, 1)</code> afronden tot één cijfer na de komma.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Bereken <code>totaleprijs</code> door de drie prijzen op te tellen. Bereken ook <code>gemiddelde</code> uit de drie ratings. Toon vervolgens een eindoverzicht met clubnaam, manager, de drie spelers, de totale transferkosten, het resterende budget en de gemiddelde rating.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p><code>totaleprijs = prijs1 + prijs2 + prijs3</code></p></details><details><summary>Hint 2 — extra hulp</summary><p><code>gemiddelde = (rating1 + rating2 + rating3) / 3</code></p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="8-0" type="checkbox"/><span>Ik bereken de totale transferkosten.</span></label><label class="check"><input data-check="8-1" type="checkbox"/><span>Mijn eindoverzicht bevat alle spelers en de teamscore.</span></label></div>
+<div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div>
+</section><section class="step" data-step="9" id="stap-10">
+<div class="meta"><span class="eyebrow">Stap 10 van 10</span></div>
+<h2>Test je Ultimate Team</h2><p class="goal">Controleer of je programma werkt met andere invoer.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Een bruikbaar programma heeft geen vaste spelersnamen of transferprijzen nodig. Test twee keer met andere gegevens. Omdat we <strong>nog geen if-voorwaarden</strong> gebruiken, kan je programma zelf nog niet controleren of je binnen het budget blijft: dat controleer jij.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Test eerst met <strong>65, 40 en 20 miljoen</strong> en ratings <strong>90, 85 en 80</strong>. De totale kost is 125 miljoen, je houdt 25 miljoen over en je gemiddelde rating is 85. Test daarna met andere spelers. Sla je notebook op en dien het in via Google Classroom.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Vergeet de haakjes bij het gemiddelde niet.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Controleer of je bij de tweede uitvoering echt andere namen en prijzen kunt invoeren.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="9-0" type="checkbox"/><span>Mijn eerste test geeft 125 miljoen kosten, 25 miljoen over en rating 85.</span></label><label class="check"><input data-check="9-1" type="checkbox"/><span>Ik heb een tweede test uitgevoerd met andere spelers.</span></label><label class="check"><input data-check="9-2" type="checkbox"/><span>Mijn notebook is klaar om in te dienen.</span></label></div>
+<div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div>
+</section>
+</main></div>
+<script>
+const sections=[...document.querySelectorAll('.step')];
+const nav=document.getElementById('navlist');
+let current=0;
+const stateKey='fifa_leerpad_check_v1';
+let checks={};try{checks=JSON.parse(localStorage.getItem(stateKey)||'{}')}catch(e){checks={}}
+document.querySelectorAll('input[data-check]').forEach(input=>{
+  input.checked=!!checks[input.dataset.check];
+  input.addEventListener('change',()=>{checks[input.dataset.check]=input.checked;try{localStorage.setItem(stateKey,JSON.stringify(checks))}catch(e){}updateNav();});
+});
+sections.forEach((s,i)=>{
+  const b=document.createElement('button');b.type='button';b.className='stepnavitem';
+  const circle=document.createElement('span');circle.className='circle';circle.innerHTML='<span>'+(i+1)+'</span>';
+  const label=document.createElement('span');label.textContent=s.querySelector('h2').textContent;
+  b.append(circle,label);b.addEventListener('click',()=>show(i));nav.appendChild(b);
+});
+function updateNav(){sections.forEach((s,i)=>{const c=[...s.querySelectorAll('input[data-check]')];nav.children[i].classList.toggle('done',c.length>0&&c.every(x=>x.checked));})}
+function show(index){
+ current=Math.max(0,Math.min(index,sections.length-1));
+ sections.forEach((s,i)=>{s.classList.toggle('active',i===current);s.querySelector('.prev').disabled=i===0;s.querySelector('.next').textContent=i===sections.length-1?'Afronden ✓':'Volgende →';});
+ [...nav.children].forEach((b,i)=>b.classList.toggle('active',i===current));
+ document.getElementById('counter').textContent='Stap '+(current+1)+' van '+sections.length;
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.prev').forEach(b=>b.addEventListener('click',()=>show(current-1)));
+document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>{if(current<sections.length-1)show(current+1);else alert('Je bent klaar. Sla je Colab-notebook op en dien het in via Google Classroom.');}));
+document.querySelectorAll('.quizoptions').forEach(g=>g.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{g.querySelectorAll('button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');const f=g.parentElement.querySelector('.feedback');const ok=b.dataset.correct==='true';f.textContent=ok?'Juist! 150 - 65 = 85.':'Nog niet. Bereken het nieuwe budget voordat print() wordt uitgevoerd.';f.style.color=ok?'#087259':'#9b4b08';})));
+updateNav();show(0);
+</script></body></html>

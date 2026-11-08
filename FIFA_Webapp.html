@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang="nl">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Transfermarkt | Clubmanager</title>
+<style>
+    :root {--navy:#093147;--cyan:#1f9dbc;--gold:#fab515;--ink:#173344;--muted:#5b7280;--bg:#eff5f7;--line:#d7e5ea;--success:#157453;--danger:#a33f3f;}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,"Segoe UI",Arial,sans-serif}
+    button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}
+    .topbar{background:linear-gradient(115deg,#062436,#12536b);color:#fff;padding:23px max(20px,calc((100vw - 1160px)/2));display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .brand{letter-spacing:.13em;text-transform:uppercase;font-size:12px;font-weight:800;color:#a6e6f2}
+    h1{font-size:clamp(29px,4.5vw,48px);margin:7px 0;line-height:1.15} .topbar p{margin:0;color:#d9eef5}
+    .topbar a{color:#fff;text-decoration:none;border:1px solid #8dc2d6;padding:10px 14px;border-radius:10px;font-size:14px}
+    .shell{max-width:1160px;margin:26px auto 70px;padding:0 18px;display:grid;grid-template-columns:minmax(0,1.22fr) minmax(300px,.78fr);gap:22px;align-items:start}
+    .panel{background:white;border-radius:18px;border:1px solid var(--line);padding:24px;box-shadow:0 9px 28px #0733480d}
+    .panel h2{margin:0 0 6px;font-size:24px}.muted{color:var(--muted)}.small{font-size:13px}.eyebrow{color:#087b94;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.11em}
+    .stepper{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:18px 0 25px}
+    .dot{padding:8px 10px;border-radius:10px;background:#e8f0f3;color:#58717d;font-size:12px;font-weight:800}.dot.active{background:var(--navy);color:white}.dot.done{background:#d7f3e7;color:#166b4d}
+    label{display:block;font-size:14px;font-weight:750;margin:13px 0 5px}
+    input{width:100%;border-radius:10px;border:1px solid #a9c1cc;padding:12px 13px;background:white;color:var(--navy)}
+    input:focus{outline:3px solid #b8eaf3;border-color:var(--cyan)}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .actions{display:flex;gap:10px;justify-content:space-between;margin-top:22px;flex-wrap:wrap}
+    .btn{padding:11px 18px;border-radius:10px;font-weight:800;border:1px solid var(--navy);background:var(--navy);color:white}
+    .btn.secondary{color:var(--navy);background:white}.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+    .error{background:#fff0ef;color:#933738;padding:12px;border-left:4px solid #ba4d4d;border-radius:8px;margin-top:15px}
+    .hint{background:#eaf6fa;padding:13px 15px;border-radius:10px;margin-top:17px;color:#275568}
+    .scorebar{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 20px}
+    .stat{background:#f0f7f9;border-radius:13px;padding:15px;min-width:0}.stat strong{font-size:26px;color:var(--navy);display:block}.stat span{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+    .meter{height:10px;background:#e3eaf0;border-radius:20px;overflow:hidden}.meter-fill{height:100%;background:#1f9dbc;transition:width .2s}.meter-fill.over{background:#d45a56}
+    .pitch{border-radius:15px;min-height:360px;background:linear-gradient(0deg,#0d604e,#127863);padding:22px 15px;color:white;display:flex;flex-direction:column;justify-content:space-around;align-items:center;position:relative;overflow:hidden;margin-top:16px}
+    .pitch::before{content:"";position:absolute;inset:13px;border:2px solid #ffffff54;pointer-events:none;border-radius:3px}.pitch::after{content:"";position:absolute;left:12px;right:12px;top:50%;border-top:2px solid #ffffff54;pointer-events:none}
+    .card{position:relative;z-index:1;width:min(220px,95%);border:2px solid #e7c56c;border-radius:11px;background:linear-gradient(135deg,#ffebb0,#d6a955);color:#423519;padding:9px 13px;text-align:center;box-shadow:0 6px 18px #082f2650}
+    .card.empty{background:#ffffff29;border:2px dashed #ffffff88;color:white;box-shadow:none}
+    .card b{font-size:15px;display:block;word-break:break-word}.card .rating{font-size:24px;line-height:1.15;font-weight:900}.card small{font-size:12px;display:block}
+    .result{display:none;border:1px solid #cbe8db;background:#f0faf5;border-radius:12px;padding:16px;margin-top:18px}
+    .result.visible{display:block}.result h3{margin:0 0 7px;color:var(--success)}
+    .breakdown{margin-top:18px;border-top:1px solid var(--line);padding-top:12px}.breakdown p{display:flex;justify-content:space-between;gap:12px;margin:9px 0}.breakdown strong{white-space:nowrap}
+    .note{border-left:4px solid var(--gold);background:#fff7e2;padding:14px 17px;border-radius:9px;margin-top:20px}
+    .hidden{display:none!important}
+    @media(max-width:850px){.shell{grid-template-columns:1fr}.topbar{padding:23px 20px}}
+    @media(max-width:450px){.panel{padding:17px}.two{grid-template-columns:1fr}.scorebar{grid-template-columns:1fr 1fr}.stat{padding:10px}.stat strong{font-size:22px}}
+  
+:root{--navy:#101d2a;--cyan:#2bb18e;--gold:#d8aa52;--ink:#203040;--muted:#6d7b89;--bg:#eef1f4;--line:#dce2e7;--success:#127454}
+body{font-family:Inter,system-ui,"Segoe UI",Arial,sans-serif;background:var(--bg)}
+.topbar{background:#101e2b;padding:0 max(22px,calc((100vw - 1200px)/2));height:72px;box-shadow:0 3px 12px #101e2b16;gap:24px}
+.top-brand{display:flex;gap:12px;align-items:center;color:white;white-space:nowrap}.emblem{height:40px;width:40px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(140deg,#2db892,#126c59);font-size:16px;font-weight:900;letter-spacing:-.04em}.top-brand strong{display:block;font-size:14px;letter-spacing:.11em}.top-brand small{display:block;font-size:10px;letter-spacing:.15em;color:#9eb3c1}
+.top-nav{display:flex;height:100%;gap:28px;align-items:center;color:#95a9b8;font-size:14px}.top-nav span{height:100%;display:flex;align-items:center;white-space:nowrap}.top-nav .nav-active{border-bottom:3px solid #36c49d;color:white;font-weight:700}.user-chip{margin-left:auto;font-size:13px;color:#bdcbd5;display:flex;align-items:center;gap:8px;white-space:nowrap}.user-dot{color:#9aaab7;font-size:18px}.status-dot{height:7px;width:7px;border-radius:50%;background:#39d19d}
+.page-head{max-width:1200px;padding:33px 18px 0;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:20px}.page-head h1{font-size:clamp(28px,3.5vw,38px);color:#1c2b38;margin:7px 0}.page-head p{color:#667783;margin:4px 0}.breadcrumb{color:#80929e;letter-spacing:.1em;font-weight:800;font-size:11px}.breadcrumb span{color:#bdc7ce;margin:0 9px}.season-tag{border:1px solid #dae2e6;background:white;border-radius:12px;padding:12px 17px;min-width:190px;display:flex;flex-direction:column;box-shadow:0 4px 14px #17293506}.season-label{font-size:10px;letter-spacing:.12em;color:#82929d;font-weight:800}.season-tag strong{font-size:16px}.live{font-size:11px;color:#238468;margin-top:4px}.live i{display:inline-block;background:#21ad84;height:7px;width:7px;border-radius:50%;margin-right:5px}
+.shell{max-width:1200px;margin-top:25px;grid-template-columns:minmax(0,1.13fr) minmax(330px,.87fr)}.panel{border-radius:15px;box-shadow:0 9px 22px #1a314209;padding:27px}.panel h2{font-size:23px;color:#1a2d3b}.eyebrow{color:#138866;font-size:11px;letter-spacing:.12em}.stepper{padding-bottom:21px;border-bottom:1px solid var(--line)}.dot{background:#eff2f5;color:#7a8995;border-radius:8px}.dot.active{background:#173649;color:white}.dot.done{background:#e2f5ec;color:#13855a}input{background:#fcfdfd;border-color:#cbd5dc}input:focus{outline:3px solid #b8e9dc;border-color:#2ba98b}.btn{background:#1a3b4b;border-color:#1a3b4b}.btn.gold{background:#1d9b79;border-color:#1d9b79;color:white}.scorebar .stat{background:#f3f6f8;border:1px solid #e3ebef}.stat strong{color:#163344}.meter-fill{background:#229b79}.pitch{background:repeating-linear-gradient(0deg,#0c6852 0,#0c6852 65px,#126f59 65px,#126f59 130px);min-height:370px;border-radius:12px}.pitch::before{inset:14px;border:2px solid #ffffff61}.pitch::after{border-color:#ffffff61}.card{background:linear-gradient(135deg,#ffe4a4,#cda04e);border-color:#efcf80;box-shadow:0 8px 22px #0a2f244f}.card.empty{background:#032b262e;border-color:#d8f4df70;color:#edfff7}.breakdown{margin-bottom:3px}.transfer-ledger{margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}.ledger-title{display:flex;align-items:center;justify-content:space-between;font-size:14px;margin-bottom:12px}.ledger-title span{font-size:12px;color:#87949c}.ledger-empty{font-size:13px;color:#87949c;padding:13px 0}.ledger-row{display:flex;justify-content:space-between;align-items:center;padding:12px 2px;border-bottom:1px solid #ebeff2;gap:10px}.ledger-row strong{display:block;font-size:13px}.ledger-row small{display:block;font-size:11px;color:#71818e}.ledger-row b{white-space:nowrap;font-size:13px}.result{background:#eef9f3;border-color:#cde8d9}.result h3{color:#137b57}.actions{margin-top:30px}
+@media(max-width:880px){.top-nav{gap:14px;font-size:12px}.user-chip{display:none}.page-head{padding:25px 18px 0}}@media(max-width:680px){.topbar{height:auto;min-height:70px;padding:15px 20px}.top-nav{width:100%;height:32px}.top-nav span{height:32px}.page-head{align-items:flex-start;flex-direction:column}.season-tag{min-width:0;width:100%}.shell{margin-top:18px}}@media(max-width:410px){.dot{font-size:11px;padding:7px}.panel{padding:17px}.stat strong{font-size:21px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="top-brand"><span class="emblem">FC</span><span><strong>CLUBMANAGER</strong><small>TRANSFER CENTRE</small></span></div><nav aria-label="Navigatie" class="top-nav"><span class="nav-active">Transfermarkt</span><span>Mijn selectie</span><span>Clubfinanciën</span></nav><div class="user-chip"><span class="user-dot">●</span> Managerportaal <span class="status-dot"></span></div></header>
+<section class="page-head"><div><div class="breadcrumb">CLUBBEHEER <span> / </span> TRANSFERS</div><h1>Transfermarkt</h1><p>Beheer je selectie, rond transfers af en bewaak je beschikbare budget.</p></div><div class="season-tag"><span class="season-label">SEIZOEN</span><strong>2026 / 2027</strong><span class="live"><i></i> Transferperiode geopend</span></div></section><div class="shell">
+<main class="panel">
+<div class="eyebrow">TRANSFERDOSSIER</div>
+<h2 id="phaseTitle">Clubregistratie</h2>
+<p class="muted" id="phaseText">Voer de club- en managergegevens in om de transfermarkt te openen.</p>
+<div aria-label="Transferverloop" class="stepper" id="stepper"><span class="dot active">Club</span><span class="dot">Aanval</span><span class="dot">Middenveld</span><span class="dot">Defensie</span><span class="dot">Overzicht</span></div>
+<form id="transferForm" novalidate="">
+<div id="clubFields">
+<label for="clubnaam">Clubnaam</label><input autocomplete="off" id="clubnaam" maxlength="35" name="clubnaam" placeholder="Naam van de club" required="" type="text"/>
+<label for="manager">Clubmanager</label><input autocomplete="off" id="manager" maxlength="35" name="manager" placeholder="Voor- en achternaam" required="" type="text"/>
+
+</div>
+<div class="hidden" id="playerFields">
+<label for="speler">Spelersnaam</label><input autocomplete="off" id="speler" maxlength="35" name="speler" placeholder="Voor- en achternaam speler" type="text"/>
+<div class="two">
+<div><label for="prijs">Transfersom (€ miljoen)</label><input id="prijs" inputmode="numeric" min="0" name="prijs" placeholder="45" step="1" type="number"/></div>
+<div><label for="rating">Algemene rating (1–99)</label><input id="rating" inputmode="numeric" max="99" min="1" name="rating" placeholder="88" step="1" type="number"/></div>
+</div>
+
+</div>
+<div class="error hidden" id="error" role="alert"></div>
+<div class="actions"><button class="btn secondary" disabled="" id="back" type="button">Vorige stap</button><button class="btn gold" id="next" type="submit">Transfermarkt openen</button></div>
+</form>
+<div aria-live="polite" class="result" id="result"><h3>Selectie bevestigd</h3><p id="resultText"></p><div id="summary"></div><button class="btn" id="reset" type="button">Nieuwe selectie starten</button></div>
+
+</main>
+<aside class="panel">
+<div class="eyebrow">CLUBOVERZICHT</div><h2 id="dashboardTitle">Selectie &amp; budget</h2>
+<div class="scorebar"><div class="stat"><span>Resterend budget</span><strong id="budget">€ 150M</strong></div><div class="stat"><span>Gemiddelde rating</span><strong id="average">—</strong></div></div>
+<div aria-label="Gebruikt transferbudget" class="meter"><div class="meter-fill" id="meterFill" style="width:0%"></div></div>
+<p class="small muted" id="budgetText">€ 0M toegewezen aan transfers</p>
+<div aria-label="Opstelling met drie spelers" class="pitch"><div class="card empty" id="card-0">Aanvaller nog niet gekozen</div><div class="card empty" id="card-1">Middenvelder nog niet gekozen</div><div class="card empty" id="card-2">Verdediger nog niet gekozen</div></div>
+<div class="breakdown" id="breakdown"><p><span>Spelers gekocht</span><strong id="playerCount">0 van 3</strong></p><p><span>Totale transferkosten</span><strong id="spent">€ 0M</strong></p></div><div class="transfer-ledger"><div class="ledger-title"><strong>Transacties</strong><span id="transactionCount">0 afgerond</span></div><div class="ledger-list" id="transactionList"><div class="ledger-empty">Nog geen geregistreerde transfers.</div></div></div>
+</aside>
+</div>
+<script>
+  'use strict';
+  const roles=['Aanvaller','Middenvelder','Verdediger'];
+  const budgetStart=150;
+  let current=0;
+  let club={naam:'',manager:''};
+  let players=[null,null,null];
+  const $=id=>document.getElementById(id);
+  const form=$('transferForm');
+  function numberM(n){return '€ '+n+'M';}
+  function savedPlayerFromForm(){
+    return {naam:$('speler').value.trim(),prijs:Number($('prijs').value),rating:Number($('rating').value)};
+  }
+  function readInputs(){
+    if(current===0){
+      const naam=$('clubnaam').value.trim(),manager=$('manager').value.trim();
+      if(!naam||!manager)return 'Vul zowel de clubnaam als de naam van de manager in.';
+      club={naam,manager};return '';
+    }
+    const p=savedPlayerFromForm();
+    if(!p.naam)return 'Vul de naam van de speler in.';
+    if($('prijs').value.trim()===''||!Number.isInteger(p.prijs)||p.prijs<0)return 'Vul een geldige transferprijs in als geheel getal vanaf 0.';
+    if($('rating').value.trim()===''||!Number.isInteger(p.rating)||p.rating<1||p.rating>99)return 'Vul een gehele rating in tussen 1 en 99.';
+    const others=players.reduce((sum,x,i)=>sum+(x&&i!==current-1?x.prijs:0),0);
+    if(others+p.prijs>budgetStart)return 'Onvoldoende budget! Je hebt nog '+numberM(budgetStart-others)+' beschikbaar voor deze transfer.';
+    players[current-1]=p;return '';
+  }
+  function updateDashboard(){
+    const confirmed=players.filter(Boolean);
+    const spent=confirmed.reduce((sum,p)=>sum+p.prijs,0);
+    $('budget').textContent=numberM(budgetStart-spent);
+    $('budgetText').textContent=numberM(spent)+' besteed van '+numberM(budgetStart);
+    $('meterFill').style.width=(spent/budgetStart*100)+'%';
+    $('average').textContent=confirmed.length? (confirmed.reduce((sum,p)=>sum+p.rating,0)/confirmed.length).toFixed(1):'—';
+    $('dashboardTitle').textContent=club.naam||'Jouw Ultimate Team';
+    $('playerCount').textContent=confirmed.length+' van 3';$('spent').textContent=numberM(spent);
+    $('transactionCount').textContent=confirmed.length+' afgerond';
+    const ledger=$('transactionList');ledger.replaceChildren();
+    if(confirmed.length===0){const empty=document.createElement('div');empty.className='ledger-empty';empty.textContent='Nog geen geregistreerde transfers.';ledger.append(empty);}
+    players.forEach((p,i)=>{if(!p)return;const item=document.createElement('div');item.className='ledger-row';const left=document.createElement('div');const title=document.createElement('strong');title.textContent=p.naam;const sub=document.createElement('small');sub.textContent=roles[i]+' · Rating '+p.rating;left.append(title,sub);const price=document.createElement('b');price.textContent=numberM(p.prijs);item.append(left,price);ledger.append(item);});
+    players.forEach((p,i)=>{
+      const el=$('card-'+i);
+      if(!p){el.className='card empty';el.textContent=roles[i]+' nog niet gekozen';}
+      else {el.className='card';el.replaceChildren();const r=document.createElement('div');r.className='rating';r.textContent=p.rating;const name=document.createElement('b');name.textContent=p.naam;const s=document.createElement('small');s.textContent=roles[i]+' · '+numberM(p.prijs);el.append(r,name,s);}
+    });
+  }
+  function showPhase(){
+    $('error').classList.add('hidden');
+    const titles=['Clubregistratie','Aanvaller contracteren','Middenvelder contracteren','Verdediger contracteren','Selectieoverzicht'];
+    const texts=['Registreer de club en de verantwoordelijke manager.','Registreer een nieuwe aanvaller en zijn transfergegevens.','Registreer een middenvelder en zijn transfergegevens.','Registreer een verdediger en zijn transfergegevens.','Alle transferdossiers zijn verwerkt. Bekijk de definitieve selectie.'];
+    $('phaseTitle').textContent=titles[current];$('phaseText').textContent=texts[current];
+    [...$('stepper').children].forEach((el,i)=>{el.className='dot'+(i===current?' active':i<current?' done':'');});
+    $('clubFields').classList.toggle('hidden',current!==0);
+    $('playerFields').classList.toggle('hidden',current===0||current===4);
+    form.classList.toggle('hidden',current===4);
+    $('result').classList.toggle('visible',current===4);
+    $('back').disabled=current===0;
+    $('next').textContent=current===0?'Transfermarkt openen':current===3?'Selectie afronden':'Transfer bevestigen';
+    if(current===0){$('clubnaam').value=club.naam;$('manager').value=club.manager;}
+    if(current>=1&&current<=3){
+      const player=players[current-1];
+      $('speler').value=player?.naam||'';$('prijs').value=player?.prijs??'';$('rating').value=player?.rating??'';
+      
+    }
+    updateDashboard();
+    if(current===4)finish();
+  }
+  function finish(){
+    const spent=players.reduce((sum,p)=>sum+p.prijs,0);
+    const avg=players.reduce((sum,p)=>sum+p.rating,0)/3;
+    $('resultText').textContent='De selectie van '+club.naam+' is geregistreerd onder verantwoordelijkheid van '+club.manager+'.';
+    const summary=$('summary');summary.replaceChildren();
+    const p=document.createElement('p');p.textContent='Totale transferkosten: '+numberM(spent)+' · Resterend budget: '+numberM(budgetStart-spent)+' · Gemiddelde rating: '+avg.toFixed(1);summary.append(p);
+    const ul=document.createElement('ul');players.forEach((player,i)=>{const li=document.createElement('li');li.textContent=roles[i]+': '+player.naam+' (rating '+player.rating+', '+numberM(player.prijs)+')';ul.append(li);});summary.append(ul);
+  }
+  form.addEventListener('submit',event=>{
+    event.preventDefault();const err=readInputs();
+    if(err){$('error').textContent=err;$('error').classList.remove('hidden');return;}
+    current++;showPhase();
+  });
+  $('back').addEventListener('click',()=>{if(current>0){current--;showPhase();}});
+  $('reset').addEventListener('click',()=>{current=0;club={naam:'',manager:''};players=[null,null,null];showPhase();window.scrollTo({top:0,behavior:'smooth'});});
+  showPhase();
+</script>
+</body>
+</html>
