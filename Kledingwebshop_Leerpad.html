@@ -1,0 +1,412 @@
+<!doctype html>
+<!DOCTYPE html>
+
+<html lang="nl"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>CodeKompas | Kledingwebshop</title>
+<style>
+      :root {
+        --navy: #093147;
+        --cyan: #1f9dbc;
+        --pale: #e7f5fa;
+        --orange: #fab515;
+        --ink: #173344;
+        --muted: #59717f;
+        --bg: #f1f6f8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        font:
+          16px/1.65 system-ui,
+          Segoe UI,
+          Arial,
+          sans-serif;
+        color: var(--ink);
+      }
+
+      a {
+        color: #096e91;
+      }
+
+      header {
+        background: linear-gradient(120deg, #093147, #155f77);
+        padding: 34px max(18px, calc((100vw - 1100px) / 2));
+        color: white;
+      }
+
+      header h1 {
+        font-size: clamp(32px, 5vw, 50px);
+        line-height: 1.14;
+        margin: 14px 0;
+      }
+
+      header p {
+        max-width: 740px;
+        color: #e5f4f8;
+      }
+
+      .brand {
+        font-weight: 800;
+        letter-spacing: 0.08em;
+      }
+
+      .pill {
+        display: inline-block;
+        background: #ffffff1d;
+        border: 1px solid #ffffff60;
+        border-radius: 30px;
+        padding: 5px 13px;
+        margin: 8px 5px 0 0;
+        font-size: 13px;
+      }
+
+      .layout {
+        max-width: 1140px;
+        margin: 24px auto 60px;
+        padding: 0 18px;
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+
+      .side,
+      .intro,
+      .step,
+      .finish {
+        background: white;
+        border: 1px solid #d8e7ec;
+        border-radius: 18px;
+        padding: 24px;
+        box-shadow: 0 7px 22px #1230440b;
+      }
+
+      .side {
+        position: sticky;
+        top: 18px;
+        padding: 17px;
+      }
+
+      .side h2 {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+      }
+
+      .stepnavitem {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        width: 100%;
+        text-align: left;
+        background: transparent;
+        border: 0;
+        padding: 10px 8px;
+        border-radius: 9px;
+        color: var(--ink);
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+      }
+
+      .stepnavitem:hover,
+      .stepnavitem.active {
+        background: var(--pale);
+      }
+
+      .circle {
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        height: 26px;
+        width: 26px;
+        border-radius: 50%;
+        background: #eaf0f3;
+        font-weight: 800;
+      }
+
+      .active .circle {
+        background: var(--navy);
+        color: white;
+      }
+
+      .intro {
+        margin-bottom: 17px;
+      }
+
+      .step {
+        display: none;
+      }
+
+      .step.active {
+        display: block;
+      }
+
+      .step h2 {
+        font-size: clamp(25px, 3.4vw, 35px);
+        line-height: 1.22;
+        margin: 10px 0;
+      }
+
+      .meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-weight: 800;
+        color: #14778c;
+      }
+
+      .time {
+        font-size: 13px;
+        background: #e8f4f8;
+        border-radius: 20px;
+        padding: 4px 10px;
+      }
+
+      .goal {
+        color: var(--muted);
+      }
+
+      .theory {
+        background: #eaf5f9;
+        border-radius: 14px;
+        padding: 18px 21px;
+        margin: 23px 0;
+      }
+
+      .task {
+        border-left: 4px solid var(--cyan);
+        padding-left: 18px;
+        margin: 24px 0;
+      }
+
+      .help {
+        background: #f8fafb;
+        border: 1px solid #d8e7ec;
+        border-radius: 14px;
+        padding: 18px 20px;
+        margin-top: 25px;
+      }
+
+      .sub {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        color: #0b6f83;
+        text-transform: uppercase;
+      }
+
+      .help details {
+        padding: 10px 0;
+        border-top: 1px solid #dbe5e9;
+      }
+
+      .help summary {
+        font-weight: 650;
+        cursor: pointer;
+      }
+
+      code {
+        font-family: Consolas, monospace;
+        font-size: 0.92em;
+      }
+
+      p code,
+      li code {
+        background: #dcecf1;
+        padding: 2px 4px;
+        border-radius: 4px;
+      }
+
+      pre {
+        background: var(--navy);
+        color: #f0f9ff;
+        border-radius: 9px;
+        padding: 15px;
+        overflow-x: auto;
+        line-height: 1.6;
+        font-size: 14px;
+      }
+
+      .check {
+        display: flex;
+        align-items: start;
+        gap: 9px;
+        margin: 9px 0;
+      }
+
+      .check input {
+        accent-color: var(--cyan);
+        width: 18px;
+        height: 18px;
+        margin-top: 4px;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 24px;
+        border-top: 1px solid #e0e9ed;
+        padding-top: 22px;
+      }
+
+      button.action {
+        background: var(--navy);
+        color: white;
+        border: 0;
+        border-radius: 10px;
+        padding: 10px 17px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button.action.secondary {
+        background: white;
+        border: 1px solid #aec7d1;
+        color: var(--navy);
+      }
+
+      button:disabled {
+        opacity: 0.3;
+        cursor: default;
+      }
+
+      .notice {
+        padding: 14px 17px;
+        background: #fff5d8;
+        border-left: 4px solid var(--orange);
+        border-radius: 9px;
+      }
+
+      .quiz {
+        margin: 17px 0;
+        border: 1px solid #d8e7ec;
+        padding: 16px;
+        border-radius: 12px;
+      }
+
+      .quiz button {
+        width: 100%;
+        text-align: left;
+        border: 1px solid #a9c8d2;
+        background: white;
+        border-radius: 8px;
+        padding: 10px;
+        margin: 4px 0;
+        cursor: pointer;
+      }
+
+      .quiz button.selected {
+        background: #dcf3f7;
+        border-color: var(--cyan);
+      }
+
+      .quiz .feedback {
+        font-weight: 700;
+        min-height: 22px;
+      }
+
+      .finish {
+        margin-top: 17px;
+        font-size: 14px;
+      }
+
+      .tiny {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      @media (max-width: 810px) {
+        .layout {
+          display: block;
+          padding: 0 12px;
+        }
+
+        .side {
+          position: static;
+          margin-bottom: 18px;
+        }
+
+        .navlist {
+          display: flex;
+          overflow-x: auto;
+        }
+
+        .stepnavitem {
+          min-width: 190px;
+        }
+
+        .intro,
+        .step {
+          padding: 20px;
+        }
+
+        header {
+          padding: 27px 20px;
+        }
+      }
+      .challenge { border-left: 4px solid #fab515; background:#fff9e9; border-radius:9px; padding:15px 18px; margin: 18px 0; }
+      .stepnavitem.done .circle { background:#d5f2e7; color:#12694d; }
+      .stepnavitem.done .circle::after { content:'✓'; }
+      .stepnavitem.done .circle span { display:none; }
+      .tools { display:flex;flex-wrap:wrap;gap:10px;margin-top:14px; }
+      .tools a { display:inline-block;padding:9px 12px;text-decoration:none;border-radius:9px;background:#eaf5f9;font-weight:700; }
+      .finish { margin-top:18px; }
+      .finish strong {color:#093147}
+</style></head>
+<body><header><div class="brand">Informaticawetenschappen: variabelen - input</div>
+<h1>De kledingwebshop</h1>
+<p>Maak in Google Colab een programma voor een kledingbestelling. Je oefent <code>print()</code>, variabelen, <code>input()</code>, <code>int(input())</code> en berekeningen.</p>
+</header>
+<div class="layout"><aside class="side"><h2>Het leerpad</h2><div class="navlist" id="navlist"></div><p class="tiny" id="counter">Stap 1 van 10</p></aside>
+<main><section class="intro"><h2>Hoe ga je tewerk?</h2>
+<p>Lees telkens de korte uitleg en voer de opdracht uit in <a href="https://colab.research.google.com/" rel="noopener" target="_blank">Google Colab</a>. <strong>Breid steeds dezelfde codecel uit</strong>, zodat je uiteindelijk één programma hebt. Test na iedere stap met ▶.</p>
+<div class="notice"><strong>Hulp nodig?</strong> Probeer eerst zelf, open daarna Hint 1 of Hint 2. Je kunt ook je leerkracht om hulp vragen. <strong>Indienen:</strong> je levert je Colab-notebook in via Google Classroom, niet deze website.</div>
+</section>
+
+<section class="step" data-step="0" id="stap-1"><div class="meta"><span class="eyebrow">Stap 01 van 10</span></div><h2>Een bestelling verwerken</h2><p class="goal">Je maakt één Pythonprogramma dat je tijdens het leerpad uitbreidt.</p><div class="theory"><span class="sub">Uitleg</span><p>Je werkt voor een kledingwebshop. Een klant bestelt T-shirts, hoodies en jeans. Jouw programma vraagt de bestelde aantallen en klantgegevens, berekent de prijzen en toont een overzicht van de bestelling.</p></div><div class="task"><span class="sub">Doe dit in Colab</span><p>Maak in <strong>Google Colab</strong> een notebook met één codecel. Werk tijdens het hele leerpad in <strong>dezelfde codecel</strong> en test na iedere stap.</p></div><div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Open Google Colab en voeg een codecel toe.</p></details></div><div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="0-0" type="checkbox"/><span>Ik heb één codecel gemaakt.</span></label><label class="check"><input data-check="0-1" type="checkbox"/><span>Ik weet hoe ik deze kan uitvoeren.</span></label></div><div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div></section><section class="step" data-step="1" id="stap-2"><div class="meta"><span class="eyebrow">Stap 02 van 10</span></div><h2>De naam van jouw webshop</h2><p class="goal">Bewaar tekst in een variabele.</p><div class="theory"><span class="sub">Uitleg</span><p>Een <strong>variabele</strong> bewaart een waarde. Tekst schrijf je tussen aanhalingstekens. Bijvoorbeeld <code>winkelnaam = "NORTHLINE"</code>.</p></div><div class="task"><span class="sub">Doe dit in Colab</span><p>Maak bovenaan je programma een tekstvariabele <code>winkelnaam</code>. Geef de winkel een naam die je zelf kiest.</p></div><div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Bij tekst staan de aanhalingstekens rond de waarde, niet rond de variabelenaam.</p></details></div><div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="1-0" type="checkbox"/><span>Mijn winkelnaam is een tekstvariabele.</span></label><label class="check"><input data-check="1-1" type="checkbox"/><span>De code werkt zonder foutmelding.</span></label></div><div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div></section><section class="step" data-step="2" id="stap-3"><div class="meta"><span class="eyebrow">Stap 03 van 10</span></div><h2>Verwelkom de klant</h2><p class="goal">Gebruik <code>print()</code> en <code>input()</code>.</p><div class="theory"><span class="sub">Uitleg</span><p><code>print()</code> toont tekst op het scherm. Met <code>input()</code> kan de klant zelf een naam invoeren. De invoer wordt bewaard als tekst.</p></div><div class="task"><span class="sub">Doe dit in Colab</span><p>Voeg onderaan een titel met <code>print()</code> toe. Vraag de naam van de klant via <code>input()</code> en bewaar die in <code>klantnaam</code>. Toon daarna de winkelnaam en een begroeting met de naam van de klant.</p></div><div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Een naam vragen kan met <code>klantnaam = input("Jouw naam: ")</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Je kunt tekst en variabelen combineren: <code>print("Welkom,", klantnaam)</code>.</p></details></div><div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="2-0" type="checkbox"/><span>Ik vraag de naam met input().</span></label><label class="check"><input data-check="2-1" type="checkbox"/><span>De begroeting gebruikt de ingevoerde naam.</span></label></div><div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div></section><section class="step" data-step="3" id="stap-4"><div class="meta"><span class="eyebrow">Stap 04 van 10</span></div><h2>De prijzen van de kleding</h2><p class="goal">Bewaar vaste prijzen als gehele getallen.</p><div class="theory"><span class="sub">Uitleg</span><p>De webshop verkoopt een <strong>T-shirt voor € 25</strong>, een <strong>hoodie voor € 60</strong> en een <strong>jeans voor € 75</strong>. Deze prijzen veranderen niet tijdens de bestelling. Daarom bewaren we ze in drie variabelen.</p></div><div class="task"><span class="sub">Doe dit in Colab</span><p>Maak <strong>boven je printregels</strong> de variabelen <code>prijs_tshirt</code>, <code>prijs_hoodie</code> en <code>prijs_jeans</code> met de juiste prijzen. Toon de prijslijst onder de begroeting.</p></div><div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Bijvoorbeeld: <code>prijs_tshirt = 25</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Toon de prijzen met <code>print()</code> en de variabelen.</p></details></div><div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="3-0" type="checkbox"/><span>Ik heb drie gehele prijzen opgeslagen.</span></label><label class="check"><input data-check="3-1" type="checkbox"/><span>De prijslijst toont € 25, € 60 en € 75.</span></label></div><div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div></section><section class="step" data-step="4" id="stap-5"><div class="meta"><span class="eyebrow">Stap 05 van 10</span></div><h2>Hoeveel T-shirts?</h2><p class="goal">Vraag een geheel getal via <code>int(input())</code>.</p><div class="theory"><span class="sub">Uitleg</span><p>Met <code>input()</code> komt de invoer binnen als tekst. Met <code>int(input())</code> maak je er een geheel getal van waarmee je kunt rekenen.</p></div><div class="task"><span class="sub">Doe dit in Colab</span><p>Vraag hoeveel T-shirts de klant bestelt. Bewaar het antwoord in <code>aantal_tshirt</code>. Bereken <code>totaal_tshirt</code> door het aantal te vermenigvuldigen met <code>prijs_tshirt</code>. Toon de kostprijs van de T-shirts.</p></div><div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Begin met <code>aantal_tshirt = int(input("Aantal T-shirts: "))</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Vermenigvuldigen doe je met <code>*</code>.</p></details></div><div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="4-0" type="checkbox"/><span>Het aantal T-shirts komt uit int(input()).</span></label><label class="check"><input data-check="4-1" type="checkbox"/><span>Bij 2 T-shirts verschijnt € 50.</span></label></div><div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div></section><section class="step" data-step="5" id="stap-6"><div class="meta"><span class="eyebrow">Stap 06 van 10</span></div><h2>Ook hoodies bestellen</h2><p class="goal">Herhaal de invoer en berekening.</p><div class="theory"><span class="sub">Uitleg</span><p>Voor een ander kledingstuk maak je aparte variabelen. Zo blijft duidelijk welke aantallen en kosten bij welk product horen.</p></div><div class="task"><span class="sub">Doe dit in Colab</span><p>Vraag hoeveel hoodies de klant bestelt en bewaar dit in <code>aantal_hoodie</code>. Bereken <code>totaal_hoodie</code> met de vaste prijs en toon het resultaat.</p></div><div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>De berekening lijkt op <code>totaal_tshirt = aantal_tshirt * prijs_tshirt</code>.</p></details></div><div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="5-0" type="checkbox"/><span>Ik gebruik aantal_hoodie en totaal_hoodie.</span></label><label class="check"><input data-check="5-1" type="checkbox"/><span>Bij 1 hoodie verschijnt € 60.</span></label></div><div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div></section><section class="step" data-step="6" id="stap-7"><div class="meta"><span class="eyebrow">Stap 07 van 10</span></div><h2>De jeans toevoegen</h2><p class="goal">Werk de winkelmand verder af.</p><div class="theory"><span class="sub">Uitleg</span><p>Ook de jeans worden op dezelfde manier besteld: eerst vraag je het aantal, daarna bereken je de kostprijs. Het programma hoeft niet aangepast te worden wanneer iemand een andere hoeveelheid bestelt.</p></div><div class="task"><span class="sub">Doe dit in Colab</span><p>Vraag het aantal jeans met <code>int(input())</code> en bewaar dit in <code>aantal_jeans</code>. Bereken <code>totaal_jeans</code> en toon het resultaat.</p></div><div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Een jeans kost <code>prijs_jeans</code> euro. Vermenigvuldig met het ingevoerde aantal.</p></details></div><div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="6-0" type="checkbox"/><span>Ik vraag de hoeveelheid jeans.</span></label><label class="check"><input data-check="6-1" type="checkbox"/><span>Bij 1 jeans verschijnt € 75.</span></label></div><div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div></section><section class="step" data-step="7" id="stap-8"><div class="meta"><span class="eyebrow">Stap 08 van 10</span></div><h2>Het subtotaal berekenen</h2><p class="goal">Tel drie berekende bedragen bij elkaar op.</p><div class="theory"><span class="sub">Uitleg</span><p>Een <strong>subtotaal</strong> is het bedrag voor alle kledingstukken samen, nog zonder verzendkosten. Tel daarom de drie producttotalen op.</p></div><div class="task"><span class="sub">Doe dit in Colab</span><p>Bereken <code>subtotaal</code> met <code>totaal_tshirt</code>, <code>totaal_hoodie</code> en <code>totaal_jeans</code>. Toon het subtotaal. Test met 2 T-shirts, 1 hoodie en 1 jeans: het subtotaal is <strong>€ 185</strong>.</p></div><div class="quiz"><strong>Controlevraag: wat toont deze code?</strong><pre>prijs_tshirt = 25
+aantal_tshirt = 2
+print(prijs_tshirt * aantal_tshirt)</pre><div class="quizoptions"><button data-correct="false" type="button">25</button><button data-correct="true" type="button">50</button><button data-correct="false" type="button">27</button></div><div aria-live="polite" class="feedback"></div></div><div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Gebruik <code>subtotaal = totaal_tshirt + totaal_hoodie + totaal_jeans</code>.</p></details></div><div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="7-0" type="checkbox"/><span>Mijn subtotaal gebruikt drie producttotalen.</span></label><label class="check"><input data-check="7-1" type="checkbox"/><span>De testbestelling kost € 185 zonder levering.</span></label></div><div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div></section><section class="step" data-step="8" id="stap-9"><div class="meta"><span class="eyebrow">Stap 09 van 10</span></div><h2>Verzendkosten en eindbedrag</h2><p class="goal">Bereken de prijs inclusief levering.</p><div class="theory"><span class="sub">Uitleg</span><p>Voor iedere bestelling rekent de webshop <strong>€ 5 verzendkosten</strong> aan. Het uiteindelijke bedrag is het subtotaal plus die verzendkosten.</p></div><div class="task"><span class="sub">Doe dit in Colab</span><p>Maak de variabele <code>verzendkosten</code> met de waarde <code>5</code>. Bereken <code>eindbedrag</code> door de verzendkosten bij <code>subtotaal</code> op te tellen. Toon beide bedragen.</p></div><div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Gebruik <code>eindbedrag = subtotaal + verzendkosten</code>.</p></details></div><div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="8-0" type="checkbox"/><span>De verzendkosten zijn € 5.</span></label><label class="check"><input data-check="8-1" type="checkbox"/><span>De testbestelling kost in totaal € 190.</span></label></div><div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div></section><section class="step" data-step="9" id="stap-10"><div class="meta"><span class="eyebrow">Stap 10 van 10</span></div><h2>Bestelling afronden</h2><p class="goal">Vraag het leveradres en toon de bestelbon.</p><div class="theory"><span class="sub">Uitleg</span><p>Om de bestelling te kunnen bezorgen, heeft de webshop ook een adres nodig. Aan het einde verschijnt een overzicht van de klant, de kledingstukken en het te betalen bedrag.</p></div><div class="task"><span class="sub">Doe dit in Colab</span><p>Vraag met <code>input()</code> het <code>adres</code> van de klant. Toon onderaan een besteloverzicht met de winkelnaam, klantnaam, adres, alle aantallen, het subtotaal, de verzendkosten en het eindbedrag. Test daarna met andere aantallen. Bewaar je Colab-notebook en dien het in via Google Classroom.</p></div><div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Voor een adres gebruik je <code>adres = input("Leveradres: ")</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Gebruik de bestaande variabelen in de printregels; schrijf de berekende bedragen niet opnieuw als vaste getallen.</p></details></div><div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input data-check="9-0" type="checkbox"/><span>Mijn bestelbon bevat de klant en het adres.</span></label><label class="check"><input data-check="9-1" type="checkbox"/><span>Alle productaantallen en bedragen worden getoond.</span></label><label class="check"><input data-check="9-2" type="checkbox"/><span>Ik heb een tweede bestelling getest.</span></label></div><div class="buttons"><button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button></div></section></main></div>
+<script>
+const sections=[...document.querySelectorAll('.step')];
+const nav=document.getElementById('navlist');
+let current=0;
+const stateKey='kledingwebshop_leerpad_check_v1';
+let checks={};try{checks=JSON.parse(localStorage.getItem(stateKey)||'{}')}catch(e){checks={}}
+document.querySelectorAll('input[data-check]').forEach(input=>{
+  input.checked=!!checks[input.dataset.check];
+  input.addEventListener('change',()=>{checks[input.dataset.check]=input.checked;try{localStorage.setItem(stateKey,JSON.stringify(checks))}catch(e){}updateNav();});
+});
+sections.forEach((s,i)=>{
+  const b=document.createElement('button');b.type='button';b.className='stepnavitem';
+  const circle=document.createElement('span');circle.className='circle';circle.innerHTML='<span>'+(i+1)+'</span>';
+  const label=document.createElement('span');label.textContent=s.querySelector('h2').textContent;
+  b.append(circle,label);b.addEventListener('click',()=>show(i));nav.appendChild(b);
+});
+function updateNav(){sections.forEach((s,i)=>{const c=[...s.querySelectorAll('input[data-check]')];nav.children[i].classList.toggle('done',c.length>0&&c.every(x=>x.checked));})}
+function show(index){
+ current=Math.max(0,Math.min(index,sections.length-1));
+ sections.forEach((s,i)=>{s.classList.toggle('active',i===current);s.querySelector('.prev').disabled=i===0;s.querySelector('.next').textContent=i===sections.length-1?'Afronden ✓':'Volgende →';});
+ [...nav.children].forEach((b,i)=>b.classList.toggle('active',i===current));
+ document.getElementById('counter').textContent='Stap '+(current+1)+' van '+sections.length;
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.prev').forEach(b=>b.addEventListener('click',()=>show(current-1)));
+document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>{if(current<sections.length-1)show(current+1);else alert('Je bent klaar. Sla je Colab-notebook op en dien het in via Google Classroom.');}));
+document.querySelectorAll('.quizoptions').forEach(g=>g.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{g.querySelectorAll('button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');const f=g.parentElement.querySelector('.feedback');const ok=b.dataset.correct==='true';f.textContent=ok?'Juist! 150 - 65 = 85.':'Nog niet. Bereken het nieuwe budget voordat print() wordt uitgevoerd.';f.style.color=ok?'#087259':'#9b4b08';})));
+updateNav();show(0);
+</script></body></html>
