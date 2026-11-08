@@ -1,10 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="nl">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CodeKompas | De Grote Radioquiz</title>
-    <style>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>CodeKompas | De Grote Radioquiz</title>
+<style>
       :root {
         --navy: #093147;
         --cyan: #1f9dbc;
@@ -361,648 +362,431 @@
         }
       }
     </style>
-  </head>
-
-  <body>
-    <header>
-      <div class="brand">Informaticawetenschappen: variabelen - input</div>
-      <h1>De Radioquiz</h1>
-      <p>
+</head>
+<body>
+<header>
+<div class="brand">Informaticawetenschappen: variabelen - input</div>
+<h1>De Radioquiz</h1>
+<p>
         Schrijf in Google Colab één Pythonprogramma voor een quiz met twee
         kandidaten en drie vragen. Leer werken met tekstvariabelen, gehele
         getallen, print(), input()en
         int(input()).
-      </p>      
-    </header>
-    <div class="layout">
-      <aside class="side">
-        <h2>Het leerpad</h2>
-        <div class="navlist" id="navlist"></div>
-        <p id="counter" class="tiny">Stap 1 van 10</p>
-      </aside>
-      <main>
-        <section class="intro">
-          <h2>Hoe ga je tewerk?</h2>
-          <p>
+      </p>
+</header>
+<div class="layout">
+<aside class="side">
+<h2>Het leerpad</h2>
+<div class="navlist" id="navlist"></div>
+<p class="tiny" id="counter">Stap 1 van 10</p>
+</aside>
+<main>
+<section class="intro">
+<h2>Hoe ga je tewerk?</h2>
+<p>
             Lees telkens de korte uitleg en voer de opdracht uit in
-            <a
-              href="https://colab.research.google.com/"
-              target="_blank"
-              rel="noopener"
-              >Google Colab</a
-            >. <strong>Breid steeds dezelfde codecel uit</strong>, zodat je
+            <a href="https://colab.research.google.com/" rel="noopener" target="_blank">Google Colab</a>. <strong>Breid steeds dezelfde codecel uit</strong>, zodat je
             uiteindelijk één programma hebt. Test na iedere stap met ▶.
           </p>
-          <div class="notice">
-            <strong>Hulp nodig?</strong> Probeer eerst zelf, open daarna Hint 1
+<div class="notice">
+<strong>Hulp nodig?</strong> Probeer eerst zelf, open daarna Hint 1
             of Hint 2. Je kunt ook je leerkracht om hulp vragen.
             <strong>Indienen:</strong> je levert je Colab-notebook in via Google
             Classroom, niet deze website.
           </div>
-        </section>
-        <section class="step" data-step="0" id="stap-1">
-          <div class="meta">
-            <span class="eyebrow">Stap 01 van 10</span>
-          </div>
-          <h2>Start: jouw programma houdt de score van de kandidaten bij</h2>
-          <p class="goal">
+</section>
+<section class="step" data-step="0" id="stap-1">
+<div class="meta">
+<span class="eyebrow">Stap 01 van 10</span>
+</div>
+<h2>Start: jouw programma houdt de score van de kandidaten bij</h2>
+<p class="goal">
             Maak een Pythonprogramma voor de puntentelling van een radioquiz.
           </p>
-          <div class="theory">
-            <span class="sub">Uitleg</span>
-            <p>
-              Bij een radioquiz spelen twee kandidaten mee. De presentator stelt
-              drie vragen. Na elke vraag geef je de de nieuwe
-              totaalscore van beide kandidaten door in jouw programma. Jouw programma bewaart, berekent en
-              toont die stand.
-            </p>
-          </div>
-          <div class="task">
-            <span class="sub">Doe dit in Colab</span>
-            <p>
+<div class="theory">
+<span class="sub">Uitleg</span>
+<p>Bij een radioquiz spelen twee kandidaten mee. De presentator stelt drie vragen. Na elke vraag geef je de <strong>punten die beide kandidaten bij die vraag kregen</strong> door in jouw programma. Jouw programma bewaart, berekent en toont de <strong>totale stand</strong>.</p>
+</div>
+<div class="task">
+<span class="sub">Doe dit in Colab</span>
+<p>
               Werk tijdens het hele
               leerpad in <strong>één codecel</strong>: pas diezelfde code
               telkens aan.
             </p>
-          </div>
-          <div class="help">
-            <span class="sub">Hulp als je vastloopt</span>
-            <details>
-              <summary>Hint 1 — kleine aanwijzing</summary>
-              <p>
+</div>
+<div class="help">
+<span class="sub">Hulp als je vastloopt</span>
+<details>
+<summary>Hint 1 — kleine aanwijzing</summary>
+<p>
                 Een codecel voer je uit met de afspeelknop links van de cel.
               </p>
-            </details>
-          </div>
-          <div class="checks">
-            <span class="sub">Zelfcontrole</span
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >Ik heb een notebook en één codecel.</span
-              ></label
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >Ik weet hoe ik mijn code kan uitvoeren.</span
-              ></label
-            >
-          </div>
-          <div class="buttons">
-            <button type="button" class="action secondary prev">← Vorige</button
-            ><button type="button" class="action next">Volgende →</button>
-          </div>
-        </section>
-        <section class="step" data-step="1" id="stap-2">
-          <div class="meta">
-            <span class="eyebrow">Stap 02 van 10</span
-            >
-          </div>
-          <h2>De eerste variabelen</h2>
-          <p class="goal">Bewaar namen en programmagegevens als tekst.</p>
-          <div class="theory">
-            <span class="sub">Uitleg</span>
-            <p>
+</details>
+</div>
+<div class="checks">
+<span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik heb een notebook en één codecel.</span></label><label class="check"><input type="checkbox"/><span>Ik weet hoe ik mijn code kan uitvoeren.</span></label>
+</div>
+<div class="buttons">
+<button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button>
+</div>
+</section>
+<section class="step" data-step="1" id="stap-2">
+<div class="meta">
+<span class="eyebrow">Stap 02 van 10</span>
+</div>
+<h2>De eerste variabelen</h2>
+<p class="goal">Bewaar namen en programmagegevens als tekst.</p>
+<div class="theory">
+<span class="sub">Uitleg</span>
+<p>
               Een <strong>variabele</strong> is een naam waaraan je een waarde
               koppelt met <code>=</code>. Tekst zet je tussen aanhalingstekens.
               Bijvoorbeeld <code>show = "De Radio Suisse Quiz"</code>. De namen
               van de kandidaten zijn voorlopig nog vaste voorbeeldnamen.
             </p>
-          </div>
-          <div class="task">
-            <span class="sub">Doe dit in Colab</span>
-            <p>
+</div>
+<div class="task">
+<span class="sub">Doe dit in Colab</span>
+<p>
               Maak bovenaan je code drie variabelen: <code>show</code> en geef deze een
               waarde die je zelf kiest voor je quizshow,
               <code>kandidaat_a</code> met <code>een eigen gekozen naam</code> en
               <code>kandidaat_b</code> met <code>een eigen gekozen naam</code>. Voer de cel uit.
             </p>
-          </div>
-          <div class="help">
-            <span class="sub">Hulp als je vastloopt</span>
-            <details>
-              <summary>Hint 1 — kleine aanwijzing</summary>
-              <p>
+</div>
+<div class="help">
+<span class="sub">Hulp als je vastloopt</span>
+<details>
+<summary>Hint 1 — kleine aanwijzing</summary>
+<p>
                 Een variabele voor een naam kan er zo uitzien:
                 <code>kandidaat_a = "Amira"</code>.
               </p>
-            </details>
-            <details>
-              <summary>Hint 2 — extra hulp</summary>
-              <p>
+</details>
+<details>
+<summary>Hint 2 — extra hulp</summary>
+<p>
                 Zet bij tekst altijd aanhalingstekens rond de waarde; niet rond
                 de variabelenaam.
               </p>
-            </details>
-          </div>
-          <div class="checks">
-            <span class="sub">Zelfcontrole</span
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >Ik heb drie tekstvariabelen.</span
-              ></label
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >De code werkt zonder foutmelding.</span
-              ></label
-            >
-          </div>
-          <div class="buttons">
-            <button type="button" class="action secondary prev">← Vorige</button
-            ><button type="button" class="action next">Volgende →</button>
-          </div>
-        </section>
-        <section class="step" data-step="2" id="stap-3">
-          <div class="meta">
-            <span class="eyebrow">Stap 03 van 10</span
-            >
-          </div>
-          <h2>Toon de deelnemers</h2>
-          <p class="goal">
+</details>
+</div>
+<div class="checks">
+<span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik heb drie tekstvariabelen.</span></label><label class="check"><input type="checkbox"/><span>De code werkt zonder foutmelding.</span></label>
+</div>
+<div class="buttons">
+<button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button>
+</div>
+</section>
+<section class="step" data-step="2" id="stap-3">
+<div class="meta">
+<span class="eyebrow">Stap 03 van 10</span>
+</div>
+<h2>Toon de deelnemers</h2>
+<p class="goal">
             Gebruik nu print() om waarden uit variabelen te halen en te tonen op het scherm.
           </p>
-          <div class="theory">
-            <span class="sub">Uitleg</span>
-            <p>
-              <code>print()</code> toont informatie op het scherm. Schrijf je
+<div class="theory">
+<span class="sub">Uitleg</span>
+<p>
+<code>print()</code> toont informatie op het scherm. Schrijf je
               <code>print(kandidaat_a)</code>, dan verschijnt de naam die in die
               variabele bewaard wordt. Schrijf je
               <code>print("kandidaat_a")</code>, dan verschijnt letterlijk de
               tekst kandidaat_a.
             </p>
-          </div>
-          <div class="task">
-            <span class="sub">Doe dit in Colab</span>
-            <p>
+</div>
+<div class="task">
+<span class="sub">Doe dit in Colab</span>
+<p>
               Voeg <strong>onderaan</strong> je code regels met
               <code>print()</code> toe. Toon de titel van de show en de namen
               van beide kandidaten. Zorg voor duidelijke tekst, zoals
               <em>Kandidaat A:</em>.
             </p>
-          </div>
-          <div class="help">
-            <span class="sub">Hulp als je vastloopt</span>
-            <details>
-              <summary>Hint 1 — kleine aanwijzing</summary>
-              <p>
+</div>
+<div class="help">
+<span class="sub">Hulp als je vastloopt</span>
+<details>
+<summary>Hint 1 — kleine aanwijzing</summary>
+<p>
                 Je kunt een tekst en een variabele combineren met een komma:
                 <code>print("Show:", show)</code>.
               </p>
-            </details>
-            <details>
-              <summary>Hint 2 — extra hulp</summary>
-              <p>
+</details>
+<details>
+<summary>Hint 2 — extra hulp</summary>
+<p>
                 Voor de eerste kandidaat:
                 <code>print("Kandidaat A:", kandidaat_a)</code>. Maak een
                 gelijkaardige regel voor B.
               </p>
-            </details>
-          </div>
-          <div class="checks">
-            <span class="sub">Zelfcontrole</span
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >Ik toon de naam van de show.</span
-              ></label
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >Ik toon kandidaat A en kandidaat B.</span
-              ></label
-            >
-          </div>
-          <div class="buttons">
-            <button type="button" class="action secondary prev">← Vorige</button
-            ><button type="button" class="action next">Volgende →</button>
-          </div>
-        </section>
-        <section class="step" data-step="3" id="stap-4">
-          <div class="meta">
-            <span class="eyebrow">Stap 04 van 10</span>
-          </div>
-          <h2>De score begint op nul</h2>
-          <p class="goal">Gebruik variabelen met gehele getallen (int).</p>
-          <div class="theory">
-            <span class="sub">Uitleg</span>
-            <p>
-              Punten zijn <strong>gehele getallen</strong>. In Python is dat
-              type <code>int</code>. Je schrijft bijvoorbeeld
-              <code>punten_a = 0</code> zonder aanhalingstekens. Beide
-              kandidaten starten met nul punten.
-            </p>
-          </div>
-          <div class="task">
-            <span class="sub">Doe dit in Colab</span>
-            <p>
-              Voeg <strong>boven je print-regels</strong> de variabelen
-              <code>punten_a</code> en <code>punten_b</code> toe, allebei met de
-              waarde <code>0</code>. Toon daarna in het overzicht ook de
-              startscore van beide kandidaten.
-            </p>
-          </div>
-          <div class="help">
-            <span class="sub">Hulp als je vastloopt</span>
-            <details>
-              <summary>Hint 1 — kleine aanwijzing</summary>
-              <p>
+</details>
+</div>
+<div class="checks">
+<span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik toon de naam van de show.</span></label><label class="check"><input type="checkbox"/><span>Ik toon kandidaat A en kandidaat B.</span></label>
+</div>
+<div class="buttons">
+<button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button>
+</div>
+</section>
+<section class="step" data-step="3" id="stap-4">
+<div class="meta">
+<span class="eyebrow">Stap 04 van 10</span>
+</div>
+<h2>De score begint op nul</h2>
+<p class="goal">Gebruik variabelen met gehele getallen (int).</p>
+<div class="theory">
+<span class="sub">Uitleg</span>
+<p>Punten zijn <strong>gehele getallen</strong>. In Python is dat type <code>int</code>. Je schrijft bijvoorbeeld <code>totaal_a = 0</code> zonder aanhalingstekens. Beide kandidaten starten met nul punten.</p>
+</div>
+<div class="task">
+<span class="sub">Doe dit in Colab</span>
+<p>Voeg <strong>boven je print-regels</strong> de variabelen <code>totaal_a</code> en <code>totaal_b</code> toe, allebei met de waarde <code>0</code>. Toon daarna in het overzicht ook de startscore van beide kandidaten.</p>
+</div>
+<div class="help">
+<span class="sub">Hulp als je vastloopt</span>
+<details>
+<summary>Hint 1 — kleine aanwijzing</summary>
+<p>
                 De variabelen moeten al een waarde hebben vóór je ze met print()
                 gebruikt.
               </p>
-            </details>
-            <details>
-              <summary>Hint 2 — extra hulp</summary>
-              <p>
-                Je kunt een score tonen met
-                <code>print("Punten A:", punten_a)</code>. Schrijf ook de regel
-                voor kandidaat B.
-              </p>
-            </details>
-          </div>
-          <div class="checks">
-            <span class="sub">Zelfcontrole</span
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >Beide scores zijn gehele getallen.</span
-              ></label
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >De beginstand is 0 – 0.</span
-              ></label
-            >
-          </div>
-          <div class="buttons">
-            <button type="button" class="action secondary prev">← Vorige</button
-            ><button type="button" class="action next">Volgende →</button>
-          </div>
-        </section>
-        <section class="step" data-step="4" id="stap-5">
-          <div class="meta">
-            <span class="eyebrow">Stap 05 van 10</span
-            >
-          </div>
-          <h2>Vraag 1: de stand verandert</h2>
-          <p class="goal">
+</details>
+<details>
+<summary>Hint 2 — extra hulp</summary>
+<p>Je kunt een score tonen met <code>print("Punten A:", totaal_a)</code>. Schrijf ook de regel voor kandidaat B.</p>
+</details>
+</div>
+<div class="checks">
+<span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Beide scores zijn gehele getallen.</span></label><label class="check"><input type="checkbox"/><span>De beginstand is 0 – 0.</span></label>
+</div>
+<div class="buttons">
+<button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button>
+</div>
+</section>
+<section class="step" data-step="4" id="stap-5">
+<div class="meta">
+<span class="eyebrow">Stap 05 van 10</span>
+</div>
+<h2>Vraag 1: de stand verandert</h2>
+<p class="goal">
             Ontdek dat je een bestaande variabele kunt overschrijven.
           </p>
-          <div class="theory">
-            <span class="sub">Uitleg</span>
-            <p>
-              De presentator heeft nu vraag 1 gesteld. Na de beoordeling krijgt
-              Kandidaat A <strong>10 punten</strong> en Kandidaat B
-              <strong>0 punten</strong>. Je hoeft geen nieuwe scorevariabelen te
-              maken: <code>punten_a = 10</code> vervangt de vorige waarde
-              <code>0</code>. Python werkt van boven naar beneden. Een aangepaste variabale 'vergeet' dus zijn vorige waarde.
-            </p>
-          </div>
-          <div class="task">
-            <span class="sub">Doe dit in Colab</span>
-            <p>
-              Behoud de eerder print van de scores die je al toont. Voeg nu
-              <strong>onderaan</strong> een nieuw deel toe met de tekst:
-              <em>Na vraag 1</em>. Overschrijf de variabele <code>punten_a</code> met
-              <code>10</code> en de variabele <code>punten_b</code> met <code>0</code>. Toon
-              de stand opnieuw. Voorspel eerst wat je ziet.
-            </p>
-          </div>
-          <div class="help">
-            <span class="sub">Hulp als je vastloopt</span>
-            <details>
-              <summary>Hint 1 — kleine aanwijzing</summary>
-              <p>
-                Voor een nieuwe waarde gebruik je dezelfde variabelenaam links
-                van <code>=</code>.
-              </p>
-            </details>
-            <details>
-              <summary>Hint 2 — extra hulp</summary>
-              <p>
-                Zet de nieuwe toekenningen vóór de nieuwe print-regels, maar ná
-                de regels die de beginstand tonen.
-              </p>
-            </details>
-          </div>
-          <div class="checks">
-            <span class="sub">Zelfcontrole</span
-            ><label class="check"
-              ><input type="checkbox" /><span>Ik zie eerst 0 – 0.</span></label
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >Na vraag 1 zie ik 10 – 0.</span
-              ></label
-            >
-          </div>
-          <div class="buttons">
-            <button type="button" class="action secondary prev">← Vorige</button
-            ><button type="button" class="action next">Volgende →</button>
-          </div>
-        </section>
-        <section class="step" data-step="5" id="stap-6">
-          <div class="meta">
-            <span class="eyebrow">Stap 06 van 10</span
-            >
-          </div>
-          <h2>Vraag 2 en 3: opnieuw overschrijven</h2>
-          <p class="goal">Volg dezelfde variabelen door drie quizrondes.</p>
-          <div class="theory">
-            <span class="sub">Uitleg</span>
-            <p>
-              Na vraag 2 krijgt Kandidaat B 10 punten erbij en is de stand <strong>10 – 10</strong>. Na vraag 3
-              is de totaalscore <strong>20 – 10</strong>. Bereken telkens de
-              <strong>totale scores tot dan toe</strong>. Je overschrijft dus steeds <code>punten_a</code> en
-              <code>punten_b</code> met een berekening.
-            </p>
-          </div>
-          <div class="task">
-            <span class="sub">Doe dit in Colab</span>
-            <p>
-              Breid je bestaande programma verder uit. Toon <em>Na vraag 2</em>,
-              bereken de waarden voor de variabelen en toon ze. Doe daarna hetzelfde voor
-              <em>Na vraag 3</em>. Na vraag 3 krijgt Kandidaat weer <code>10</code> punten. Behoud
-              alle eerdere uitvoer. Beantwoord ook de korte controlevraag
-              hieronder.
-            </p>
-          </div>
-          <div class="quiz">
-            <strong>Controle: wat wordt afgedrukt?</strong>
-            <pre>
-punten_a = 0
+<div class="theory">
+<span class="sub">Uitleg</span>
+<p>De presentator heeft nu vraag 1 gesteld. Na de beoordeling krijgt Kandidaat A <strong>10 punten</strong> en Kandidaat B <strong>0 punten</strong>. Je bewaart deze punten in <code>punten_a</code> en <code>punten_b</code>. Daarna bereken je met <code>totaal_a = totaal_a + punten_a</code> de nieuwe totaalscore. Je doet hetzelfde voor kandidaat B.</p>
+</div>
+<div class="task">
+<span class="sub">Doe dit in Colab</span>
+<p>Behoud de eerdere <code>print()</code>-regels die de beginstand tonen. Voeg nu <strong>onderaan</strong> een nieuw deel toe met de tekst <em>Na vraag 1</em>. Maak de variabelen <code>punten_a = 10</code> en <code>punten_b = 0</code>. Tel deze punten op bij <code>totaal_a</code> en <code>totaal_b</code> en toon de nieuwe stand. Voorspel eerst wat je ziet.</p>
+</div>
+<div class="help">
+<span class="sub">Hulp als je vastloopt</span>
+<details>
+<summary>Hint 1 — kleine aanwijzing</summary>
+<p>Voor de nieuwe punten gebruik je de variabelen <code>punten_a</code> en <code>punten_b</code>. De totaalscores bewaar je in <code>totaal_a</code> en <code>totaal_b</code>.</p>
+</details>
+<details>
+<summary>Hint 2 — extra hulp</summary>
+<p>Zet de optellingen vóór de nieuwe print-regels, maar ná de regels die de beginstand tonen.</p>
+</details>
+</div>
+<div class="checks">
+<span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik zie eerst 0 – 0.</span></label><label class="check"><input type="checkbox"/><span>Na vraag 1 zie ik 10 – 0.</span></label>
+</div>
+<div class="buttons">
+<button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button>
+</div>
+</section>
+<section class="step" data-step="5" id="stap-6">
+<div class="meta">
+<span class="eyebrow">Stap 06 van 10</span>
+</div>
+<h2>Vraag 2 en 3: opnieuw overschrijven</h2>
+<p class="goal">Volg dezelfde variabelen door drie quizrondes.</p>
+<div class="theory">
+<span class="sub">Uitleg</span>
+<p>Na vraag 2 krijgt Kandidaat B 10 punten erbij en is de stand <strong>10 – 10</strong>. Na vraag 3 krijgt Kandidaat A nog eens 10 punten en is de totaalscore <strong>20 – 10</strong>. Je overschrijft steeds <code>punten_a</code> en <code>punten_b</code> met de <strong>punten van de nieuwe vraag</strong>. Daarna tel je die op bij <code>totaal_a</code> en <code>totaal_b</code>.</p>
+</div>
+<div class="task">
+<span class="sub">Doe dit in Colab</span>
+<p>Breid je bestaande programma verder uit. Toon <em>Na vraag 2</em>, geef de nieuwe punten aan <code>punten_a</code> en <code>punten_b</code>, tel ze bij de totaalscores en toon de stand. Doe daarna hetzelfde voor <em>Na vraag 3</em>. Na vraag 3 krijgt Kandidaat A weer <code>10</code> punten. Behoud alle eerdere uitvoer. Beantwoord ook de korte controlevraag hieronder.</p>
+</div>
+<div class="quiz">
+<strong>Controle: wat wordt afgedrukt?</strong>
+<pre>punten_a = 0
+totaal_a = 0
 punten_a = 10
-print(punten_a)
-punten_a = 20
-print(punten_a)</pre
-            >
-            <div class="quizoptions">
-              <button type="button" data-correct="false">0 en 20</button
-              ><button type="button" data-correct="true">10 en 20</button
-              ><button type="button" data-correct="false">20 en 20</button>
-            </div>
-            <div class="feedback" aria-live="polite"></div>
-          </div>
-          <div class="help">
-            <span class="sub">Hulp als je vastloopt</span>
-            <details>
-              <summary>Hint 1 — kleine aanwijzing</summary>
-              <p>
-                Je hebt per vraag drie onderdelen: een titel (Na vraag ..), de twee nieuwe
-                berekeningen en twee print-regels.
-              </p>
-            </details>
-            <details>
-              <summary>Hint 2 — extra hulp</summary>
-              <p>
-                Dezelfde variabele <code>punten_a</code> krijgt achtereenvolgens
-                de waarden <code>0</code>, <code>10</code>, <code>10</code> en
-                <code>20</code>.
-              </p>
-            </details>            
-          </div>
-          <div class="checks">
-            <span class="sub">Zelfcontrole</span
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >Ik toon de stand na alle drie de vragen.</span
-              ></label
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >Ik begrijp waarom punten_a op verschillende regels een andere
-                waarde kan hebben.</span
-              ></label
-            >
-          </div>
-          <div class="buttons">
-            <button type="button" class="action secondary prev">← Vorige</button
-            ><button type="button" class="action next">Volgende →</button>
-          </div>
-        </section>
-        <section class="step" data-step="6" id="stap-7">
-          <div class="meta">
-            <span class="eyebrow">Stap 07 van 10</span
-            >
-          </div>
-          <h2>De kandidaten aanmelden met input()</h2>
-          <p class="goal">Vervang vaste namen door vragen aan de gebruiker.</p>
-          <div class="theory">
-            <span class="sub">Uitleg</span>
-            <p>
+totaal_a = totaal_a + punten_a
+print(totaal_a)
+punten_a = 10
+totaal_a = totaal_a + punten_a
+print(totaal_a)</pre>
+<div class="quizoptions">
+<button data-correct="false" type="button">0 en 20</button><button data-correct="true" type="button">10 en 20</button><button data-correct="false" type="button">20 en 20</button>
+</div>
+<div aria-live="polite" class="feedback"></div>
+</div>
+<div class="help">
+<span class="sub">Hulp als je vastloopt</span>
+<details>
+<summary>Hint 1 — kleine aanwijzing</summary>
+<p>Je hebt per vraag vier onderdelen: een titel (Na vraag ..), twee nieuwe puntenwaarden, twee optellingen en twee print-regels.</p>
+</details>
+<details>
+<summary>Hint 2 — extra hulp</summary>
+<p>Dezelfde variabele <code>totaal_a</code> krijgt achtereenvolgens de waarden <code>0</code>, <code>10</code>, <code>10</code> en <code>20</code>.</p>
+</details>
+</div>
+<div class="checks">
+<span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik toon de stand na alle drie de vragen.</span></label><label class="check"><input type="checkbox"/><span>Ik begrijp waarom <code>totaal_a</code> na iedere vraag kan veranderen.</span></label>
+</div>
+<div class="buttons">
+<button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button>
+</div>
+</section>
+<section class="step" data-step="6" id="stap-7">
+<div class="meta">
+<span class="eyebrow">Stap 07 van 10</span>
+</div>
+<h2>De kandidaten aanmelden met input()</h2>
+<p class="goal">Vervang vaste namen door vragen aan de gebruiker.</p>
+<div class="theory">
+<span class="sub">Uitleg</span>
+<p>
               De volgende aflevering heeft <strong>andere</strong> kandidaten. Met
               <code>input()</code> stelt je programma een vraag. De ingevoerde
               naam wordt automatisch als <strong>tekst</strong> bewaard in een
               variabele.
             </p>
-          </div>
-          <div class="task">
-            <span class="sub">Doe dit in Colab</span>
-            <p>
+</div>
+<div class="task">
+<span class="sub">Doe dit in Colab</span>
+<p>
               Ga terug naar <strong>bovenaan</strong> je programma. Vervang de
               vaste namen door twee
               vragen met <code>input()</code>. Verander niets aan de
               print-regels: die moeten nu vanzelf de ingevoerde namen tonen.
             </p>
-          </div>
-          <div class="help">
-            <span class="sub">Hulp als je vastloopt</span>
-            <details>
-              <summary>Hint 1 — kleine aanwijzing</summary>
-              <p>
+</div>
+<div class="help">
+<span class="sub">Hulp als je vastloopt</span>
+<details>
+<summary>Hint 1 — kleine aanwijzing</summary>
+<p>
                 Bijvoorbeeld:
                 <code>kandidaat_a = input("Naam kandidaat A: ")</code>.
               </p>
-            </details>            
-          </div>
-          <div class="checks">
-            <span class="sub">Zelfcontrole</span
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >Mijn programma vraagt twee namen.</span
-              ></label
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >Mijn overzicht toont de ingetikte namen.</span
-              ></label
-            >
-          </div>
-          <div class="buttons">
-            <button type="button" class="action secondary prev">← Vorige</button
-            ><button type="button" class="action next">Volgende →</button>
-          </div>
-        </section>
-        <section class="step" data-step="7" id="stap-8">
-          <div class="meta">
-            <span class="eyebrow">Stap 08 van 10</span
-            >
-          </div>
-          <h2>Punten invoeren met int(input())</h2>
-          <p class="goal">Laat de gamemaster gehele getallen invoeren.</p>
-          <div class="theory">
-            <span class="sub">Uitleg</span>
-            <p>
-              Met <code>input()</code> krijg je altijd tekst terug, zelfs als
-              iemand <code>10</code> typt. Met
-              <code>int(input("..."))</code> zet je die invoer om naar een
-              <strong>geheel getal</strong>. De gamemaster kan zo voor elke kandidaat andere scores ingeven. Typ alleen cijfers,
-              bijvoorbeeld 10, geen woorden.
-            </p>
-          </div>
-          <div class="task">
-            <span class="sub">Doe dit in Colab</span>
-            <p>
-              Zoek in het deel <em>Na vraag 1</em> de vaste waarden
-              <code>punten_a = 10</code> en <code>punten_b = 0</code>. Vervang
-              ze door twee vragen met <code>int(input())</code> die expliciet
-              naar de <strong>punten vraagt na vraag 1</strong>. Test
-              bijvoorbeeld met 10 en 0.
-            </p>
-          </div>
-          <div class="help">
-            <span class="sub">Hulp als je vastloopt</span>
-            <details>
-              <summary>Hint 1 — kleine aanwijzing</summary>
-              <p>
-                Start zo:
-                <code>punten_a = int(input("Punten voor kandidaat A na vraag 1: "))</code
-                >.
-              </p>
-            </details>
-            <details>
-              <summary>Hint 2 — extra hulp</summary>
-              <p>
+</details>
+</div>
+<div class="checks">
+<span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Mijn programma vraagt twee namen.</span></label><label class="check"><input type="checkbox"/><span>Mijn overzicht toont de ingetikte namen.</span></label>
+</div>
+<div class="buttons">
+<button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button>
+</div>
+</section>
+<section class="step" data-step="7" id="stap-8">
+<div class="meta">
+<span class="eyebrow">Stap 08 van 10</span>
+</div>
+<h2>Punten invoeren met int(input())</h2>
+<p class="goal">Laat de gamemaster gehele getallen invoeren.</p>
+<div class="theory">
+<span class="sub">Uitleg</span>
+<p>Met <code>input()</code> krijg je altijd tekst terug, zelfs als iemand <code>10</code> typt. Met <code>int(input("..."))</code> zet je die invoer om naar een <strong>geheel getal</strong>. De gamemaster kan zo na iedere vraag de behaalde punten invoeren. Typ alleen cijfers, bijvoorbeeld 10, geen woorden.</p>
+</div>
+<div class="task">
+<span class="sub">Doe dit in Colab</span>
+<p>Zoek in het deel <em>Na vraag 1</em> de vaste waarden <code>punten_a = 10</code> en <code>punten_b = 0</code>. Vervang ze door twee vragen met <code>int(input())</code> die expliciet naar de <strong>behaalde punten bij vraag 1</strong> vragen. De optellingen bij <code>totaal_a</code> en <code>totaal_b</code> blijven staan. Test bijvoorbeeld met 10 en 0.</p>
+</div>
+<div class="help">
+<span class="sub">Hulp als je vastloopt</span>
+<details>
+<summary>Hint 1 — kleine aanwijzing</summary>
+<p>Start zo: <code>punten_a = int(input("Punten van " + kandidaat_a + " bij vraag 1: "))</code>.</p>
+</details>
+<details>
+<summary>Hint 2 — extra hulp</summary>
+<p>
                 Let op de dubbele sluitende haakjes: één voor
                 <code>input()</code> en één voor <code>int()</code>. Doe
                 hetzelfde voor B.
               </p>
-            </details>
-          </div>
-          <div class="checks">
-            <span class="sub">Zelfcontrole</span
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >Ik gebruik int(input()) voor beide puntenaantallen.</span
-              ></label
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >De ingevoerde scores verschijnen na vraag 1.</span
-              ></label
-            >
-          </div>
-          <div class="buttons">
-            <button type="button" class="action secondary prev">← Vorige</button
-            ><button type="button" class="action next">Volgende →</button>
-          </div>
-        </section>
-        <section class="step" data-step="8" id="stap-9">
-          <div class="meta">
-            <span class="eyebrow">Stap 09 van 10</span
-            >
-          </div>
-          <h2>De drie vragen worden interactief</h2>
-          <p class="goal">
+</details>
+</div>
+<div class="checks">
+<span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik gebruik int(input()) voor beide puntenaantallen.</span></label><label class="check"><input type="checkbox"/><span>De ingevoerde scores verschijnen na vraag 1.</span></label>
+</div>
+<div class="buttons">
+<button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button>
+</div>
+</section>
+<section class="step" data-step="8" id="stap-9">
+<div class="meta">
+<span class="eyebrow">Stap 09 van 10</span>
+</div>
+<h2>De drie vragen worden interactief</h2>
+<p class="goal">
             Laat de gamemaster na elke quizvraag dezelfde scores bijwerken.
           </p>
-          <div class="theory">
-            <span class="sub">Uitleg</span>
-            <p>
-              In de echte uitzending komen de punten pas binnen
-              <strong>nadat</strong> de presentator een vraag heeft beoordeeld.
-              Je programma moet daarom na elke vraag om de punten
-              vragen. Zo werkt dezelfde code voor een volgende aflevering met
-              andere punten.
-            </p>
-          </div>
-          <div class="task">
-            <span class="sub">Doe dit in Colab</span>
-            <p>
-              Vervang ook bij <em>Na vraag 2</em> en <em>Na vraag 3</em> de
-              vaste scores door een vraag met <code>int(input())</code>. Gebruik opnieuw de
-              <strong>bestaande variabelen</strong> <code>punten_a</code> en
-              <code>punten_b</code>. Toon telkens de nieuwe stand. Test met
-              10–0, daarna 10–10 en tot slot 20–10.
-            </p>
-          </div>
-          <div class="checks">
-            <span class="sub">Zelfcontrole</span
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >Na elke van de drie vragen kan ik twee scores invoeren.</span
-              ></label
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >De variabelen worden telkens overschreven.</span
-              ></label>
-          </div>
-          <div class="buttons">
-            <button type="button" class="action secondary prev">← Vorige</button
-            ><button type="button" class="action next">Volgende →</button>
-          </div>
-        </section>
-        <section class="step" data-step="9" id="stap-10">
-          <div class="meta">
-            <span class="eyebrow">Stap 10 van 10</span
-            >
-          </div>
-          <h2>Test, verbeter en dien in</h2>
-          <p class="goal">
+<div class="theory">
+<span class="sub">Uitleg</span>
+<p>In de echte uitzending komen de punten pas binnen <strong>nadat</strong> de presentator een vraag heeft beoordeeld. Je programma moet daarom na elke vraag om de <strong>behaalde punten</strong> vragen en die bij de bestaande totaalscores optellen. Zo werkt dezelfde code voor een volgende aflevering met andere punten.</p>
+</div>
+<div class="task">
+<span class="sub">Doe dit in Colab</span>
+<p>Vervang ook bij <em>Na vraag 2</em> en <em>Na vraag 3</em> de vaste punten door vragen met <code>int(input())</code>. Gebruik opnieuw de <strong>bestaande variabelen</strong> <code>punten_a</code> en <code>punten_b</code>. Tel de punten bij <code>totaal_a</code> en <code>totaal_b</code> op en toon telkens de nieuwe stand. Test met 10–0, daarna 0–10 en tot slot 10–0. De totaalscores worden 10–0, 10–10 en 20–10.</p>
+</div>
+<div class="checks">
+<span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Na elke van de drie vragen kan ik twee scores invoeren.</span></label><label class="check"><input type="checkbox"/><span>De puntenvariabelen worden overschreven en de totaalscores opnieuw berekend.</span></label>
+</div>
+<div class="buttons">
+<button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button>
+</div>
+</section>
+<section class="step" data-step="9" id="stap-10">
+<div class="meta">
+<span class="eyebrow">Stap 10 van 10</span>
+</div>
+<h2>Test, verbeter en dien in</h2>
+<p class="goal">
             Controleer of je programma in een nieuwe uitzending bruikbaar is.
           </p>
-          <div class="theory">
-            <span class="sub">Uitleg</span>
-            <p>
-              Je programma vraagt twee namen en na elk van de drie vragen twee
-              nieuwe <strong>totaalscores</strong>. Het toont de scores op het
-              juiste moment. De namen en cijfers kunnen telkens anders zijn,
-              zonder dat je de code moet aanpassen.
-            </p>
-          </div>
-          <div class="task">
-            <span class="sub">Doe dit in Colab</span>
-            <p>
-              Voer de volledige code opnieuw uit met twee
-              <strong>andere</strong> kandidaatnamen. Gebruik voor de drie
-              rondes bijvoorbeeld <strong>0–10</strong>,
-              <strong>10–10</strong> en <strong>10–20</strong>. Kijk of de namen
-              en alle scores kloppen. Controleer of je slechts twee
-              scorevariabelen gebruikt. Sla je notebook op en
-              <strong>dien het in via Google Classroom</strong>.
-            </p>
-          </div>
-          <div class="help">
-            <span class="sub">Hulp als je vastloopt</span>
-            <details>
-              <summary>Hint 1 — kleine aanwijzing</summary>
-              <p>
+<div class="theory">
+<span class="sub">Uitleg</span>
+<p>Je programma vraagt twee namen en na elk van de drie vragen twee nieuwe <strong>puntenaantallen</strong>. Het telt de punten op bij de bestaande totaalscores en toont de stand op het juiste moment. De namen en cijfers kunnen telkens anders zijn, zonder dat je de code moet aanpassen.</p>
+</div>
+<div class="task">
+<span class="sub">Doe dit in Colab</span>
+<p>Voer de volledige code opnieuw uit met twee <strong>andere</strong> kandidaatnamen. Gebruik voor de drie vragen bijvoorbeeld <strong>0–10</strong>, <strong>10–0</strong> en <strong>0–10</strong>. Kijk of de namen en de totaalscores (<strong>0–10</strong>, <strong>10–10</strong>, <strong>10–20</strong>) kloppen. Controleer of je twee puntenvariabelen en twee totaalvariabelen gebruikt. Sla je notebook op en <strong>dien het in via Google Classroom</strong>.</p>
+</div>
+<div class="help">
+<span class="sub">Hulp als je vastloopt</span>
+<details>
+<summary>Hint 1 — kleine aanwijzing</summary>
+<p>
                 Controleer vooral of de vragen voor vraag 2 en 3 écht opnieuw
                 verschijnen.
               </p>
-            </details>
-            <details>
-              <summary>Hint 2 — extra hulp</summary>
-              <p>
-                Controleer je code van boven naar beneden: namen → startscore →
-                vraag 1 → vraag 2 → vraag 3.
-              </p>
-            </details>
-          </div>
-          <div class="checks">
-            <span class="sub">Zelfcontrole</span
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >Ik heb met andere namen en scores getest.</span
-              ></label
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >Ik begrijp input(), int(input()), print() en
-                overschrijven.</span
-              ></label
-            ><label class="check"
-              ><input type="checkbox" /><span
-                >Mijn Colab-notebook is klaar voor indiening.</span
-              ></label
-            >
-          </div>
-          <div class="buttons">
-            <button type="button" class="action secondary prev">← Vorige</button
-            ><button type="button" class="action next">Volgende →</button>
-          </div>
-        </section>
-      </main>
-    </div>
-    <script>
+</details>
+<details>
+<summary>Hint 2 — extra hulp</summary>
+<p>Controleer je code van boven naar beneden: namen → startscore → vraag 1 → vraag 2 → vraag 3.</p>
+</details>
+</div>
+<div class="checks">
+<span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik heb met andere namen en scores getest.</span></label><label class="check"><input type="checkbox"/><span>Ik begrijp <code>input()</code>, <code>int(input())</code>, <code>print()</code>, overschrijven en optellen.</span></label><label class="check"><input type="checkbox"/><span>Mijn Colab-notebook is klaar voor indiening.</span></label>
+</div>
+<div class="buttons">
+<button class="action secondary prev" type="button">← Vorige</button><button class="action next" type="button">Volgende →</button>
+</div>
+</section>
+</main>
+</div>
+<script>
       const sections = [...document.querySelectorAll(".step")],
         nav = document.getElementById("navlist");
       let current = 0;
@@ -1051,8 +835,8 @@ print(punten_a)</pre
             const f = g.parentElement.querySelector(".feedback");
             f.textContent =
               b.dataset.correct === "true"
-                ? "Juist! Bij elke print() telt de meest recente toekenning."
-                : "Probeer opnieuw: kijk naar de laatste toekenning vóór elke print().";
+                ? "Juist! De behaalde punten worden telkens bij het totaal opgeteld."
+                : "Probeer opnieuw: tel de behaalde punten bij de bestaande totaalscore op.";
             f.style.color =
               b.dataset.correct === "true" ? "#087259" : "#9b4b08";
           }),
@@ -1060,5 +844,5 @@ print(punten_a)</pre
       );
       show(0);
     </script>
-  </body>
+</body>
 </html>
