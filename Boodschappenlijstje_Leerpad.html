@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Mijn boodschappenlijstje</title>
+  <style>
+:root{--navy:#093147;--cyan:#1f9dbc;--pale:#e7f5fa;--orange:#fab515;--ink:#173344;--muted:#59717f;--bg:#f1f6f8}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);font:16px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink)}a{color:#096e91}header{background:linear-gradient(120deg,#093147,#155f77);padding:34px max(18px,calc((100vw - 1100px)/2));color:white}header h1{font-size:clamp(32px,5vw,50px);line-height:1.14;margin:12px 0}header p{max-width:770px;color:#e5f4f8;margin:0}.brand{font-weight:800;letter-spacing:.08em}.layout{max-width:1140px;margin:24px auto 60px;padding:0 18px;display:grid;grid-template-columns:275px 1fr;gap:24px;align-items:start}.side,.intro,.step{background:white;border:1px solid #d8e7ec;border-radius:18px;padding:24px;box-shadow:0 7px 22px #1230440b}.side{position:sticky;top:18px;padding:17px;max-height:calc(100vh - 36px);overflow-y:auto}.side h2{font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.stepnavitem{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:transparent;border:0;padding:9px 8px;border-radius:9px;color:var(--ink);font:inherit;font-size:13px;line-height:1.4;cursor:pointer}.stepnavitem:hover,.stepnavitem.active{background:var(--pale)}.circle{display:grid;place-items:center;flex-shrink:0;height:26px;width:26px;border-radius:50%;background:#eaf0f3;font-weight:800}.active .circle{background:var(--navy);color:white}.stepnavitem.done .circle{background:#d5f2e7;color:#12694d}.intro{margin-bottom:17px}.step{display:none}.step.active{display:block}.step h2{font-size:clamp(25px,3.4vw,35px);line-height:1.22;margin:10px 0}.meta{display:flex;justify-content:space-between;gap:15px}.eyebrow,.sub{font-size:12px;text-transform:uppercase;letter-spacing:.09em;font-weight:800;color:#14778c}.goal{color:var(--muted)}.theory{background:#eaf5f9;border-radius:14px;padding:18px 21px;margin:23px 0}.task{border-left:4px solid var(--cyan);padding-left:18px;margin:24px 0}.help{background:#f8fafb;border:1px solid #d8e7ec;border-radius:14px;padding:18px 20px;margin-top:25px}.help details{padding:10px 0;border-top:1px solid #dbe5e9}.help summary{font-weight:650;cursor:pointer}code{font-family:Consolas,monospace;font-size:.92em}p code,li code,.quiz code{background:#dcecf1;padding:2px 4px;border-radius:4px}.check{display:flex;align-items:start;gap:9px;margin:9px 0}.check input{accent-color:var(--cyan);width:18px;height:18px;margin-top:4px}.buttons{display:flex;justify-content:space-between;gap:12px;margin-top:24px;border-top:1px solid #e0e9ed;padding-top:22px}button.action{background:var(--navy);color:white;border:0;border-radius:10px;padding:10px 17px;font-weight:700;cursor:pointer}button.action.secondary{background:white;border:1px solid #aec7d1;color:var(--navy)}button:disabled{opacity:.3;cursor:default}.notice{padding:14px 17px;background:#fff5d8;border-left:4px solid var(--orange);border-radius:9px}.quiz{margin:17px 0;border:1px solid #d8e7ec;padding:16px;border-radius:12px}.quiz button{width:100%;text-align:left;border:1px solid #a9c8d2;background:white;border-radius:8px;padding:10px;margin:4px 0;cursor:pointer}.quiz button.selected{background:#dcf3f7;border-color:var(--cyan)}.quiz .feedback{font-weight:700;min-height:22px}.tiny{font-size:12px;color:var(--muted)}@media(max-width:810px){.layout{display:block;padding:0 12px}.side{position:static;max-height:none;margin-bottom:18px}.navlist{display:flex;overflow-x:auto}.stepnavitem{min-width:195px}.intro,.step{padding:20px}header{padding:27px 20px}}
+header .brand{letter-spacing:.06em} .intro p{margin-top:0} .step .goal{margin-bottom:15px}
+.step .checks{margin-top:24px}.quiz button:hover{border-color:var(--cyan)}
+.progressbar{height:7px;background:#dfecef;border-radius:99px;overflow:hidden;margin:15px 0 9px}.progressbar>div{height:100%;background:var(--cyan);transition:width .2s}
+@media(max-width:810px){.intro{padding:20px}}</style>
+</head>
+<body>
+  <header>
+    <div class="brand">Informaticawetenschappen: Pythonlijsten</div>
+    <h1>Mijn boodschappenlijstje</h1>
+    <p>Bouw in Google Colab stap voor stap een boodschappenlijstje dat je kunt aanvullen, bekijken, doorzoeken en aanpassen.</p>
+  </header>
+  <div class="layout">
+    <aside class="side">
+      <h2>Het leerpad</h2>
+      <div class="navlist" id="navlist"></div>
+      <div class="progressbar"><div id="progress"></div></div>
+      <p id="counter" class="tiny">Stap 1 van 12</p>
+    </aside>
+    <main>
+      <section class="intro">
+        <h2>Hoe ga je tewerk?</h2>
+        <p>Lees telkens de korte uitleg en voer de opdracht uit in <a href="https://colab.research.google.com/" target="_blank" rel="noopener">Google Colab</a>. Breid je programma stap voor stap uit en test het na iedere stap.</p>
+        <div class="notice"><strong>Hulp nodig?</strong> Probeer eerst zelf. Bekijk daarna de hints of vraag hulp aan je leerkracht. <strong>Indienen:</strong> via Google Classroom.</div>
+      </section>
+      <section class="step" data-step="0" id="stap-1">
+  <div class="meta"><span class="eyebrow">Stap 01 van 12</span></div>
+  <h2>Waarom gebruiken we een lijst?</h2><p class="goal">Ontdek waarom één lijst handiger is dan losse variabelen.</p>
+  <div class="theory"><span class="sub">Uitleg</span><p>Een boodschappenlijst kan elke week andere producten bevatten. Met losse variabelen zoals <code>product1</code>, <code>product2</code> en <code>product3</code> wordt het snel onoverzichtelijk. Een <strong>lijst</strong> bewaart meerdere waarden onder één naam. Je herkent een lijst aan de vierkante haakjes <code>[ ]</code>.</p></div>
+  <div class="task"><span class="sub">Doe dit in Colab</span><p>Open Google Colab. Maak één codecel en schrijf daarin <code>boodschappen = ["brood", "melk", "appels"]</code>. Deze lijst is het begin van je programma.</p></div>
+  
+  <div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>In een lijst scheid je de producten met komma’s.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Productnamen zijn tekst en staan dus tussen aanhalingstekens.</p></details></div>
+  <div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik heb één lijst met drie producten gemaakt.</span></label><label class="check"><input type="checkbox"/><span>Mijn code werkt zonder foutmelding.</span></label></div>
+  <div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="1" id="stap-2">
+  <div class="meta"><span class="eyebrow">Stap 02 van 12</span></div>
+  <h2>Wat zit er op mijn lijst?</h2><p class="goal">Toon de volledige lijst met print().</p>
+  <div class="theory"><span class="sub">Uitleg</span><p><code>print(boodschappen)</code> toont alle elementen van de lijst, inclusief de vierkante haakjes. Zo kun je snel controleren wat erin zit.</p></div>
+  <div class="task"><span class="sub">Doe dit in Colab</span><p>Voeg onder je lijst een titel toe met <code>print()</code>. Toon daarna de volledige lijst met <code>print(boodschappen)</code>. Voer je code uit.</p></div>
+  
+  <div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Gebruik de variabelenaam zonder aanhalingstekens.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Een voorbeeld: <code>print("Mijn lijst:", boodschappen)</code>.</p></details></div>
+  <div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik zie de drie producten verschijnen.</span></label></div>
+  <div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="2" id="stap-3">
+  <div class="meta"><span class="eyebrow">Stap 03 van 12</span></div>
+  <h2>Een product toevoegen</h2><p class="goal">Laat je lijst groeien met append().</p>
+  <div class="theory"><span class="sub">Uitleg</span><p>Met <code>append()</code> voeg je één nieuw element toe <strong>achteraan</strong> een bestaande lijst. Je hoeft daarvoor geen nieuwe lijst te maken.</p></div>
+  <div class="task"><span class="sub">Doe dit in Colab</span><p>Voeg <code>boodschappen.append("bananen")</code> toe. Toon de volledige lijst opnieuw en controleer of het nieuwe product erbij staat.</p></div>
+  
+  <div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Gebruik de punt tussen de lijstnaam en <code>append()</code>.</p></details></div>
+  <div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Mijn lijst bevat nu vier producten.</span></label></div>
+  <div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="3" id="stap-4">
+  <div class="meta"><span class="eyebrow">Stap 04 van 12</span></div>
+  <h2>Een product zelf invoeren</h2><p class="goal">Combineer een lijst met input().</p>
+  <div class="theory"><span class="sub">Uitleg</span><p><code>input()</code> vraagt tekst aan de gebruiker. Die tekst kun je in een variabele bewaren en vervolgens aan de lijst toevoegen.</p></div>
+  <div class="task"><span class="sub">Doe dit in Colab</span><p>Vraag met <code>input()</code> welk product de gebruiker wil toevoegen. Bewaar de invoer in <code>product</code>, voeg het product met <code>append()</code> toe en toon de lijst opnieuw.</p></div>
+  
+  <div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Begin met <code>product = input("Nieuw product: ")</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Voeg de variabele toe: <code>boodschappen.append(product)</code>.</p></details></div>
+  <div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik kan zelf een product invoeren.</span></label><label class="check"><input type="checkbox"/><span>Het ingevoerde product komt in de lijst terecht.</span></label></div>
+  <div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="4" id="stap-5">
+  <div class="meta"><span class="eyebrow">Stap 05 van 12</span></div>
+  <h2>Een overzicht, product per product</h2><p class="goal">Doorloop een lijst met een for-lus.</p>
+  <div class="theory"><span class="sub">Uitleg</span><p>Met <code>for product in boodschappen:</code> bezoek je elk element van de lijst. Zo kun je elk product op een aparte regel tonen. De instructie onder de <code>for</code> krijgt een inspringing.</p></div>
+  <div class="task"><span class="sub">Doe dit in Colab</span><p>Toon de boodschap <em>Mijn boodschappen:</em> en maak daaronder een <code>for</code>-lus die elk product afzonderlijk afdrukt, voorafgegaan door een streepje.</p></div>
+  
+  <div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Start met <code>for product in boodschappen:</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Plaats daaronder ingesprongen <code>print("-", product)</code>.</p></details></div>
+  <div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Elk product verschijnt op een aparte regel.</span></label></div>
+  <div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="5" id="stap-6">
+  <div class="meta"><span class="eyebrow">Stap 06 van 12</span></div>
+  <h2>Staat het product al op mijn lijst?</h2><p class="goal">Zoek op productnaam met in.</p>
+  <div class="theory"><span class="sub">Uitleg</span><p>Met <code>in</code> controleer je of een waarde in een lijst voorkomt. Bijvoorbeeld: <code>"melk" in boodschappen</code>. In combinatie met <code>if</code> kun je een passend bericht tonen.</p></div>
+  <div class="task"><span class="sub">Doe dit in Colab</span><p>Vraag welk product de gebruiker zoekt. Controleer met <code>if product in boodschappen:</code> of het aanwezig is. Toon een boodschap voor zowel aanwezig als niet aanwezig.</p></div>
+  <div class="quiz"><strong>Wat controleert <code>"brood" in boodschappen</code>?</strong><div class="quizoptions"><button type="button" data-correct="true">Of brood voorkomt in de lijst</button><button type="button" data-correct="false">Hoeveel producten er zijn</button><button type="button" data-correct="false">Of brood achteraan staat</button></div><div class="feedback" aria-live="polite"></div></div>
+  <div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Gebruik <code>if</code> en <code>else</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>De voorwaarde is <code>product in boodschappen</code>.</p></details></div>
+  <div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik kan een aanwezig product zoeken.</span></label><label class="check"><input type="checkbox"/><span>Ik krijg ook een duidelijke melding als het product ontbreekt.</span></label></div>
+  <div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="6" id="stap-7">
+  <div class="meta"><span class="eyebrow">Stap 07 van 12</span></div>
+  <h2>Een product schrappen</h2><p class="goal">Verwijder een afgewerkt product met remove().</p>
+  <div class="theory"><span class="sub">Uitleg</span><p>Met <code>boodschappen.remove("melk")</code> verwijder je de eerste overeenkomende waarde uit de lijst. Als die waarde niet bestaat, krijg je een foutmelding. Controleer daarom eerst met <code>in</code>.</p></div>
+  <div class="task"><span class="sub">Doe dit in Colab</span><p>Vraag welk product de gebruiker wil verwijderen. Controleer eerst of het voorkomt in de lijst. Verwijder het dan met <code>remove()</code>. Toon anders dat het product niet op de lijst staat.</p></div>
+  
+  <div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Gebruik dezelfde controle als bij het zoeken.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Binnen de <code>if</code>: <code>boodschappen.remove(product)</code>.</p></details></div>
+  <div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik kan een bestaand product verwijderen.</span></label><label class="check"><input type="checkbox"/><span>Een onbekend product veroorzaakt geen foutmelding.</span></label></div>
+  <div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="7" id="stap-8">
+  <div class="meta"><span class="eyebrow">Stap 08 van 12</span></div>
+  <h2>Hoeveel boodschappen blijven er over?</h2><p class="goal">Tel producten met len().</p>
+  <div class="theory"><span class="sub">Uitleg</span><p><code>len(boodschappen)</code> geeft het aantal elementen in een lijst terug. Dat is nuttig wanneer je na het toevoegen of verwijderen meteen het actuele aantal wilt zien.</p></div>
+  <div class="task"><span class="sub">Doe dit in Colab</span><p>Voeg een <code>print()</code> toe die de tekst <em>Aantal producten:</em> toont, gevolgd door <code>len(boodschappen)</code>. Probeer daarna opnieuw een product toe te voegen of te verwijderen.</p></div>
+  
+  <div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Gebruik <code>print("Aantal producten:", len(boodschappen))</code>.</p></details></div>
+  <div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Het aantal past zich aan wanneer de lijst verandert.</span></label></div>
+  <div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="8" id="stap-9">
+  <div class="meta"><span class="eyebrow">Stap 09 van 12</span></div>
+  <h2>Een string bestaat uit tekens</h2><p class="goal">Gebruik een for-lus ook op tekst.</p>
+  <div class="theory"><span class="sub">Uitleg</span><p>Een <strong>string</strong> is geen gewone lijst, maar je kunt er wel teken voor teken doorheen lopen. Bijvoorbeeld: <code>for letter in "melk":</code> bezoekt achtereenvolgens de letters m, e, l en k.</p></div>
+  <div class="task"><span class="sub">Doe dit in Colab</span><p>Maak de variabele <code>voorbeeld = "melk"</code>. Toon met een <code>for</code>-lus alle letters onder elkaar. Test daarna met een andere productnaam. Plaats dit deel boven je uiteindelijke keuzemenu.</p></div>
+  
+  <div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Je kunt schrijven: <code>for letter in voorbeeld:</code>.</p></details></div>
+  <div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik kan de letters van een productnaam afzonderlijk tonen.</span></label></div>
+  <div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="9" id="stap-10">
+  <div class="meta"><span class="eyebrow">Stap 10 van 12</span></div>
+  <h2>De lengte van een string</h2><p class="goal">Leer het verschil tussen een aantal producten en een aantal tekens.</p>
+  <div class="theory"><span class="sub">Uitleg</span><p><code>len()</code> werkt ook op een string. Dan telt Python de <strong>tekens</strong> in plaats van de producten in een lijst. Bijvoorbeeld: <code>len("melk")</code> is <code>4</code>. Bij een wachtwoord kun je hiermee een minimale lengte controleren.</p></div>
+  <div class="task"><span class="sub">Doe dit in Colab</span><p>Maak vóór het keuzemenu een korte lengtecontrole. Vraag een wachtwoord met <code>input()</code>. Controleer met <code>if</code> of <code>len(wachtwoord)</code> kleiner is dan <code>12</code> en toon een gepaste melding. Dit is alleen een lengtecontrole, geen echte beveiliging.</p></div>
+  
+  <div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Vergelijk <code>len(wachtwoord)</code> met <code>12</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Gebruik <code>if</code> en <code>else</code>.</p></details></div>
+  <div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik begrijp het verschil tussen <code>len(boodschappen)</code> en <code>len(wachtwoord)</code>.</span></label></div>
+  <div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="10" id="stap-11">
+  <div class="meta"><span class="eyebrow">Stap 11 van 12</span></div>
+  <h2>Van oefeningen naar een echt boodschappenlijstje</h2><p class="goal">Maak een menu dat je meerdere keren kunt gebruiken.</p>
+  <div class="theory"><span class="sub">Uitleg</span><p>Tot nu toe voer je opdrachten achter elkaar uit. In een bruikbaar boodschappenlijstje moet je zelf kunnen kiezen wat je wilt doen. Met <code>while</code> laat je een menu opnieuw verschijnen zolang de gebruiker niet voor stoppen kiest. Met <code>if</code> en <code>elif</code> verwerk je de gekozen actie.</p></div>
+  <div class="task"><span class="sub">Doe dit in Colab</span><p>Behoud <code>boodschappen = ["brood", "melk", "appels"]</code> bovenaan, de letteroefening en de lengtecontrole. <strong>Vervang</strong> de eerdere losse opdrachten voor toevoegen, tonen, zoeken en verwijderen door één keuzemenu met vijf mogelijkheden: <strong>1</strong> tonen, <strong>2</strong> toevoegen, <strong>3</strong> zoeken, <strong>4</strong> verwijderen en <strong>5</strong> stoppen. Gebruik binnen het menu dezelfde lijstbewerkingen als in de vorige stappen.</p></div>
+  
+  <div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Begin met <code>keuze = ""</code> en <code>while keuze != "5":</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Vraag in de lus <code>keuze = input("Maak je keuze (1-5): ")</code>.</p></details><details><summary>Hint 3 — extra hulp</summary><p>Gebruik <code>if keuze == "1":</code> en daarna <code>elif</code> voor de andere keuzes.</p></details></div>
+  <div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik kan meerdere opdrachten na elkaar uitvoeren zonder het programma opnieuw te starten.</span></label><label class="check"><input type="checkbox"/><span>Bij stoppen eindigt de lus.</span></label></div>
+  <div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="11" id="stap-12">
+  <div class="meta"><span class="eyebrow">Stap 12 van 12</span></div>
+  <h2>Test je volledige boodschappenlijstje</h2><p class="goal">Controleer of de toepassing werkt zoals bedoeld.</p>
+  <div class="theory"><span class="sub">Uitleg</span><p>Een boodschappenlijst is pas bruikbaar wanneer de lijst ook na verschillende acties klopt. Test daarom niet alleen het toevoegen, maar ook het zoeken, verwijderen en het aantal producten.</p></div>
+  <div class="task"><span class="sub">Doe dit in Colab</span><p>Start met <strong>brood, melk en appels</strong>. Toon de lijst. Voeg <strong>bananen</strong> toe. Zoek <strong>melk</strong> en daarna <strong>rijst</strong>. Verwijder <strong>melk</strong> en probeer vervolgens <strong>rijst</strong> te verwijderen. Controleer of de lijst nog drie producten telt. Sla je Colab-notebook op en dien het in via Google Classroom.</p></div>
+  
+  <div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Je eindlijst hoort <strong>brood, appels en bananen</strong> te bevatten.</p></details></div>
+  <div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>De lijst, zoekfunctie en verwijderfunctie werken.</span></label><label class="check"><input type="checkbox"/><span>Het aantal producten klopt.</span></label><label class="check"><input type="checkbox"/><span>Mijn notebook is klaar voor indiening.</span></label></div>
+  <div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section>
+    </main>
+  </div>
+  <script>
+const sections=[...document.querySelectorAll('.step')];
+const nav=document.getElementById('navlist');
+let current=0;
+sections.forEach((section,i)=>{
+  const button=document.createElement('button');
+  button.type='button';button.className='stepnavitem';
+  const circle=document.createElement('span');circle.className='circle';circle.textContent=i+1;
+  const name=document.createElement('span');name.textContent=section.querySelector('h2').textContent;
+  button.append(circle,name);button.addEventListener('click',()=>show(i));nav.appendChild(button);
+});
+function show(index){
+  current=Math.max(0,Math.min(sections.length-1,index));
+  sections.forEach((section,i)=>{
+    section.classList.toggle('active',i===current);
+    section.querySelector('.prev').disabled=i===0;
+    section.querySelector('.next').textContent=i===sections.length-1?'Afronden ✓':'Volgende →';
+  });
+  [...nav.children].forEach((button,i)=>button.classList.toggle('active',i===current));
+  document.getElementById('counter').textContent=`Stap ${current+1} van ${sections.length}`;
+  document.getElementById('progress').style.width=`${(current+1)/sections.length*100}%`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.prev').forEach(button=>button.addEventListener('click',()=>show(current-1)));
+document.querySelectorAll('.next').forEach(button=>button.addEventListener('click',()=>{
+  if(current<sections.length-1)show(current+1);
+  else alert('Je bent klaar. Sla je Colab-notebook op en dien het in via Google Classroom.');
+}));
+document.querySelectorAll('.quizoptions').forEach(group=>group.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{
+  group.querySelectorAll('button').forEach(other=>other.classList.remove('selected'));
+  button.classList.add('selected');
+  const feedback=group.parentElement.querySelector('.feedback');
+  feedback.textContent=button.dataset.correct==='true'?'Juist!':'Probeer opnieuw.';
+  feedback.style.color=button.dataset.correct==='true'?'#087259':'#9b4b08';
+})));
+show(0);
+</script>
+</body>
+</html>

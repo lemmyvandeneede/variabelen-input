@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Mijn favoriete playlist</title>
+<style>
+:root{--navy:#093147;--cyan:#1f9dbc;--pale:#e7f5fa;--orange:#fab515;--ink:#173344;--muted:#59717f;--bg:#f1f6f8}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);font:16px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink)}a{color:#096e91}header{background:linear-gradient(120deg,#093147,#155f77);padding:34px max(18px,calc((100vw - 1100px)/2));color:white}header h1{font-size:clamp(32px,5vw,50px);line-height:1.14;margin:12px 0}header p{max-width:770px;color:#e5f4f8;margin:0}.brand{font-weight:800;letter-spacing:.08em}.layout{max-width:1140px;margin:24px auto 60px;padding:0 18px;display:grid;grid-template-columns:275px 1fr;gap:24px;align-items:start}.side,.intro,.step{background:white;border:1px solid #d8e7ec;border-radius:18px;padding:24px;box-shadow:0 7px 22px #1230440b}.side{position:sticky;top:18px;padding:17px;max-height:calc(100vh - 36px);overflow-y:auto}.side h2{font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.stepnavitem{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:transparent;border:0;padding:9px 8px;border-radius:9px;color:var(--ink);font:inherit;font-size:13px;line-height:1.4;cursor:pointer}.stepnavitem:hover,.stepnavitem.active{background:var(--pale)}.circle{display:grid;place-items:center;flex-shrink:0;height:26px;width:26px;border-radius:50%;background:#eaf0f3;font-weight:800}.active .circle{background:var(--navy);color:white}.stepnavitem.done .circle{background:#d5f2e7;color:#12694d}.intro{margin-bottom:17px}.step{display:none}.step.active{display:block}.step h2{font-size:clamp(25px,3.4vw,35px);line-height:1.22;margin:10px 0}.meta{display:flex;justify-content:space-between;gap:15px}.eyebrow,.sub{font-size:12px;text-transform:uppercase;letter-spacing:.09em;font-weight:800;color:#14778c}.goal{color:var(--muted)}.theory{background:#eaf5f9;border-radius:14px;padding:18px 21px;margin:23px 0}.task{border-left:4px solid var(--cyan);padding-left:18px;margin:24px 0}.help{background:#f8fafb;border:1px solid #d8e7ec;border-radius:14px;padding:18px 20px;margin-top:25px}.help details{padding:10px 0;border-top:1px solid #dbe5e9}.help summary{font-weight:650;cursor:pointer}code{font-family:Consolas,monospace;font-size:.92em}p code,li code,.quiz code{background:#dcecf1;padding:2px 4px;border-radius:4px}.check{display:flex;align-items:start;gap:9px;margin:9px 0}.check input{accent-color:var(--cyan);width:18px;height:18px;margin-top:4px}.buttons{display:flex;justify-content:space-between;gap:12px;margin-top:24px;border-top:1px solid #e0e9ed;padding-top:22px}button.action{background:var(--navy);color:white;border:0;border-radius:10px;padding:10px 17px;font-weight:700;cursor:pointer}button.action.secondary{background:white;border:1px solid #aec7d1;color:var(--navy)}button:disabled{opacity:.3;cursor:default}.notice{padding:14px 17px;background:#fff5d8;border-left:4px solid var(--orange);border-radius:9px}.quiz{margin:17px 0;border:1px solid #d8e7ec;padding:16px;border-radius:12px}.quiz button{width:100%;text-align:left;border:1px solid #a9c8d2;background:white;border-radius:8px;padding:10px;margin:4px 0;cursor:pointer}.quiz button.selected{background:#dcf3f7;border-color:var(--cyan)}.quiz .feedback{font-weight:700;min-height:22px}.tiny{font-size:12px;color:var(--muted)}@media(max-width:810px){.layout{display:block;padding:0 12px}.side{position:static;max-height:none;margin-bottom:18px}.navlist{display:flex;overflow-x:auto}.stepnavitem{min-width:195px}.intro,.step{padding:20px}header{padding:27px 20px}}
+header .brand{letter-spacing:.06em} .intro p{margin-top:0} .step .goal{margin-bottom:15px}
+.step .checks{margin-top:24px}.quiz button:hover{border-color:var(--cyan)}
+.progressbar{height:7px;background:#dfecef;border-radius:99px;overflow:hidden;margin:15px 0 9px}.progressbar>div{height:100%;background:var(--cyan);transition:width .2s}
+@media(max-width:810px){.intro{padding:20px}}</style>
+</head>
+<body>
+<header><div class="brand">Informaticawetenschappen: Pythonlijsten</div>
+<h1>Mijn favoriete playlist</h1>
+<p>Maak in Python je eigen muziekplaylist. Voeg favoriete liedjes toe, bekijk je playlist, zoek nummers en verwijder liedjes die je niet meer wilt bewaren.</p>
+</header>
+<div class="layout"><aside class="side"><h2>Het leerpad</h2><div class="navlist" id="navlist"></div><div class="progressbar"><div id="progress"></div></div><p id="counter" class="tiny">Stap 1 van 12</p></aside>
+<main><section class="intro"><h2>Hoe ga je tewerk?</h2><p>Lees telkens de korte uitleg en voer de opdracht uit in <a href="https://colab.research.google.com/" target="_blank" rel="noopener">Google Colab</a>. Je werkt stap voor stap aan dezelfde playlist. Test je code na iedere stap.</p>
+<div class="notice"><strong>Hulp nodig?</strong> Probeer eerst zelf. Bekijk daarna de hints of vraag hulp aan je leerkracht. <strong>Indienen:</strong> via Google Classroom.</div></section>
+<section class="step" data-step="0" id="stap-1">
+<div class="meta"><span class="eyebrow">Stap 01 van 12</span></div>
+<h2>Jouw favoriete muziek op één plek</h2><p class="goal">Ontdek waarom een lijst geschikt is voor een playlist.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>In een playlist kun je meerdere liedjes bewaren. Met losse variabelen zoals <code>liedje1</code> en <code>liedje2</code> is het moeilijk om de verzameling later uit te breiden. Een <strong>lijst</strong> bevat verschillende waarden onder één variabelenaam. De elementen staan tussen vierkante haakjes <code>[ ]</code>.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Open Google Colab en maak één codecel. Maak een lijst <code>playlist</code> met drie favoriete liedjes. Noteer per liedje de titel en artiest samen als één tekst, bijvoorbeeld <code>"Blinding Lights - The Weeknd"</code>. Zo kun je voorlopig met één lijst werken.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Een lijst begint met <code>[</code> en eindigt met <code>]</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Plaats een komma tussen de liedjes.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Mijn lijst bevat drie liedjes.</span></label><label class="check"><input type="checkbox"/><span>Elk liedje is een string met een titel en artiest.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="1" id="stap-2">
+<div class="meta"><span class="eyebrow">Stap 02 van 12</span></div>
+<h2>Een naam voor je playlist</h2><p class="goal">Gebruik tekstvariabelen en print().</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Met <code>input()</code> kan de gebruiker een naam voor zijn playlist kiezen. <code>print()</code> toont de naam en de volledige lijst. Bij <code>print(playlist)</code> verschijnen ook de vierkante haakjes.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Vraag met <code>input()</code> naar de naam van je playlist en bewaar die in <code>naam_playlist</code>. Toon daarna de naam en de volledige lijst met <code>print()</code>.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Begin met <code>naam_playlist = input("Naam van je playlist: ")</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Gebruik <code>print(playlist)</code> zonder aanhalingstekens rond <code>playlist</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Mijn programma vraagt een naam.</span></label><label class="check"><input type="checkbox"/><span>De naam en de volledige lijst worden getoond.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="2" id="stap-3">
+<div class="meta"><span class="eyebrow">Stap 03 van 12</span></div>
+<h2>Een extra nummer bewaren</h2><p class="goal">Voeg een liedje toe met append().</p>
+<div class="theory"><span class="sub">Uitleg</span><p><code>append()</code> voegt een nieuw element toe <strong>achteraan</strong> een bestaande lijst. De eerdere liedjes blijven bewaard.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Voeg met <code>playlist.append("... - ...")</code> een vierde liedje toe. Toon de lijst opnieuw om het resultaat te bekijken.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Schrijf <code>playlist.append(...)</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Mijn lijst bevat vier liedjes.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="3" id="stap-4">
+<div class="meta"><span class="eyebrow">Stap 04 van 12</span></div>
+<h2>Jij kiest het volgende liedje</h2><p class="goal">Combineer input() met append().</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Het volgende liedje is niet vooraf bekend. Met <code>input()</code> vraag je de titel en de artiest op. Daarna kun je beide stukken tekst samenvoegen met <code>+</code> en het resultaat aan de lijst toevoegen.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Vraag afzonderlijk de <strong>titel</strong> en de <strong>artiest</strong> met <code>input()</code>. Bewaar beide waarden in variabelen, maak er één tekst van in de vorm <code>Titel - Artiest</code>, en voeg die toe aan <code>playlist</code>.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Begin met <code>titel = input("Titel: ")</code> en <code>artiest = input("Artiest: ")</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Combineer met <code>liedje = titel + " - " + artiest</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>De gebruiker kan zelf een nummer invoeren.</span></label><label class="check"><input type="checkbox"/><span>Het nummer verschijnt in de lijst.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="4" id="stap-5">
+<div class="meta"><span class="eyebrow">Stap 05 van 12</span></div>
+<h2>Een overzicht zoals een playlist</h2><p class="goal">Doorloop de lijst met een for-lus.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Met <code>for liedje in playlist:</code> doorloop je alle elementen. Zo verschijnt ieder liedje op een afzonderlijke regel. De <code>print()</code> onder de <code>for</code> moet ingesprongen zijn.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Toon eerst de playlistnaam. Gebruik daarna een <code>for</code>-lus om alle liedjes onder elkaar te tonen. Zet voor elk nummer een streepje.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Start met <code>for liedje in playlist:</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Gebruik daaronder <code>print("-", liedje)</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Elk liedje verschijnt op een nieuwe regel.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="5" id="stap-6">
+<div class="meta"><span class="eyebrow">Stap 06 van 12</span></div>
+<h2>Staat een liedje al in je playlist?</h2><p class="goal">Zoek in de lijst zonder index.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Met <code>in</code> controleer je of een bepaalde waarde in je lijst voorkomt. Je kunt de uitkomst gebruiken in een <code>if</code>-voorwaarde. Je zoekt hier op de <strong>volledige tekst</strong> van het liedje, bijvoorbeeld <code>"Blinding Lights - The Weeknd"</code>.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Vraag een liedje in de vorm <code>Titel - Artiest</code>. Controleer met <code>if liedje in playlist:</code> of het bestaat. Toon een bericht als het aanwezig is en een ander bericht als het niet in de playlist staat.</p></div>
+<div class="quiz"><strong>Wat controleert <code>liedje in playlist</code>?</strong><div class="quizoptions"><button type="button" data-correct="true">Of dit liedje in de playlist voorkomt</button><button type="button" data-correct="false">Op welke positie het liedje staat</button><button type="button" data-correct="false">Hoeveel liedjes er zijn</button></div><div class="feedback" aria-live="polite"></div></div><div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Gebruik <code>if</code> en <code>else</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>De controle is <code>liedje in playlist</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik kan een aanwezig liedje vinden.</span></label><label class="check"><input type="checkbox"/><span>Ik krijg ook een bericht voor een onbekend liedje.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="6" id="stap-7">
+<div class="meta"><span class="eyebrow">Stap 07 van 12</span></div>
+<h2>Een liedje uit de playlist halen</h2><p class="goal">Verwijder een element met remove().</p>
+<div class="theory"><span class="sub">Uitleg</span><p><code>remove()</code> verwijdert het eerste overeenkomende element uit een lijst. Als dat element ontbreekt, krijgt Python een foutmelding. Controleer daarom eerst met <code>in</code>.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Vraag welk liedje de gebruiker wil verwijderen. Controleer eerst met <code>in</code> of het bestaat. Verwijder het dan met <code>playlist.remove(liedje)</code>. Toon een ander bericht wanneer het liedje ontbreekt.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Gebruik <code>if liedje in playlist:</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Plaats <code>playlist.remove(liedje)</code> binnen de <code>if</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Een bekend liedje wordt verwijderd.</span></label><label class="check"><input type="checkbox"/><span>Een onbekend liedje veroorzaakt geen foutmelding.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="7" id="stap-8">
+<div class="meta"><span class="eyebrow">Stap 08 van 12</span></div>
+<h2>Hoe groot is je playlist?</h2><p class="goal">Tel alle liedjes met len().</p>
+<div class="theory"><span class="sub">Uitleg</span><p><code>len(playlist)</code> geeft het <strong>aantal elementen</strong> in de lijst terug. Het resultaat verandert als je nummers toevoegt of verwijdert.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Toon met <code>print()</code> de tekst <em>Aantal liedjes:</em>, gevolgd door <code>len(playlist)</code>. Probeer na toevoegen en verwijderen of het aantal klopt.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Gebruik <code>print("Aantal liedjes:", len(playlist))</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Het aantal liedjes klopt na wijzigingen.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="8" id="stap-9">
+<div class="meta"><span class="eyebrow">Stap 09 van 12</span></div>
+<h2>Een titel bestaat uit letters</h2><p class="goal">Loop door een string.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Een <strong>string</strong> is geen lijst, maar je kunt er net als bij een lijst met <code>for</code> doorheen lopen. Bij <code>for teken in titel:</code> bekijk je elk teken van de titel afzonderlijk, ook eventuele spaties.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Kies één titel en bewaar die in <code>voorbeeldtitel</code>. Gebruik een <code>for</code>-lus om alle tekens van die titel onder elkaar te tonen. Plaats dit experiment boven je uiteindelijke keuzemenu.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Maak bijvoorbeeld <code>voorbeeldtitel = "Flowers"</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Gebruik <code>for teken in voorbeeldtitel:</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik zie alle tekens van een titel afzonderlijk.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="9" id="stap-10">
+<div class="meta"><span class="eyebrow">Stap 10 van 12</span></div>
+<h2>Een korte of lange titel?</h2><p class="goal">Meet de lengte van een string.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Met <code>len()</code> kun je ook <strong>tekens</strong> tellen. <code>len(playlist)</code> telt liedjes, maar <code>len(voorbeeldtitel)</code> telt tekens in een titel. Spaties tellen mee.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Toon de lengte van <code>voorbeeldtitel</code>. Controleer daarna met <code>if</code> of de eerder gekozen <code>naam_playlist</code> minstens <strong>3 tekens</strong> heeft. Toon een passend bericht. Het is een eenvoudige controle, geen beperking die je later in het menu moet inbouwen.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Voor de titellengte gebruik je <code>len(voorbeeldtitel)</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Vergelijk <code>len(naam_playlist)</code> met <code>3</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik begrijp het verschil tussen het aantal liedjes en het aantal tekens.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="10" id="stap-11">
+<div class="meta"><span class="eyebrow">Stap 11 van 12</span></div>
+<h2>Een echte playlist met een keuzemenu</h2><p class="goal">Laat de gebruiker meerdere acties na elkaar uitvoeren.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Een playlistmanager is pas handig wanneer je na elke actie verder kunt kiezen. Met een <code>while</code>-lus verschijnt een menu opnieuw totdat de gebruiker stopt. <code>if</code> en <code>elif</code> bepalen welke lijstbewerking wordt uitgevoerd.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Behoud bovenaan je lijst <code>playlist</code> en de playlistnaam. <strong>Vervang</strong> de losse oefeningen voor toevoegen, zoeken en verwijderen door één menu met zes keuzes: <strong>1</strong> toon playlist, <strong>2</strong> voeg liedje toe, <strong>3</strong> zoek liedje, <strong>4</strong> verwijder liedje, <strong>5</strong> toon aantal liedjes en <strong>6</strong> stop. Laat het menu terugkomen tot de gebruiker voor <strong>6</strong> kiest.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Begin met <code>keuze = ""</code> en <code>while keuze != "6":</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Vraag met <code>keuze = input("Kies 1-6: ")</code> naar een keuze.</p></details><details><summary>Hint 3 — extra hulp</summary><p>Gebruik <code>if</code>, <code>elif</code> en <code>else</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik kan meerdere acties na elkaar uitvoeren.</span></label><label class="check"><input type="checkbox"/><span>Mijn menu stopt bij keuze 6.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="11" id="stap-12">
+<div class="meta"><span class="eyebrow">Stap 12 van 12</span></div>
+<h2>Laat je playlist echt werken</h2><p class="goal">Test toevoegen, zoeken, verwijderen en tellen.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Je kunt pas vertrouwen op een playlistmanager wanneer de lijst na meerdere acties blijft kloppen. Test daarom ook een zoekactie of verwijderactie met een liedje dat niet voorkomt.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Start met drie zelfgekozen liedjes. Toon de playlist en controleer dat er <strong>3</strong> nummers zijn. Voeg een vierde nummer toe, zoek dit liedje, verwijder het en zoek het opnieuw. Controleer of er weer <strong>3</strong> nummers overblijven. Sluit af via keuze <strong>6</strong>. Sla je Colab-notebook op en dien het in via Google Classroom.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Gebruik exact dezelfde titel en artiest wanneer je zoekt of verwijdert.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Toevoegen, zoeken en verwijderen werken.</span></label><label class="check"><input type="checkbox"/><span>Het aantal liedjes wordt correct bijgewerkt.</span></label><label class="check"><input type="checkbox"/><span>Mijn notebook is klaar voor indiening.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section>
+</main></div><script>
+const sections=[...document.querySelectorAll('.step')];
+const nav=document.getElementById('navlist');
+let current=0;
+sections.forEach((section,i)=>{
+  const button=document.createElement('button');
+  button.type='button';button.className='stepnavitem';
+  const circle=document.createElement('span');circle.className='circle';circle.textContent=i+1;
+  const name=document.createElement('span');name.textContent=section.querySelector('h2').textContent;
+  button.append(circle,name);button.addEventListener('click',()=>show(i));nav.appendChild(button);
+});
+function show(index){
+  current=Math.max(0,Math.min(sections.length-1,index));
+  sections.forEach((section,i)=>{
+    section.classList.toggle('active',i===current);
+    section.querySelector('.prev').disabled=i===0;
+    section.querySelector('.next').textContent=i===sections.length-1?'Afronden ✓':'Volgende →';
+  });
+  [...nav.children].forEach((button,i)=>button.classList.toggle('active',i===current));
+  document.getElementById('counter').textContent=`Stap ${current+1} van ${sections.length}`;
+  document.getElementById('progress').style.width=`${(current+1)/sections.length*100}%`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.prev').forEach(button=>button.addEventListener('click',()=>show(current-1)));
+document.querySelectorAll('.next').forEach(button=>button.addEventListener('click',()=>{
+  if(current<sections.length-1)show(current+1);
+  else alert('Je bent klaar. Sla je Colab-notebook op en dien het in via Google Classroom.');
+}));
+document.querySelectorAll('.quizoptions').forEach(group=>group.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{
+  group.querySelectorAll('button').forEach(other=>other.classList.remove('selected'));
+  button.classList.add('selected');
+  const feedback=group.parentElement.querySelector('.feedback');
+  feedback.textContent=button.dataset.correct==='true'?'Juist!':'Probeer opnieuw.';
+  feedback.style.color=button.dataset.correct==='true'?'#087259':'#9b4b08';
+})));
+show(0);
+</script></body></html>

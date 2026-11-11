@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Concerttickets met functies</title>
+<style>
+:root{--navy:#093147;--cyan:#1f9dbc;--pale:#e7f5fa;--orange:#fab515;--ink:#173344;--muted:#59717f;--bg:#f1f6f8}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);font:16px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink)}a{color:#096e91}header{background:linear-gradient(120deg,#093147,#155f77);padding:34px max(18px,calc((100vw - 1100px)/2));color:white}header h1{font-size:clamp(32px,5vw,50px);line-height:1.14;margin:12px 0}header p{max-width:770px;color:#e5f4f8;margin:0}.brand{font-weight:800;letter-spacing:.08em}.layout{max-width:1140px;margin:24px auto 60px;padding:0 18px;display:grid;grid-template-columns:275px 1fr;gap:24px;align-items:start}.side,.intro,.step{background:white;border:1px solid #d8e7ec;border-radius:18px;padding:24px;box-shadow:0 7px 22px #1230440b}.side{position:sticky;top:18px;padding:17px;max-height:calc(100vh - 36px);overflow-y:auto}.side h2{font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.stepnavitem{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:transparent;border:0;padding:9px 8px;border-radius:9px;color:var(--ink);font:inherit;font-size:13px;line-height:1.4;cursor:pointer}.stepnavitem:hover,.stepnavitem.active{background:var(--pale)}.circle{display:grid;place-items:center;flex-shrink:0;height:26px;width:26px;border-radius:50%;background:#eaf0f3;font-weight:800}.active .circle{background:var(--navy);color:white}.stepnavitem.done .circle{background:#d5f2e7;color:#12694d}.intro{margin-bottom:17px}.step{display:none}.step.active{display:block}.step h2{font-size:clamp(25px,3.4vw,35px);line-height:1.22;margin:10px 0}.meta{display:flex;justify-content:space-between;gap:15px}.eyebrow,.sub{font-size:12px;text-transform:uppercase;letter-spacing:.09em;font-weight:800;color:#14778c}.goal{color:var(--muted)}.theory{background:#eaf5f9;border-radius:14px;padding:18px 21px;margin:23px 0}.task{border-left:4px solid var(--cyan);padding-left:18px;margin:24px 0}.help{background:#f8fafb;border:1px solid #d8e7ec;border-radius:14px;padding:18px 20px;margin-top:25px}.help details{padding:10px 0;border-top:1px solid #dbe5e9}.help summary{font-weight:650;cursor:pointer}code{font-family:Consolas,monospace;font-size:.92em}p code,li code,.quiz code{background:#dcecf1;padding:2px 4px;border-radius:4px}.check{display:flex;align-items:start;gap:9px;margin:9px 0}.check input{accent-color:var(--cyan);width:18px;height:18px;margin-top:4px}.buttons{display:flex;justify-content:space-between;gap:12px;margin-top:24px;border-top:1px solid #e0e9ed;padding-top:22px}button.action{background:var(--navy);color:white;border:0;border-radius:10px;padding:10px 17px;font-weight:700;cursor:pointer}button.action.secondary{background:white;border:1px solid #aec7d1;color:var(--navy)}button:disabled{opacity:.3;cursor:default}.notice{padding:14px 17px;background:#fff5d8;border-left:4px solid var(--orange);border-radius:9px}.quiz{margin:17px 0;border:1px solid #d8e7ec;padding:16px;border-radius:12px}.quiz button{width:100%;text-align:left;border:1px solid #a9c8d2;background:white;border-radius:8px;padding:10px;margin:4px 0;cursor:pointer}.quiz button.selected{background:#dcf3f7;border-color:var(--cyan)}.quiz .feedback{font-weight:700;min-height:22px}.tiny{font-size:12px;color:var(--muted)}@media(max-width:810px){.layout{display:block;padding:0 12px}.side{position:static;max-height:none;margin-bottom:18px}.navlist{display:flex;overflow-x:auto}.stepnavitem{min-width:195px}.intro,.step{padding:20px}header{padding:27px 20px}}
+header .brand{letter-spacing:.06em} .intro p{margin-top:0} .step .goal{margin-bottom:15px}
+.step .checks{margin-top:24px}.quiz button:hover{border-color:var(--cyan)}
+.progressbar{height:7px;background:#dfecef;border-radius:99px;overflow:hidden;margin:15px 0 9px}.progressbar>div{height:100%;background:var(--cyan);transition:width .2s}
+@media(max-width:810px){.intro{padding:20px}}</style>
+</head>
+<body>
+<header><div class="brand">Informaticawetenschappen: functies in Python</div>
+<h1>Concerttickets met functies</h1>
+<p>Maak één Pythonprogramma dat twee ticketbestellingen verwerkt. Ontdek hoe je met functies, parameters en <code>return</code> dezelfde code meermaals kunt gebruiken.</p>
+</header>
+<div class="layout"><aside class="side"><h2>Het leerpad</h2><div class="navlist" id="navlist"></div><div class="progressbar"><div id="progress"></div></div><p id="counter" class="tiny">Stap 1 van 12</p></aside>
+<main><section class="intro"><h2>Hoe ga je tewerk?</h2><p>Lees telkens de korte uitleg en voer de opdracht uit in <a href="https://colab.research.google.com/" target="_blank" rel="noopener">Google Colab</a>. <strong>Breid steeds dezelfde codecel uit</strong>, zodat je uiteindelijk één programma hebt. Test na iedere stap.</p>
+<div class="notice"><strong>Hulp nodig?</strong> Probeer eerst zelf, open daarna een hint of vraag hulp aan je leerkracht. <strong>Indienen:</strong> je levert je Colab-notebook in via Google Classroom.</div></section>
+<section class="step" data-step="0" id="stap-1">
+<div class="meta"><span class="eyebrow">Stap 01 van 12</span></div>
+<h2>Een ticketverkoop programmeren</h2><p class="goal">Ontdek waarom functies nuttig zijn.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Bij een concert worden meerdere tickets verkocht. Telkens moeten dezelfde soorten gegevens worden gevraagd, prijzen worden berekend en een overzicht worden getoond. Als je al die code telkens opnieuw schrijft, wordt je programma lang. Met een <strong>functie</strong> geef je een groep instructies één naam. Je kunt die groep later opnieuw gebruiken.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Open Google Colab en maak één codecel. Je bouwt tijdens dit leerpad één programma voor de ticketverkoop van <strong>NOVA LIVE</strong>. Het programma zal twee bestellingen verwerken. Lees de volgende stap voordat je code schrijft.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Tijdens het hele leerpad werk je in dezelfde codecel.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik kan uitleggen waarvoor functies dienen.</span></label><label class="check"><input type="checkbox"/><span>Ik heb een Colab-notebook geopend.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="1" id="stap-2">
+<div class="meta"><span class="eyebrow">Stap 02 van 12</span></div>
+<h2>Je eerste functie</h2><p class="goal">Maak een functie met def.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Je maakt een functie met <code>def</code>, daarna de functienaam en ronde haakjes. De dubbele punt <code>:</code> sluit de eerste regel af. De instructies die bij de functie horen, staan <strong>ingesprongen</strong>.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Schrijf bovenaan je programma de functie <code>toon_welkom()</code>. Laat ze de tekst <em>Welkom bij NOVA LIVE</em> afdrukken met <code>print()</code>. Voer de code uit. Verschijnt de tekst al?</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Begin met <code>def toon_welkom():</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Zet de <code>print()</code> op de volgende regel, ingesprongen.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Mijn functie is correct gedefinieerd.</span></label><label class="check"><input type="checkbox"/><span>Ik weet dat het definiëren de functie nog niet uitvoert.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="2" id="stap-3">
+<div class="meta"><span class="eyebrow">Stap 03 van 12</span></div>
+<h2>Een functie oproepen</h2><p class="goal">Voer je functie daadwerkelijk uit.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Python voert de code in een functie pas uit wanneer je de functie <strong>oproept</strong>. Daarvoor schrijf je de functienaam met ronde haakjes: <code>toon_welkom()</code>. Je schrijft de oproep buiten de definitie, zonder inspringing.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Roep onder de functie <code>toon_welkom()</code> op. Voer je code uit en controleer of de welkomsttekst verschijnt.</p></div>
+<div class="quiz"><strong>Wat gebeurt er bij <code>def toon_welkom():</code>?</strong><div class="quizoptions"><button type="button" data-correct="true">Je maakt de functie aan, maar voert ze nog niet uit.</button><button type="button" data-correct="false">Je roept de functie meteen op.</button><button type="button" data-correct="false">Je geeft een waarde terug.</button></div><div class="feedback" aria-live="polite"></div></div><div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Schrijf onder de definitie <code>toon_welkom()</code> zonder <code>def</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>De welkomsttekst verschijnt.</span></label><label class="check"><input type="checkbox"/><span>Ik ken het verschil tussen definiëren en oproepen.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="3" id="stap-4">
+<div class="meta"><span class="eyebrow">Stap 04 van 12</span></div>
+<h2>Een functie met een parameter</h2><p class="goal">Geef informatie mee aan een functie.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Een <strong>parameter</strong> is een variabele die tussen de haakjes van de functiedefinitie staat. Bij de oproep geef je een <strong>argument</strong> mee. Bijvoorbeeld: bij <code>toon_concert("NOVA LIVE")</code> krijgt de parameter <code>artiest</code> de tekst <em>NOVA LIVE</em>.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Maak bovenaan een tweede functie <code>toon_concert(artiest)</code> die de artiest toont met <code>print()</code>. Roep deze functie onderaan op met <code>"NOVA LIVE"</code> als argument, na <code>toon_welkom()</code>.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>De definitie begint met <code>def toon_concert(artiest):</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Binnen de functie kun je <code>print("Concert:", artiest)</code> gebruiken.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik geef een argument mee bij de oproep.</span></label><label class="check"><input type="checkbox"/><span>De juiste artiest verschijnt.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="4" id="stap-5">
+<div class="meta"><span class="eyebrow">Stap 05 van 12</span></div>
+<h2>Gegevens voor de eerste bestelling</h2><p class="goal">Werk met twee parameters en input().</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Een functie kan meerdere parameters ontvangen. Die zet je met een komma tussen de haakjes, bijvoorbeeld <code>def toon_klant(naam, aantal):</code>. Met <code>input()</code> vraag je een naam; met <code>int(input())</code> vraag je een geheel getal.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Maak <code>toon_klant(naam, aantal)</code>, die de naam en het aantal tickets afdrukt. Vraag onderaan je programma met <code>input()</code> de naam van klant 1 en met <code>int(input())</code> hoeveel tickets die koopt. Bewaar de antwoorden in <code>naam1</code> en <code>aantal1</code>. Roep dan <code>toon_klant(naam1, aantal1)</code> op.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>De functie ontvangt twee parameters: <code>naam</code> en <code>aantal</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Gebruik <code>aantal1 = int(input("Aantal tickets: "))</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik vraag een naam en een aantal.</span></label><label class="check"><input type="checkbox"/><span>Ik gebruik beide waarden in één functieoproep.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="5" id="stap-6">
+<div class="meta"><span class="eyebrow">Stap 06 van 12</span></div>
+<h2>Een prijs berekenen en afdrukken</h2><p class="goal">Ontdek wat print() binnen een functie doet.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>In een functie kun je ook rekenen. Met <code>print()</code> toon je het resultaat, maar je geeft het nog niet terug om elders in het programma te gebruiken. Voor één bestelling is de ticketprijs het aantal tickets maal de prijs per ticket.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Vraag de prijs per ticket met <code>int(input())</code> en bewaar die in <code>prijs1</code>. Maak de functie <code>toon_ticketbedrag(aantal, prijs)</code>. Bereken daarin <code>bedrag = aantal * prijs</code> en druk <code>bedrag</code> af. Roep de functie op met <code>aantal1</code> en <code>prijs1</code>.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Gebruik <code>def toon_ticketbedrag(aantal, prijs):</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Plaats de berekening en <code>print()</code> binnen de functie.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>De ticketprijs wordt correct berekend.</span></label><label class="check"><input type="checkbox"/><span>Ik begrijp dat print() alleen iets toont.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="6" id="stap-7">
+<div class="meta"><span class="eyebrow">Stap 07 van 12</span></div>
+<h2>Van print() naar return</h2><p class="goal">Laat een functie een waarde teruggeven.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Soms moet je het berekende bedrag later opnieuw gebruiken, bijvoorbeeld om de servicekosten erbij te tellen. Met <code>return</code> <strong>geeft</strong> een functie het resultaat terug aan de plaats waar ze werd opgeroepen. <code>print()</code> toont een waarde, maar <code>return</code> maakt verder rekenen ermee mogelijk.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p><strong>Vervang</strong> <code>toon_ticketbedrag(aantal, prijs)</code> door <code>bereken_ticketbedrag(aantal, prijs)</code>. Laat de berekening staan, maar vervang de <code>print()</code> in de functie door <code>return bedrag</code>. Vervang ook de oude oproep door <code>bereken_ticketbedrag(aantal1, prijs1)</code>. Voer je programma uit. Zie je het bedrag nog verschijnen?</p></div>
+<div class="quiz"><strong>Welke instructie geeft een berekend bedrag terug?</strong><div class="quizoptions"><button type="button" data-correct="true"><code>return bedrag</code></button><button type="button" data-correct="false"><code>print(bedrag)</code></button><button type="button" data-correct="false"><code>input(bedrag)</code></button></div><div class="feedback" aria-live="polite"></div></div><div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Begin met <code>def bereken_ticketbedrag(aantal, prijs):</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Na <code>bedrag = aantal * prijs</code> schrijf je <code>return bedrag</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik gebruik return in plaats van print() in de berekenfunctie.</span></label><label class="check"><input type="checkbox"/><span>Ik begrijp waarom het bedrag niet automatisch wordt afgedrukt.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="7" id="stap-8">
+<div class="meta"><span class="eyebrow">Stap 08 van 12</span></div>
+<h2>Het resultaat bewaren</h2><p class="goal">Gebruik een teruggegeven waarde in je hoofdprogramma.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>De waarde van <code>return</code> komt terug op de plaats van de functieoproep. Je kunt ze bewaren in een variabele: <code>ticketbedrag1 = bereken_ticketbedrag(aantal1, prijs1)</code>. Daarna kun je met die variabele verder werken.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p><strong>Vervang</strong> de losse oproep van <code>bereken_ticketbedrag()</code> door een toekenning aan <code>ticketbedrag1</code>. Toon onderaan het programma <code>ticketbedrag1</code> met <code>print()</code>. Controleer het bedrag met een eigen berekening.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Schrijf <code>ticketbedrag1 = bereken_ticketbedrag(aantal1, prijs1)</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Toon daarna <code>print("Ticketbedrag:", ticketbedrag1, "euro")</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik bewaar de teruggegeven waarde.</span></label><label class="check"><input type="checkbox"/><span>Ik toon het bedrag buiten de functie.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="8" id="stap-9">
+<div class="meta"><span class="eyebrow">Stap 09 van 12</span></div>
+<h2>Servicekosten toevoegen</h2><p class="goal">Laat een tweede functie rekenen met return.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Voor elke bestelling rekent de ticketverkoop <strong>3 euro servicekosten</strong> aan. Je kunt een functie laten werken met het bedrag dat een andere functie heeft berekend. Zo krijgt elke functie een duidelijke taak.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Maak <code>bereken_eindbedrag(ticketbedrag, servicekosten)</code>. De functie berekent de som en geeft die terug met <code>return</code>. Maak bovenaan het hoofdprogramma de variabele <code>servicekosten = 3</code>. Bereken <code>eindbedrag1</code> met de nieuwe functie en toon het eindbedrag.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>De berekening is <code>eindbedrag = ticketbedrag + servicekosten</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Gebruik <code>eindbedrag1 = bereken_eindbedrag(ticketbedrag1, servicekosten)</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Beide berekenfuncties gebruiken return.</span></label><label class="check"><input type="checkbox"/><span>De servicekosten worden één keer opgeteld.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="9" id="stap-10">
+<div class="meta"><span class="eyebrow">Stap 10 van 12</span></div>
+<h2>Een besteloverzicht met een functie</h2><p class="goal">Combineer berekeningen en uitvoer.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Een functie die informatie <strong>toont</strong>, mag <code>print()</code> gebruiken. Een functie die een getal <strong>berekent en teruggeeft</strong>, gebruikt <code>return</code>. Door die taken te scheiden, kun je het programma overzichtelijk houden.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Maak <code>toon_overzicht(naam, aantal, ticketbedrag, eindbedrag)</code>. Toon daarin de naam, het aantal tickets, het ticketbedrag en het eindbedrag. Roep deze functie op voor klant 1. De eerdere losse <code>print()</code>-regels voor de bedragen mag je <strong>vervangen</strong> door dit overzicht.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>De vier parameters staan tussen haakjes, gescheiden door komma’s.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Roep op met <code>toon_overzicht(naam1, aantal1, ticketbedrag1, eindbedrag1)</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Ik gebruik print() in de overzichtfunctie.</span></label><label class="check"><input type="checkbox"/><span>Mijn besteloverzicht toont alle juiste gegevens.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="10" id="stap-11">
+<div class="meta"><span class="eyebrow">Stap 11 van 12</span></div>
+<h2>Een tweede bestelling</h2><p class="goal">Gebruik dezelfde functies meer dan één keer.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Een groot voordeel van functies is dat je ze opnieuw kunt oproepen met <strong>andere waarden</strong>. Je hoeft dan niet opnieuw de berekeningen te schrijven. De functiedefinities blijven ongewijzigd.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Vraag onder de eerste bestelling de gegevens van klant 2: <code>naam2</code>, <code>aantal2</code> en <code>prijs2</code>. Roep dezelfde functies opnieuw op. Bewaar de resultaten in <code>ticketbedrag2</code> en <code>eindbedrag2</code> en toon het tweede besteloverzicht.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Gebruik opnieuw <code>bereken_ticketbedrag(aantal2, prijs2)</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Ook <code>bereken_eindbedrag()</code> en <code>toon_overzicht()</code> kun je hergebruiken.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Beide bestellingen hebben een eigen totaal.</span></label><label class="check"><input type="checkbox"/><span>Dezelfde functies worden meerdere keren gebruikt.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section><section class="step" data-step="11" id="stap-12">
+<div class="meta"><span class="eyebrow">Stap 12 van 12</span></div>
+<h2>Test je ticketverkoop</h2><p class="goal">Controleer je programma en dien het in.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Je programma bevat nu verschillende functies: sommige tonen tekst, andere berekenen en geven een waarde terug. Je hebt dezelfde functies voor twee klanten gebruikt.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Voer je volledige programma opnieuw uit. Gebruik voor klant 1 <strong>2 tickets van 35 euro</strong> en voor klant 2 <strong>3 tickets van 55 euro</strong>. Controleer de eindbedragen: <strong>73 euro</strong> en <strong>168 euro</strong>. Test daarna met andere namen en prijzen. Sla je notebook op en dien het in via Google Classroom.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Controleer of je eerst alle functies definieert en ze daarna oproept.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span><label class="check"><input type="checkbox"/><span>Mijn bedragen zijn 73 euro en 168 euro.</span></label><label class="check"><input type="checkbox"/><span>Ik begrijp het verschil tussen print() en return.</span></label><label class="check"><input type="checkbox"/><span>Mijn notebook is klaar voor indiening.</span></label></div>
+<div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div>
+</section>
+</main></div><script>
+const sections=[...document.querySelectorAll('.step')];
+const nav=document.getElementById('navlist');
+let current=0;
+sections.forEach((section,i)=>{
+  const button=document.createElement('button');
+  button.type='button';button.className='stepnavitem';
+  const circle=document.createElement('span');circle.className='circle';circle.textContent=i+1;
+  const name=document.createElement('span');name.textContent=section.querySelector('h2').textContent;
+  button.append(circle,name);button.addEventListener('click',()=>show(i));nav.appendChild(button);
+});
+function show(index){
+  current=Math.max(0,Math.min(sections.length-1,index));
+  sections.forEach((section,i)=>{
+    section.classList.toggle('active',i===current);
+    section.querySelector('.prev').disabled=i===0;
+    section.querySelector('.next').textContent=i===sections.length-1?'Afronden ✓':'Volgende →';
+  });
+  [...nav.children].forEach((button,i)=>button.classList.toggle('active',i===current));
+  document.getElementById('counter').textContent=`Stap ${current+1} van ${sections.length}`;
+  document.getElementById('progress').style.width=`${(current+1)/sections.length*100}%`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.prev').forEach(button=>button.addEventListener('click',()=>show(current-1)));
+document.querySelectorAll('.next').forEach(button=>button.addEventListener('click',()=>{
+  if(current<sections.length-1)show(current+1);
+  else alert('Je bent klaar. Sla je Colab-notebook op en dien het in via Google Classroom.');
+}));
+document.querySelectorAll('.quizoptions').forEach(group=>group.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{
+  group.querySelectorAll('button').forEach(other=>other.classList.remove('selected'));
+  button.classList.add('selected');
+  const feedback=group.parentElement.querySelector('.feedback');
+  feedback.textContent=button.dataset.correct==='true'?'Juist!':'Probeer opnieuw.';
+  feedback.style.color=button.dataset.correct==='true'?'#087259':'#9b4b08';
+})));
+show(0);
+</script></body></html>

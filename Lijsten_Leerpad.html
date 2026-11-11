@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="nl">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lijsten in de praktijk</title>
+<style>
+:root{--navy:#093147;--cyan:#1f9dbc;--pale:#e7f5fa;--orange:#fab515;--ink:#173344;--muted:#59717f;--bg:#f1f6f8}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);font:16px/1.65 system-ui,Segoe UI,Arial,sans-serif;color:var(--ink)}a{color:#096e91}header{background:linear-gradient(120deg,#093147,#155f77);padding:34px max(18px,calc((100vw - 1100px)/2));color:white}header h1{font-size:clamp(32px,5vw,50px);line-height:1.14;margin:12px 0}header p{max-width:770px;color:#e5f4f8;margin:0}.brand{font-weight:800;letter-spacing:.08em}.layout{max-width:1140px;margin:24px auto 60px;padding:0 18px;display:grid;grid-template-columns:275px 1fr;gap:24px;align-items:start}.side,.intro,.step{background:white;border:1px solid #d8e7ec;border-radius:18px;padding:24px;box-shadow:0 7px 22px #1230440b}.side{position:sticky;top:18px;padding:17px;max-height:calc(100vh - 36px);overflow-y:auto}.side h2{font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.stepnavitem{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:transparent;border:0;padding:9px 8px;border-radius:9px;color:var(--ink);font:inherit;font-size:13px;line-height:1.4;cursor:pointer}.stepnavitem:hover,.stepnavitem.active{background:var(--pale)}.circle{display:grid;place-items:center;flex-shrink:0;height:26px;width:26px;border-radius:50%;background:#eaf0f3;font-weight:800}.active .circle{background:var(--navy);color:white}.stepnavitem.done .circle{background:#d5f2e7;color:#12694d}.intro{margin-bottom:17px}.step{display:none}.step.active{display:block}.step h2{font-size:clamp(25px,3.4vw,35px);line-height:1.22;margin:10px 0}.meta{display:flex;justify-content:space-between;gap:15px}.eyebrow,.sub{font-size:12px;text-transform:uppercase;letter-spacing:.09em;font-weight:800;color:#14778c}.goal{color:var(--muted)}.theory{background:#eaf5f9;border-radius:14px;padding:18px 21px;margin:23px 0}.task{border-left:4px solid var(--cyan);padding-left:18px;margin:24px 0}.help{background:#f8fafb;border:1px solid #d8e7ec;border-radius:14px;padding:18px 20px;margin-top:25px}.help details{padding:10px 0;border-top:1px solid #dbe5e9}.help summary{font-weight:650;cursor:pointer}code{font-family:Consolas,monospace;font-size:.92em}p code,li code,.quiz code{background:#dcecf1;padding:2px 4px;border-radius:4px}.check{display:flex;align-items:start;gap:9px;margin:9px 0}.check input{accent-color:var(--cyan);width:18px;height:18px;margin-top:4px}.buttons{display:flex;justify-content:space-between;gap:12px;margin-top:24px;border-top:1px solid #e0e9ed;padding-top:22px}button.action{background:var(--navy);color:white;border:0;border-radius:10px;padding:10px 17px;font-weight:700;cursor:pointer}button.action.secondary{background:white;border:1px solid #aec7d1;color:var(--navy)}button:disabled{opacity:.3;cursor:default}.notice{padding:14px 17px;background:#fff5d8;border-left:4px solid var(--orange);border-radius:9px}.quiz{margin:17px 0;border:1px solid #d8e7ec;padding:16px;border-radius:12px}.quiz button{width:100%;text-align:left;border:1px solid #a9c8d2;background:white;border-radius:8px;padding:10px;margin:4px 0;cursor:pointer}.quiz button.selected{background:#dcf3f7;border-color:var(--cyan)}.quiz .feedback{font-weight:700;min-height:22px}.tiny{font-size:12px;color:var(--muted)}@media(max-width:810px){.layout{display:block;padding:0 12px}.side{position:static;max-height:none;margin-bottom:18px}.navlist{display:flex;overflow-x:auto}.stepnavitem{min-width:195px}.intro,.step{padding:20px}header{padding:27px 20px}}</style></head><body>
+<header><div class="brand">Informaticawetenschappen: Python – lijsten</div><h1>Lijsten in de praktijk</h1><p>Van winkelcatalogus tot gastenlijst en wachtwoordcontrole. Ontdek hoe je gegevens bewaart, doorzoekt en verwerkt met Python.</p></header>
+<div class="layout"><aside class="side"><h2>Het leerpad</h2><div class="navlist" id="navlist"></div><p id="counter" class="tiny"></p></aside><main>
+<section class="intro"><h2>Hoe ga je tewerk?</h2><p>Lees de uitleg en voer iedere opdracht uit in <a href="https://colab.research.google.com/" target="_blank" rel="noopener">Google Colab</a>. Gebruik voor <strong>iedere opdracht een aparte codecel</strong>, zodat je eerdere oefeningen kunt bewaren en opnieuw testen. De laatste opdrachten combineren verschillende technieken.</p><div class="notice"><strong>Hulp nodig?</strong> Probeer eerst zelf. Open zo nodig een hint en test je code met verschillende invoerwaarden. Je dient je Colab-notebook in via Google Classroom.</div></section>
+<section class="step" data-step="0" id="stap-1"><div class="meta"><span class="eyebrow">Stap 01 van 14</span></div><h2>Waarom bestaan lijsten?</h2><p class="goal">Een webshop bewaart meer dan één bestelling.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Een kledingwebshop krijgt tientallen bestellingen per dag. Met aparte variabelen zoals <code>bestelling1</code>, <code>bestelling2</code> en <code>bestelling3</code> wordt het programma snel onoverzichtelijk. Een <strong>lijst</strong> bewaart meerdere waarden onder één naam. De volgorde blijft bewaard en een lijst mag veranderen.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Open een nieuwe Colab-notebook. Maak een lijst <code>bestellingen</code> met de drie klantnamen <code>"Noor"</code>, <code>"Ilias"</code> en <code>"Mila"</code>. Toon de volledige lijst. Verander daarna de tweede naam in de lijstdefinitie en voer de code opnieuw uit.</p></div>
+<div class="quiz"><strong>Controlevraag: Welke regel maakt een lijst?</strong><div class="quizoptions">
+<button type="button" data-correct="false"><code>klanten = "Noor, Ilias"</code></button>
+<button type="button" data-correct="true"><code>klanten = ["Noor", "Ilias"]</code></button>
+<button type="button" data-correct="false"><code>klanten = ("Noor", "Ilias")</code></button>
+</div><div class="feedback" data-explanation="Vierkante haken maken hier een lijst." aria-live="polite"></div></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>In Python schrijf je een lijst tussen vierkante haken: <code>bestellingen = ["Noor", "Ilias", "Mila"]</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Voor de volledige lijst volstaat <code>print(bestellingen)</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span>
+<label class="check"><input type="checkbox" data-check="0-0"><span>Ik heb een lijst met drie klantnamen.</span></label>
+<label class="check"><input type="checkbox" data-check="0-1"><span>Ik kan uitleggen waarom één lijst handiger is dan drie losse variabelen.</span></label>
+</div><div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div></section>
+<section class="step" data-step="1" id="stap-2"><div class="meta"><span class="eyebrow">Stap 02 van 14</span></div><h2>Een lijst afdrukken en items opvragen</h2><p class="goal">Een magazijn heeft een vaste volgorde van producten.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Met <code>print(producten)</code> toon je de <strong>hele lijst</strong>. Met <code>producten[0]</code> toon je het <strong>eerste element</strong>. Python begint bij index <code>0</code>, dus <code>producten[1]</code> is het tweede element.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Gebruik <code>producten = ["T-shirt", "Hoodie", "Jeans", "Pet"]</code>. Toon eerst de hele lijst. Toon daarna met afzonderlijke <code>print()</code>-regels het eerste, derde en vierde product. Schrijf bij iedere uitvoer een duidelijke omschrijving.</p></div>
+<div class="quiz"><strong>Controlevraag: Wat wordt getoond door <code>producten[2]</code>?</strong><div class="quizoptions">
+<button type="button" data-correct="false">T-shirt</button>
+<button type="button" data-correct="false">Hoodie</button>
+<button type="button" data-correct="true">Jeans</button>
+</div><div class="feedback" data-explanation="De telling begint bij 0: 0, 1, 2." aria-live="polite"></div></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>De eerste positie heeft index <code>0</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Bijvoorbeeld: <code>print("Eerste product:", producten[0])</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span>
+<label class="check"><input type="checkbox" data-check="1-0"><span>Ik kan de hele lijst tonen.</span></label>
+<label class="check"><input type="checkbox" data-check="1-1"><span>Ik kan een element opvragen met een index.</span></label>
+</div><div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div></section>
+<section class="step" data-step="2" id="stap-3"><div class="meta"><span class="eyebrow">Stap 03 van 14</span></div><h2>Een nieuw product toevoegen</h2><p class="goal">De webshop breidt haar assortiment uit.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Met <code>append()</code> voeg je <strong>één element achteraan</strong> een bestaande lijst toe. De lijst zelf verandert. Je hoeft dus geen nieuwe lijst te maken.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Maak <code>producten = ["T-shirt", "Hoodie", "Jeans"]</code>. Vraag met <code>input()</code> welk nieuw product aan de webshop wordt toegevoegd. Voeg dit toe met <code>append()</code>. Toon de aangepaste lijst.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Bewaar de invoer eerst in <code>nieuw_product</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Toevoegen doe je met <code>producten.append(nieuw_product)</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span>
+<label class="check"><input type="checkbox" data-check="2-0"><span>Mijn programma vraagt een nieuw product.</span></label>
+<label class="check"><input type="checkbox" data-check="2-1"><span>Het ingevoerde product staat achteraan in de lijst.</span></label>
+</div><div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div></section>
+<section class="step" data-step="3" id="stap-4"><div class="meta"><span class="eyebrow">Stap 04 van 14</span></div><h2>Alle elementen één voor één tonen</h2><p class="goal">Een webshop drukt een eenvoudige productcatalogus af.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Een <code>for</code>-lus kan <strong>elk element</strong> uit een lijst één keer verwerken. Je hoeft niet vooraf te weten hoeveel producten er zijn. Bij <code>for product in producten:</code> krijgt <code>product</code> achtereenvolgens de waarden uit de lijst.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Maak <code>producten = ["T-shirt", "Hoodie", "Jeans", "Pet"]</code>. Toon met een <code>for</code>-lus elk product op een aparte regel met de tekst <em>Beschikbaar:</em> ervoor. Voeg vooraf één nieuw product toe met <code>append()</code> en controleer of het automatisch verschijnt.</p></div>
+<div class="quiz"><strong>Controlevraag: Hoeveel regels worden afgedrukt?</strong><div class="quizoptions">
+<button type="button" data-correct="false">Altijd één</button>
+<button type="button" data-correct="true">Eén per element in de lijst</button>
+<button type="button" data-correct="false">Altijd vier</button>
+</div><div class="feedback" data-explanation="De for-lus loopt één keer voor elk aanwezig element." aria-live="polite"></div></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>De lus begint met <code>for product in producten:</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Onder de lus komt ingesprongen <code>print("Beschikbaar:", product)</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span>
+<label class="check"><input type="checkbox" data-check="3-0"><span>Ik gebruik een for-lus zonder vier aparte printregels.</span></label>
+<label class="check"><input type="checkbox" data-check="3-1"><span>Ook het toegevoegde product verschijnt.</span></label>
+</div><div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div></section>
+<section class="step" data-step="4" id="stap-5"><div class="meta"><span class="eyebrow">Stap 05 van 14</span></div><h2>Zoeken zonder index</h2><p class="goal">Bij een evenement wordt nagekeken of iemand op de gastenlijst staat.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Met <code>in</code> controleer je of een waarde voorkomt in een lijst. Bijvoorbeeld <code>if naam in gasten:</code>. Je krijgt hiermee antwoord op de vraag <em>staat deze naam erin?</em>, maar je vraagt nog niet op welke positie.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Maak <code>gasten = ["Noor", "Ilias", "Mila", "Adam"]</code>. Vraag de naam van een bezoeker met <code>input()</code>. Toon <em>Je staat op de gastenlijst.</em> als de naam voorkomt, anders <em>Geen registratie gevonden.</em></p></div>
+<div class="quiz"><strong>Controlevraag: Wat onderzoekt <code>"Mila" in gasten</code>?</strong><div class="quizoptions">
+<button type="button" data-correct="false">Of Mila het derde element is</button>
+<button type="button" data-correct="true">Of de naam ergens in de lijst voorkomt</button>
+<button type="button" data-correct="false">Hoeveel gasten er zijn</button>
+</div><div class="feedback" data-explanation="Met in controleer je of een waarde aanwezig is, niet waar die staat." aria-live="polite"></div></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Voor de controle gebruik je <code>if naam in gasten:</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Bij de andere uitkomst gebruik je <code>else:</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span>
+<label class="check"><input type="checkbox" data-check="4-0"><span>Een bestaande naam wordt herkend.</span></label>
+<label class="check"><input type="checkbox" data-check="4-1"><span>Een onbekende naam krijgt een andere melding.</span></label>
+</div><div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div></section>
+<section class="step" data-step="5" id="stap-6"><div class="meta"><span class="eyebrow">Stap 06 van 14</span></div><h2>Zoeken met index</h2><p class="goal">Een medewerker moet weten op welke plaats een reservering staat.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Met <code>index()</code> zoek je de <strong>positie</strong> van een waarde in een lijst. De eerste positie is <code>0</code>. <code>index()</code> geeft een foutmelding wanneer de waarde niet voorkomt. Controleer daarom <strong>eerst met <code>in</code></strong> of de waarde aanwezig is.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Gebruik dezelfde gastenlijst. Vraag een naam. Als die aanwezig is, toon dan de index van de naam met <code>gasten.index(naam)</code>. Als de naam niet voorkomt, toon je een duidelijke melding. Test zowel een bestaande als een onbekende naam.</p></div>
+<div class="quiz"><strong>Controlevraag: Wat geeft <code>gasten.index("Ilias")</code> terug?</strong><div class="quizoptions">
+<button type="button" data-correct="false">0</button>
+<button type="button" data-correct="true">1</button>
+<button type="button" data-correct="false">2</button>
+</div><div class="feedback" data-explanation="Ilias is het tweede element en heeft index 1." aria-live="polite"></div></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Controleer eerst <code>if naam in gasten:</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Binnen die voorwaarde kan je <code>positie = gasten.index(naam)</code> gebruiken.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span>
+<label class="check"><input type="checkbox" data-check="5-0"><span>Mijn programma toont de juiste index bij een bestaande naam.</span></label>
+<label class="check"><input type="checkbox" data-check="5-1"><span>Een onbekende naam veroorzaakt geen foutmelding.</span></label>
+</div><div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div></section>
+<section class="step" data-step="6" id="stap-7"><div class="meta"><span class="eyebrow">Stap 07 van 14</span></div><h2>Door een lijst lopen mét index</h2><p class="goal">Een festival wil op elke bezoekerslijst regelnummers tonen.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Als je naast de inhoud ook de index nodig hebt, kan je <code>for i in range(len(gasten)):</code> gebruiken. <code>i</code> is dan achtereenvolgens <code>0</code>, <code>1</code>, ... en <code>gasten[i]</code> geeft het bijbehorende element. Met <code>i + 1</code> kan je bezoekersnummers tonen vanaf 1.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Gebruik de lijst <code>gasten = ["Noor", "Ilias", "Mila", "Adam"]</code>. Toon alle bezoekers met een volgnummer vanaf 1, bijvoorbeeld <em>Bezoeker 1 : Noor</em>. Voeg daarna nog een gast toe en controleer of het extra nummer automatisch verschijnt.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>De lus wordt <code>for i in range(len(gasten)):</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Gebruik in de lus <code>print("Bezoeker", i + 1, ":", gasten[i])</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span>
+<label class="check"><input type="checkbox" data-check="6-0"><span>Elk element wordt getoond met een volgnummer.</span></label>
+<label class="check"><input type="checkbox" data-check="6-1"><span>Het nieuwe element verschijnt zonder extra printregel.</span></label>
+</div><div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div></section>
+<section class="step" data-step="7" id="stap-8"><div class="meta"><span class="eyebrow">Stap 08 van 14</span></div><h2>Een element op naam verwijderen</h2><p class="goal">Een klant annuleert een reservering.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Met <code>remove()</code> verwijder je een element <strong>op basis van zijn waarde</strong>. Bijvoorbeeld <code>gasten.remove("Mila")</code>. Als een waarde niet in de lijst staat, geeft <code>remove()</code> een foutmelding. Controleer daarom eerst met <code>in</code>. Bij dubbele waarden verdwijnt alleen de eerste overeenkomst.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Gebruik <code>gasten = ["Noor", "Ilias", "Mila", "Adam"]</code>. Vraag welke gast wil annuleren. Verwijder die naam als hij bestaat en toon daarna de volledige aangepaste lijst. Laat de oorspronkelijke lijst staan als de naam niet voorkomt.</p></div>
+<div class="quiz"><strong>Controlevraag: Welk element verdwijnt bij <code>gasten.remove("Mila")</code>?</strong><div class="quizoptions">
+<button type="button" data-correct="false">Het laatste element</button>
+<button type="button" data-correct="true">Het element met de waarde Mila</button>
+<button type="button" data-correct="false">Het element met index 2, ongeacht de inhoud</button>
+</div><div class="feedback" data-explanation="remove() zoekt naar de opgegeven waarde." aria-live="polite"></div></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Gebruik <code>if naam in gasten:</code> voordat je verwijdert.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Verwijderen op naam doe je met <code>gasten.remove(naam)</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span>
+<label class="check"><input type="checkbox" data-check="7-0"><span>Een bestaande naam wordt verwijderd.</span></label>
+<label class="check"><input type="checkbox" data-check="7-1"><span>Een onbekende naam geeft geen foutmelding.</span></label>
+</div><div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div></section>
+<section class="step" data-step="8" id="stap-9"><div class="meta"><span class="eyebrow">Stap 09 van 14</span></div><h2>Een element op positie verwijderen</h2><p class="goal">Het magazijn schrapt een product op een bepaalde plaats.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Met <code>pop(index)</code> verwijder je het element op een <strong>bepaalde positie</strong>. Bij <code>pop(1)</code> verdwijnt het tweede element. Zonder argument verwijdert <code>pop()</code> het laatste element. Een ongeldige index geeft een foutmelding.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Maak <code>producten = ["T-shirt", "Hoodie", "Jeans", "Pet"]</code>. Toon de lijst. Verwijder met <code>pop(1)</code> het tweede product. Toon welke waarde verwijderd werd en druk daarna de nieuwe lijst af.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Bewaar de uitkomst in <code>verwijderd = producten.pop(1)</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Toon vervolgens <code>verwijderd</code> en <code>producten</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span>
+<label class="check"><input type="checkbox" data-check="8-0"><span>Het tweede product verdwijnt.</span></label>
+<label class="check"><input type="checkbox" data-check="8-1"><span>Ik kan uitleggen wat het verschil is tussen remove() en pop().</span></label>
+</div><div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div></section>
+<section class="step" data-step="9" id="stap-10"><div class="meta"><span class="eyebrow">Stap 10 van 14</span></div><h2>De lengte van een lijst</h2><p class="goal">De festivalorganisatie telt hoeveel inschrijvingen er zijn.</p>
+<div class="theory"><span class="sub">Uitleg</span><p><code>len(lijst)</code> geeft het <strong>aantal elementen</strong> terug. Het resultaat is een geheel getal. Als je een gast toevoegt of verwijdert, verandert de lengte automatisch.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Maak <code>gasten = ["Noor", "Ilias", "Mila", "Adam"]</code>. Toon het aantal gasten. Voeg een naam toe met <code>append()</code> en toon het nieuwe aantal. Verwijder daarna een bestaande naam met <code>remove()</code> en toon het aantal opnieuw.</p></div>
+<div class="quiz"><strong>Controlevraag: Wat geeft <code>len(["a", "b", "c"])</code> terug?</strong><div class="quizoptions">
+<button type="button" data-correct="false">2</button>
+<button type="button" data-correct="true">3</button>
+<button type="button" data-correct="false">4</button>
+</div><div class="feedback" data-explanation="Er zijn drie elementen." aria-live="polite"></div></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Je telt elementen met <code>len(gasten)</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Een duidelijk bericht kan met <code>print("Aantal gasten:", len(gasten))</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span>
+<label class="check"><input type="checkbox" data-check="9-0"><span>De aantallen veranderen bij toevoegen en verwijderen.</span></label>
+<label class="check"><input type="checkbox" data-check="9-1"><span>Ik gebruik len() en tel niet handmatig.</span></label>
+</div><div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div></section>
+<section class="step" data-step="10" id="stap-11"><div class="meta"><span class="eyebrow">Stap 11 van 14</span></div><h2>Een string lijkt op een lijst</h2><p class="goal">Een bestelsysteem leest tekens uit een bestelcode.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Een <strong>string</strong> is tekst, bijvoorbeeld <code>code = "AB2026"</code>. Net als bij een lijst kan je een afzonderlijk element opvragen met een index, zoals <code>code[0]</code>, en met een <code>for</code>-lus door alle tekens lopen. Een belangrijk verschil: je kunt een teken in een string niet rechtstreeks vervangen via <code>code[0] = "X"</code>.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Maak <code>code = "AB2026"</code>. Toon het eerste en het vierde teken. Toon daarna alle tekens onder elkaar met een <code>for</code>-lus.</p></div>
+<div class="quiz"><strong>Controlevraag: Wat toont <code>"AB2026"[3]</code>?</strong><div class="quizoptions">
+<button type="button" data-correct="false">B</button>
+<button type="button" data-correct="false">2</button>
+<button type="button" data-correct="true">0</button>
+</div><div class="feedback" data-explanation="A=0, B=1, 2=2, 0=3." aria-live="polite"></div></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Het eerste teken is <code>code[0]</code>; het vierde is <code>code[3]</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Een lus kan starten met <code>for teken in code:</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span>
+<label class="check"><input type="checkbox" data-check="10-0"><span>Ik toon afzonderlijke tekens met een index.</span></label>
+<label class="check"><input type="checkbox" data-check="10-1"><span>Ik kan met een for-lus door een string lopen.</span></label>
+</div><div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div></section>
+<section class="step" data-step="11" id="stap-12"><div class="meta"><span class="eyebrow">Stap 12 van 14</span></div><h2>De lengte van een string</h2><p class="goal">Een accountpagina controleert hoe lang een wachtwoord is.</p>
+<div class="theory"><span class="sub">Uitleg</span><p><code>len()</code> werkt ook voor tekst. <code>len(wachtwoord)</code> telt het aantal tekens in de string. Je kunt die lengte bijvoorbeeld vergelijken met een minimum. In dit voorbeeld is dat <strong>minstens 12 tekens</strong>. Lengte alleen maakt een wachtwoord niet automatisch veilig.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Vraag een wachtwoord met <code>input()</code> en bewaar het in <code>wachtwoord</code>. Bereken en toon het aantal tekens. Toon met <code>if</code> of <code>else</code> of het wachtwoord minstens 12 tekens telt. Druk het ingevoerde wachtwoord zelf niet af.</p></div>
+<div class="quiz"><strong>Controlevraag: Wat is <code>len("voetbal2026")</code>?</strong><div class="quizoptions">
+<button type="button" data-correct="false">10</button>
+<button type="button" data-correct="true">11</button>
+<button type="button" data-correct="false">12</button>
+</div><div class="feedback" data-explanation="voetbal heeft 7 tekens en 2026 heeft 4 tekens: samen 11." aria-live="polite"></div></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Gebruik <code>aantal_tekens = len(wachtwoord)</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Controleer met <code>if aantal_tekens >= 12:</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span>
+<label class="check"><input type="checkbox" data-check="11-0"><span>Mijn programma telt de tekens.</span></label>
+<label class="check"><input type="checkbox" data-check="11-1"><span>Ik toon het wachtwoord zelf nergens.</span></label>
+</div><div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div></section>
+<section class="step" data-step="12" id="stap-13"><div class="meta"><span class="eyebrow">Stap 13 van 14</span></div><h2>Een volledige gastenlijst beheren</h2><p class="goal">Een concertzaal verwerkt inschrijvingen, controles en annuleringen.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>In een echt reserveringssysteem moet je namen opslaan, toevoegen, opzoeken, tonen en verwijderen. Dat zijn precies de bewerkingen die je met een lijst kunt uitvoeren. We gebruiken hier een eenvoudige naamcontrole; in een echt systeem kunnen meerdere bezoekers dezelfde naam hebben.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Bouw een programma met de startlijst <code>gasten = ["Noor", "Ilias", "Mila"]</code>. Vraag een nieuwe gast en voeg die toe. Druk alle namen met een volgnummer af. Vraag daarna een naam voor de toegangscontrole: toon of die voorkomt en, als dat zo is, de index. Vraag vervolgens welke naam de reservering annuleert, verwijder die alleen als ze voorkomt en toon de definitieve gastenlijst en het totale aantal gasten.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Werk in deze volgorde: <code>append()</code>, <code>for</code>, <code>in</code>, <code>index()</code>, <code>remove()</code>, <code>len()</code>.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Gebruik voor volgnummers <code>range(len(gasten))</code> en voor het zoeken of verwijderen telkens eerst <code>if naam in gasten:</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span>
+<label class="check"><input type="checkbox" data-check="12-0"><span>Ik heb minstens zes lijstbewerkingen gecombineerd.</span></label>
+<label class="check"><input type="checkbox" data-check="12-1"><span>Mijn programma werkt ook wanneer een naam niet voorkomt.</span></label>
+</div><div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div></section>
+<section class="step" data-step="13" id="stap-14"><div class="meta"><span class="eyebrow">Stap 14 van 14</span></div><h2>Testen en afronden</h2><p class="goal">Controleer of je de lijstbewerkingen bewust kunt kiezen.</p>
+<div class="theory"><span class="sub">Uitleg</span><p>Je hebt nu twee manieren om te zoeken: met <code>in</code> wanneer je alleen wilt weten of iets voorkomt, en met <code>index()</code> wanneer je een positie nodig hebt. Je kunt elementen toevoegen, verwijderen, tellen en stuk voor stuk afdrukken. Een string ondersteunt eveneens indexen, lussen en <code>len()</code>.</p></div>
+<div class="task"><span class="sub">Doe dit in Colab</span><p>Test de vorige opdracht met twee andere namen, een naam die niet voorkomt en een annulering. Controleer ook nog eens de wachtwoordopdracht met een wachtwoord van 11 tekens en van 12 tekens. Bewaar de notebook(s) en dien ze in volgens de afspraak van je leerkracht.</p></div>
+<div class="help"><span class="sub">Hulp als je vastloopt</span><details><summary>Hint 1 — kleine aanwijzing</summary><p>Controleer vooral wat er gebeurt bij een naam die niet in de lijst staat.</p></details><details><summary>Hint 2 — extra hulp</summary><p>Bekijk het verschil tussen <code>remove(naam)</code> en <code>pop(index)</code>.</p></details></div>
+<div class="checks"><span class="sub">Zelfcontrole</span>
+<label class="check"><input type="checkbox" data-check="13-0"><span>Ik heb minstens één foutgevoelige invoer getest.</span></label>
+<label class="check"><input type="checkbox" data-check="13-1"><span>Ik kan uitleggen wanneer ik in, index(), remove() en pop() gebruik.</span></label>
+</div><div class="buttons"><button type="button" class="action secondary prev">← Vorige</button><button type="button" class="action next">Volgende →</button></div></section>
+</main></div>
+<script>
+const sections=[...document.querySelectorAll('.step')];
+const nav=document.getElementById('navlist');
+let current=0;
+const key='codekompas_lijsten_v1';
+let saved={};
+try{saved=JSON.parse(localStorage.getItem(key)||'{}')}catch(error){saved={}}
+document.querySelectorAll('input[data-check]').forEach(input=>{
+ input.checked=!!saved[input.dataset.check];
+ input.addEventListener('change',()=>{
+  saved[input.dataset.check]=input.checked;
+  try{localStorage.setItem(key,JSON.stringify(saved))}catch(error){}
+  updateNav();
+ });
+});
+sections.forEach((section,i)=>{
+ const button=document.createElement('button');button.type='button';button.className='stepnavitem';
+ const circle=document.createElement('span');circle.className='circle';circle.textContent=i+1;
+ const label=document.createElement('span');label.textContent=section.querySelector('h2').textContent;
+ button.append(circle,label);button.addEventListener('click',()=>show(i));nav.appendChild(button);
+});
+function updateNav(){
+ sections.forEach((section,i)=>{
+  const inputs=[...section.querySelectorAll('input[data-check]')];
+  nav.children[i].classList.toggle('done',inputs.length>0&&inputs.every(input=>input.checked));
+ });
+}
+function show(index){
+ current=Math.max(0,Math.min(index,sections.length-1));
+ sections.forEach((section,i)=>{
+  section.classList.toggle('active',i===current);
+  section.querySelector('.prev').disabled=i===0;
+  section.querySelector('.next').textContent=i===sections.length-1?'Afronden ✓':'Volgende →';
+ });
+ [...nav.children].forEach((button,i)=>button.classList.toggle('active',i===current));
+ document.getElementById('counter').textContent='Stap '+(current+1)+' van '+sections.length;
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.prev').forEach(button=>button.addEventListener('click',()=>show(current-1)));
+document.querySelectorAll('.next').forEach(button=>button.addEventListener('click',()=>{
+ if(current<sections.length-1){show(current+1)}else{alert('Je bent klaar. Bewaar je notebook en dien het in via Google Classroom.')}
+}));
+document.querySelectorAll('.quizoptions').forEach(group=>{
+ group.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{
+  group.querySelectorAll('button').forEach(item=>item.classList.remove('selected'));
+  button.classList.add('selected');
+  const feedback=group.parentElement.querySelector('.feedback');
+  const correct=button.dataset.correct==='true';
+  feedback.textContent=(correct?'Juist! ':'Nog niet. ')+feedback.dataset.explanation;
+  feedback.style.color=correct?'#087259':'#9b4b08';
+ }));
+});
+updateNav();show(0);
+</script>
+</body></html>
