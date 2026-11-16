@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10132b">
+  <title>De Grote Radioquiz — Live scorebord</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0b1024; --panel:#171e36; --panel2:#202b47; --line:#34415e; --text:#f7f8fc; --muted:#aebbd5; --pink:#ff557d; --cyan:#3edbd8; --yellow:#ffd66b; --radius:22px; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; background:radial-gradient(ellipse at 15% 0%,#263254 0,transparent 50%),radial-gradient(ellipse at 95% 15%,#2b1b45 0,transparent 42%),var(--bg); color:var(--text); }
+    button,input { font:inherit; }
+    button { cursor:pointer; }
+    button:disabled { cursor:not-allowed; opacity:.5; }
+    .shell { width:min(1260px,calc(100% - 36px)); margin:auto; padding:28px 0 50px; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:24px; }
+    .brand { display:flex; align-items:center; gap:14px; }
+    .logo { display:grid; place-items:center; width:51px; height:51px; border-radius:16px; font-size:29px; background:linear-gradient(135deg,var(--pink),#a45df7); box-shadow:0 10px 35px #ff557d36; }
+    .eyebrow { font-size:11px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
+    h1 { font-size:clamp(24px,3vw,34px); letter-spacing:-.045em; margin:3px 0 0; }
+    .live { display:inline-flex; gap:9px; align-items:center; padding:9px 14px; border:1px solid #554056; border-radius:100px; color:#ffacbf; font-size:12px; font-weight:900; letter-spacing:.13em; background:#2c2035; }
+    .live i { width:8px; height:8px; background:var(--pink); border-radius:50%; box-shadow:0 0 0 5px #ff557d22; animation:pulse 1.6s infinite; }
+    @keyframes pulse {50% {opacity:.45;box-shadow:0 0 0 9px #ff557d0d;}}
+    .layout { display:grid; grid-template-columns:minmax(0,1.65fr) minmax(320px,1fr); gap:20px; align-items:start; }
+    .main { min-width:0; }
+    .stage { position:relative; overflow:hidden; border:1px solid #4c5370; background:linear-gradient(165deg,#263456,#161d3c 58%,#171a38); border-radius:28px; padding:30px; min-height:480px; }
+    .stage:before { content:""; position:absolute; width:430px; height:430px; right:-150px; top:-230px; border:70px solid #ffffff08; border-radius:50%; pointer-events:none; }
+    .topline { display:flex; gap:12px; justify-content:space-between; align-items:center; flex-wrap:wrap; }
+    .kicker { color:var(--yellow); font-size:12px; text-transform:uppercase; font-weight:800; letter-spacing:.2em; }
+    .roundpill { background:#ffffff13; border:1px solid #ffffff22; border-radius:50px; font-weight:700; font-size:13px; padding:9px 14px; }
+    .headline { text-align:center; margin:33px 0 31px; }
+    .headline h2 { font-size:clamp(30px,4.4vw,52px); letter-spacing:-.055em; line-height:1.07; margin:6px 0 10px; }
+    .headline p { color:#bdc6db; margin:0; font-size:14px; }
+    .scorecards { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .scorecard { min-width:0; position:relative; border-radius:23px; border:1px solid #ffffff2a; text-align:center; padding:23px 10px 24px; background:#ffffff0b; }
+    .scorecard.a { box-shadow:inset 0 4px 0 var(--pink); }
+    .scorecard.b { box-shadow:inset 0 4px 0 var(--cyan); }
+    .letter { font-size:11px; letter-spacing:.15em; font-weight:850; text-transform:uppercase; color:var(--muted); }
+    .name { font-size:clamp(18px,2.3vw,28px); font-weight:850; margin:13px 0 8px; overflow-wrap:anywhere; }
+    .points { font-size:clamp(60px,8vw,102px); letter-spacing:-.075em; line-height:1.15; font-weight:900; font-variant-numeric:tabular-nums; }
+    .a .points { color:#ff7b9b; } .b .points { color:#68e4e1; }
+    .unit { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.15em; font-weight:750; }
+    .leader { min-height:25px; margin-top:15px; font-size:12px; font-weight:800; color:var(--yellow); }
+    .status { text-align:center; min-height:50px; padding-top:22px; font-size:15px; font-weight:700; color:#d1d9ed; }
+    .status strong { color:var(--yellow); }
+    .wave { display:flex; align-items:center; justify-content:center; gap:4px; height:25px; margin-top:14px; opacity:.65; }
+    .wave span { width:3px; height:6px; border-radius:5px; background:#8d94d4; animation:wave 1.1s ease-in-out infinite alternate; }
+    .wave span:nth-child(3n) { animation-delay:.3s; height:15px; } .wave span:nth-child(2n) { animation-delay:.6s; height:10px; }
+    @keyframes wave { to {height:23px; opacity:.45;} }
+    .box { background:var(--panel); border:1px solid var(--line); border-radius:24px; padding:23px; }
+    .box h3 { font-size:18px; margin:0 0 5px; letter-spacing:-.03em; }
+    .sub { color:var(--muted); font-size:13px; line-height:1.55; margin:0 0 21px; }
+    .control { margin-bottom:18px; }
+    label { display:block; font-size:12px; font-weight:800; margin-bottom:8px; color:#dbe5f7; }
+    input { color:var(--text); background:#0f162a; border:1px solid #485573; padding:13px 14px; border-radius:12px; width:100%; outline:none; transition:border-color .15s, box-shadow .15s; }
+    input:focus { border-color:var(--cyan); box-shadow:0 0 0 3px #3edbd81b; }
+    input:disabled { color:#b5c0d9; opacity:.7; }
+    input::placeholder { color:#8793ad; }
+    input[type=number] { font-variant-numeric:tabular-nums; }
+    .two { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .button { display:flex; gap:10px; align-items:center; justify-content:center; width:100%; padding:14px; border:0; border-radius:13px; font-size:14px; font-weight:850; }
+    .primary { background:linear-gradient(110deg,var(--pink),#ff8b70); color:#1f1020; box-shadow:0 8px 25px #ff557d26; }
+    .secondary { color:#e0e8fb; background:#2c3753; border:1px solid #455271; }
+    .ghost { border:1px solid #404d6d; color:#b6c4dc; background:transparent; }
+    .btnline { display:flex; gap:10px; }
+    .btnline .button { flex:1; }
+    .progress { display:flex; gap:7px; margin:15px 0 23px; }
+    .progress span { height:6px; flex:1; background:#35415b; border-radius:10px; }
+    .progress span.done { background:var(--cyan); }
+    .progress span.now { background:var(--pink); }
+    .question { font-size:15px; font-weight:850; margin:0 0 7px; }
+    .hint { font-size:12px; color:var(--muted); line-height:1.5; margin:0 0 19px; }
+    .score-label { display:flex; justify-content:space-between; gap:5px; flex-wrap:wrap; }
+    .score-label small { color:var(--muted); font-weight:600; }
+    .error { color:#ff9eb2; font-size:12px; min-height:19px; margin:-3px 0 13px; }
+    .round-results { margin-top:18px; background:#10192d; border:1px solid #31425c; border-radius:14px; padding:15px; color:#bcd3e4; font-size:13px; line-height:1.7; }
+    .history { margin-top:20px; }
+    .history-head { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .history table { border-collapse:collapse; width:100%; text-align:left; font-size:13px; }
+    .history th { color:var(--muted); font-size:11px; letter-spacing:.04em; font-weight:750; }
+    .history td,.history th { border-bottom:1px solid #34405b; padding:13px 6px; }
+    .history tr:last-child td {border-bottom:none;}
+    .history td:not(:first-child),.history th:not(:first-child) {text-align:right;}
+    .footnote { margin-top:16px; color:#8b9abc; font-size:12px; line-height:1.5; }
+    [hidden] { display:none !important; }
+    @media (max-width:920px) { .layout {grid-template-columns:1fr;} .stage {min-height:0;} }
+    @media (max-width:550px) { .shell {width:calc(100% - 24px);padding-top:15px;} .stage,.box {padding:18px;border-radius:20px;} header {align-items:flex-start;} .live {margin-top:7px;padding:7px 9px;} .headline {margin:27px 0 25px;} .scorecards {gap:9px;} .scorecard {padding:17px 6px 13px;} .two {gap:8px;} .points {font-size:60px;} .name {font-size:17px;} }
+    @media (prefers-reduced-motion:reduce) {*,*:before,*:after {animation:none!important; transition:none!important;} }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="brand"><div class="logo" aria-hidden="true">🎙️</div><div><div class="eyebrow">Radio studio · Interactieve demo</div><h1>De Grote Radioquiz</h1></div></div>
+      <div class="live"><i aria-hidden="true"></i><span>LIVE SCOREBORD</span></div>
+    </header>
+    <div class="layout">
+      <main class="main">
+        <section class="stage" aria-label="Live scorebord">
+          <div class="topline"><span class="kicker">✦ De strijd om de punten</span><span class="roundpill" id="roundBadge">Klaar voor de start</span></div>
+          <div class="headline"><h2 id="stageTitle">Wie wordt de winnaar?</h2><p id="stageSubtitle">Twee kandidaten. Drie vragen. Eén winnaar.</p></div>
+          <div class="scorecards">
+            <div class="scorecard a"><div class="letter">Kandidaat A</div><div class="name" id="nameA">Kandidaat A</div><div class="points" id="scoreA">0</div><div class="unit">punten</div><div class="leader" id="leaderA"></div></div>
+            <div class="scorecard b"><div class="letter">Kandidaat B</div><div class="name" id="nameB">Kandidaat B</div><div class="points" id="scoreB">0</div><div class="unit">punten</div><div class="leader" id="leaderB"></div></div>
+          </div>
+          <div class="status" id="stageStatus" aria-live="polite">Vul rechts de namen in om te starten.</div>
+          <div class="wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </section>
+        <section class="box history" aria-labelledby="historyTitle"><div class="history-head"><h3 id="historyTitle">📊 Overzicht per vraag</h3><span class="eyebrow" id="historyCount">0 / 3 gespeeld</span></div>
+          <p class="sub" style="margin-top:6px;margin-bottom:10px">Bekijk hoeveel punten elke kandidaat per vraag verdiende en wat de tussenstand was.</p>
+          <table><thead><tr><th>Vraag</th><th id="tableNameA">Kandidaat A</th><th id="tableNameB">Kandidaat B</th></tr></thead><tbody id="historyBody"><tr><td colspan="3" style="text-align:left;color:#9daac3">Nog geen vragen gespeeld.</td></tr></tbody></table>
+        </section>
+      </main>
+      <aside class="box" aria-label="Bediening voor de presentator">
+        <h3>🎚️ Presentatorpaneel</h3><p class="sub">Jij bedient de radioshow. Voer de namen in en ken na elke vraag punten toe.</p>
+        <div id="setup">
+          <div class="control"><label for="inputNameA">Naam kandidaat A</label><input id="inputNameA" type="text" autocomplete="off" maxlength="36" placeholder="Bijv. Noor" autofocus></div>
+          <div class="control"><label for="inputNameB">Naam kandidaat B</label><input id="inputNameB" type="text" autocomplete="off" maxlength="36" placeholder="Bijv. Milan"></div>
+          <p class="error" id="setupError" role="alert"></p>
+          <button type="button" class="button primary" id="startBtn">Start de radioquiz →</button>
+        </div>
+        <div id="game" hidden>
+          <div class="progress" aria-label="Voortgang"><span id="step1"></span><span id="step2"></span><span id="step3"></span></div>
+          <div id="questionForm">
+            <div class="question" id="questionLabel">Vraag 1 van 3</div>
+            <p class="hint">Vul in hoeveel punten iedere kandidaat <strong>bij deze vraag</strong> heeft verdiend. Die punten worden bij hun totaalscore opgeteld.</p>
+            <div class="two">
+              <div class="control"><label class="score-label" for="inputPointsA"><span id="pointsLabelA">Kandidaat A</span><small>punten</small></label><input id="inputPointsA" type="number" min="0" max="1000000" step="1" value="0" inputmode="numeric"></div>
+              <div class="control"><label class="score-label" for="inputPointsB"><span id="pointsLabelB">Kandidaat B</span><small>punten</small></label><input id="inputPointsB" type="number" min="0" max="1000000" step="1" value="0" inputmode="numeric"></div>
+            </div>
+            <p class="error" id="pointsError" role="alert"></p>
+            <button type="button" class="button primary" id="submitBtn">Punten toevoegen →</button>
+          </div>
+          <div id="finished" hidden>
+            <div class="question">🏆 De uitslag is bekend!</div><p class="hint">Alle drie de vragen zijn gespeeld. De eindscores staan op het scorebord.</p>
+            <div class="round-results" id="winnerDetail"></div>
+          </div>
+          <div class="round-results" id="lastUpdate" hidden aria-live="polite"></div>
+          <div style="margin-top:18px"><button type="button" class="button ghost" id="resetBtn">↻ Nieuwe quiz starten</button></div>
+        </div>
+        <p class="footnote">Deze demo volgt dezelfde opbouw als het Pythonprogramma: twee namen, een beginstand van nul en drie opeenvolgende vragen waarbij nieuwe punten worden opgeteld.</p>
+      </aside>
+    </div>
+  </div>
+<script>
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+  let state = { started:false, names:['Kandidaat A','Kandidaat B'], totals:[0,0], rounds:[] };
+  const fmt = (number) => new Intl.NumberFormat('nl-BE').format(number);
+  function setText(id, value) { $(id).textContent = value; }
+  function render() {
+    const {started,names,totals,rounds} = state;
+    const played = rounds.length;
+    setText('nameA',names[0]); setText('nameB',names[1]);
+    setText('scoreA',fmt(totals[0])); setText('scoreB',fmt(totals[1]));
+    setText('tableNameA',names[0]); setText('tableNameB',names[1]);
+    setText('historyCount',played + ' / 3 gespeeld');
+    $('setup').hidden = started;
+    $('game').hidden = !started;
+    $('questionForm').hidden = !started || played === 3;
+    $('finished').hidden = !started || played !== 3;
+    setText('leaderA',started && played && totals[0]>totals[1] ? '★ Aan de leiding' : '');
+    setText('leaderB',started && played && totals[1]>totals[0] ? '★ Aan de leiding' : '');
+    setText('roundBadge',!started?'Klaar voor de start':played===3?'Quiz afgelopen':'Vraag '+(played+1)+' van 3');
+    if (!started) {
+      setText('stageTitle','Wie wordt de winnaar?');
+      setText('stageSubtitle','Twee kandidaten. Drie vragen. Eén winnaar.');
+      setText('stageStatus','Vul rechts de namen in om te starten.');
+    } else if (played === 0) {
+      setText('stageTitle','De quiz is begonnen!');
+      setText('stageSubtitle','De beginstand is 0 – 0. Tijd voor de eerste vraag.');
+      setText('stageStatus','Vraag 1 staat klaar.');
+    } else if (played < 3) {
+      setText('stageTitle','De spanning stijgt!');
+      setText('stageSubtitle','Nog '+(3-played)+' '+(3-played===1?'vraag':'vragen')+' te gaan.');
+      setText('stageStatus',totals[0]===totals[1]?'Het staat gelijk!':(totals[0]>totals[1]?names[0]:names[1])+' staat op kop!');
+    } else {
+      const winner = totals[0]===totals[1]?null:(totals[0]>totals[1]?0:1);
+      setText('stageTitle',winner===null?'Het is een gelijkspel!':'🏆 '+names[winner]+' wint!');
+      setText('stageSubtitle','Alle drie de vragen zijn gespeeld.');
+      setText('stageStatus',winner===null?'Beide kandidaten eindigen met '+fmt(totals[0])+' punten.':'Proficiat, '+names[winner]+'!');
+      setText('winnerDetail',winner===null?'Gelijkspel: '+names[0]+' en '+names[1]+' hebben allebei '+fmt(totals[0])+' punten.':names[winner]+' wint met '+fmt(totals[winner])+' punten tegenover '+fmt(totals[1-winner])+' punten.');
+    }
+    if (played < 3) {
+      setText('questionLabel','Vraag '+(played+1)+' van 3');
+      setText('pointsLabelA',names[0]); setText('pointsLabelB',names[1]);
+      setText('submitBtn',played===2?'Toon de einduitslag →':'Punten toevoegen →');
+    }
+    for (let i=1;i<=3;i++) $('step'+i).className=i<=played?'done':i===played+1&&started?'now':'';
+    const tbody = $('historyBody'); tbody.replaceChildren();
+    if (!rounds.length) {
+      const tr=document.createElement('tr'); const td=document.createElement('td');td.colSpan=3;td.textContent='Nog geen vragen gespeeld.';td.style.cssText='text-align:left;color:#9daac3';tr.append(td);tbody.append(tr);
+    } else {
+      rounds.forEach((r,i)=>{
+        const tr=document.createElement('tr');
+        ['Vraag '+(i+1), '+'+fmt(r.points[0])+' → '+fmt(r.totals[0]), '+'+fmt(r.points[1])+' → '+fmt(r.totals[1])].forEach(v=>{ const td=document.createElement('td');td.textContent=v;tr.append(td); });
+        tbody.append(tr);
+      });
+    }
+  }
+  function start() {
+    const a=$('inputNameA').value.trim(),b=$('inputNameB').value.trim();
+    if (!a || !b) {setText('setupError','Vul voor beide kandidaten een naam in.');return;}
+    state={started:true,names:[a,b],totals:[0,0],rounds:[]};
+    setText('setupError','');$('lastUpdate').hidden=true;render();$('inputPointsA').focus();
+  }
+  function parsePoints(id) {
+    const input=$(id), raw=input.value.trim();
+    if (raw==='' || !/^\d+$/.test(raw)) return null;
+    const value=Number(raw);
+    return Number.isSafeInteger(value) && value>=0 && value<=1000000 ? value : null;
+  }
+  function submit() {
+    if (!state.started || state.rounds.length>=3) return;
+    const a=parsePoints('inputPointsA'),b=parsePoints('inputPointsB');
+    if(a===null || b===null) {setText('pointsError','Vul voor beide kandidaten een geheel aantal punten van 0 of meer in (max. 1.000.000).');return;}
+    const index=state.rounds.length+1;
+    state.totals=[state.totals[0]+a,state.totals[1]+b];
+    state.rounds.push({points:[a,b],totals:[...state.totals]});
+    setText('pointsError','');
+    setText('lastUpdate','Na vraag '+index+': '+state.names[0]+' +'+fmt(a)+' punten, '+state.names[1]+' +'+fmt(b)+' punten.');
+    $('lastUpdate').hidden=index===3;
+    $('inputPointsA').value='0';$('inputPointsB').value='0';
+    render();
+    if(index<3) $('inputPointsA').focus();
+  }
+  function reset() {
+    state={started:false,names:['Kandidaat A','Kandidaat B'],totals:[0,0],rounds:[]};
+    $('inputNameA').value='';$('inputNameB').value='';
+    $('inputPointsA').value='0';$('inputPointsB').value='0';
+    $('lastUpdate').hidden=true;
+    setText('setupError','');setText('pointsError','');render();$('inputNameA').focus();
+  }
+  $('startBtn').addEventListener('click',start);
+  $('submitBtn').addEventListener('click',submit);
+  $('resetBtn').addEventListener('click',reset);
+  ['inputNameA','inputNameB'].forEach(id=>$(id).addEventListener('keydown',event=>{if(event.key==='Enter')start();}));
+  ['inputPointsA','inputPointsB'].forEach(id=>$(id).addEventListener('keydown',event=>{if(event.key==='Enter')submit();}));
+  render();
+</script>
+</body>
+</html>
